@@ -1,0 +1,268 @@
+{
+  "Beginner": [
+    {
+      "question": "<details> What will the following code output?",
+      "code": "console.log(typeof \"Hello, World!\");"
+    },
+    {
+      "question": "<details> How do you create a function in JavaScript?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is the output of the following code?",
+      "code": "let x = 5;\nlet y = \"5\";\nconsole.log(x == y);"
+    },
+    {
+      "question": "<details> What will the following code output?",
+      "code": "console.log(5 + \"5\");"
+    },
+    {
+      "question": "<details> How do you declare a variable in JavaScript?",
+      "code": ""
+    },
+    {
+      "question": "<details> What does the following code produce?",
+      "code": "let num = 10;\nnum++;\nconsole.log(num);"
+    },
+    {
+      "question": "<details> What will the output be?",
+      "code": "console.log(3 * 3 == 9);"
+    },
+    {
+      "question": "<details> How do you create an array in JavaScript?",
+      "code": ""
+    },
+    {
+      "question": "<details> What does the following code return?",
+      "code": "const greet = () => \"Hello, World!\";\nconsole.log(greet());"
+    },
+    {
+      "question": "<details> What does the following code produce?",
+      "code": "let num = 10;\nnum++;\nconsole.log(num++);"
+    },
+    {
+      "question": "<details> What will this code output?",
+      "code": "let x = \"5\";\nlet y = 2;\nconsole.log(x * y);"
+    },
+    {
+      "question": "<details> What is the difference between null and undefined?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is a callback function?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is the difference between HTTP GET and POST methods?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is a server? Give a real-world analogy.",
+      "code": ""
+    },
+    {
+      "question": "<details> Write a function to count how many unique characters are in a string.",
+      "code": ""
+    },
+    {
+      "question": "<details> Write a function to capitalize the first letter of each word in a string.",
+      "code": ""
+    },
+    {
+      "question": "<details> Write a function to find the most frequent item in an array.",
+      "code": ""
+    }
+  ],
+  "Intermediate": [
+    {
+      "question": "<details> What will be the output of the following code?",
+      "code": "let a = [1, 2, 3];\nlet b = a;\nb.push(4);\nconsole.log(a);"
+    },
+    {
+      "question": "<details> How can you remove the last element from an array?",
+      "code": ""
+    },
+    {
+      "question": "<details> What does the following code print?",
+      "code": "const obj = { a: 1, b: 2 };\nconst clone = { ...obj };\nclone.a = 3;\nconsole.log(obj.a);"
+    },
+    {
+      "question": "<details> What will the following code output?",
+      "code": "const numbers = [1, 2, 3, 4, 5];\nconst result = numbers.reduce((acc, curr) => acc + curr, 0);\nconsole.log(result);"
+    },
+    {
+      "question": "<details> What will this code produce?",
+      "code": "let str = \"Hello\";\nstr[0] = \"h\";\nconsole.log(str);"
+    },
+    {
+      "question": "<details> What will the output of the following code be?",
+      "code": "function test() {\n  var x = 1;\n  if (true) {\n    var x = 2;\n    console.log(x);\n  }\n  console.log(x);\n}\ntest();"
+    },
+    {
+      "question": "<details> What will the output of the following code be?",
+      "code": "function test() {\n  let x = 1;\n  if (true) {\n    let x = 2;\n    console.log(x);\n  }\n  console.log(x);\n}\ntest();"
+    },
+    {
+      "question": "<details> What does the following code return?",
+      "code": "const person = { name: \"Meefr\", age: 25 };\nconst { name, age } = person;\nconsole.log(name, age);"
+    },
+    {
+      "question": "<details> What will be the output of this code?",
+      "code": "console.log(null == undefined);"
+    },
+    {
+      "question": "<details> What does the following code log?",
+      "code": "const getSum = (a, b) => a + b;\nconsole.log(getSum(5, 10));"
+    },
+    {
+      "question": "<details> What will this code output?",
+      "code": "let arr = [1, 2, 3, 4];\narr[10] = 10;\nconsole.log(arr.length);"
+    },
+    {
+      "question": "<details> What does this code produce?",
+      "code": "const greet = (name = \"stranger\") => `Hello, ${name}!`;\nconsole.log(greet(\"Meefr\"));\nconsole.log(greet());"
+    },
+    {
+      "question": "<details> What will be the output of the following code?",
+      "code": "console.log(typeof NaN);"
+    },
+    {
+      "question": "<details> What does the following code output?",
+      "code": "const x = 10;\nx += 5;\nconsole.log(x);"
+    },
+    {
+      "question": "<details> What is a foreign key in SQL databases?",
+      "code": ""
+    },
+    {
+      "question": "<details> What are database indexes and when would you use them?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is the difference between SQL and NoSQL databases?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is the difference between synchronous and asynchronous programming?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is the purpose of `package.json` in Node.js?",
+      "code": ""
+    },
+    {
+      "question": "<details> What does CRUD stand for in backend development?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is an API?",
+      "code": ""
+    }
+  ],
+  "Advanced": [
+    {
+      "question": "<details> What is the output of the following code?",
+      "code": "console.log(0.1 + 0.2 === 0.3);"
+    },
+    {
+      "question": "<details> What will the following code return?",
+      "code": "function multiplyBy(factor) {\n  return function (x) {\n    return x * factor;\n  };\n}\nconst double = multiplyBy(2);\nconsole.log(double(5));"
+    },
+    {
+      "question": "<details> What does the following code produce?",
+      "code": "const numbers = [1, 2, 3, 4, 5];\nconst doubled = numbers.map((n) => n * 2).filter((n) => n > 5);\nconsole.log(doubled);"
+    },
+    {
+      "question": "<details> What will the following code output?",
+      "code": "console.log(1 + \"2\" - 1);"
+    },
+    {
+      "question": "<details> What will this code log?",
+      "code": "function foo() {\n  console.log(this);\n}\nfoo();"
+    },
+    {
+      "question": "<details> What does the following code produce?",
+      "code": "console.log(2 ** 3);"
+    },
+    {
+      "question": "<details> What will the following code output?",
+      "code": "const obj = { a: 1, b: 2, c: 3 };\nconst { a, ...rest } = obj;\nconsole.log(rest);"
+    },
+    {
+      "question": "<details> What will this code log?",
+      "code": "const promise = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"Done!\"), 1000);\n});\npromise.then((result) => console.log(result));"
+    },
+    {
+      "question": "<details> What does the following code return?",
+      "code": "const arr = [1, 2, 3, 4, 5];\nconst newArr = arr.filter((num) => num > 3);\nconsole.log(newArr);"
+    },
+    {
+      "question": "<details> What will be the output of the following code?",
+      "code": "(function () {\n  console.log(a);\n  var a = 1;\n})();"
+    },
+    {
+      "question": "<details> What will this code produce?",
+      "code": "const arr = [1, 2, 3];\nconst doubled = arr.map((x) => x * 2);\nconsole.log(doubled);"
+    },
+    {
+      "question": "<details> What will this code produce?",
+      "code": "const arr = [1, 2, 3, 4];\nconst result = arr.find((num) => num > 2);\nconsole.log(result);"
+    },
+    {
+      "question": "<details> How does the Node.js event loop handle different phases (timers, I/O, etc.)?",
+      "code": ""
+    },
+    {
+      "question": "<details> How do you handle asynchronous errors in Node.js?",
+      "code": "async function fetchData() {\n  // Your implementation here\n}"
+    },
+    {
+      "question": "<details> What is the recommended folder structure for a Node.js project?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is JWT?",
+      "code": ""
+    },
+    {
+      "question": "<details> How should we store user passwords in a database?",
+      "code": ""
+    },
+    {
+      "question": "<details> What are the security risks of storing JWTs in localStorage?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is the purpose of caching in backend development?",
+      "code": ""
+    },
+    {
+      "question": "<details> How and where can we cache data?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is a collection in MongoDB?",
+      "code": ""
+    },
+    {
+      "question": "<details> When would you use embedded documents vs references in MongoDB?",
+      "code": ""
+    },
+    {
+      "question": "<details> How do you connect a Node.js application to a MongoDB database?",
+      "code": "// Your implementation here"
+    },
+    {
+      "question": "<details> What is a middleware in backend development?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is REST in web development?",
+      "code": ""
+    },
+    {
+      "question": "<details> What is an environment variable in backend development?",
+      "code": ""
+    }
+  ]
+}

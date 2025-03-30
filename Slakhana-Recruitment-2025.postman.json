@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "edffd8e0-da79-4e40-b180-0035e8c9327d",
+		"name": "Slakhana-Recruitment-2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35826830",
+		"_collection_link": "https://galactic-zodiac-858162.postman.co/workspace/OSC~1b71e7e6-a5a0-450d-b6ab-61fc07e221d0/collection/35826830-edffd8e0-da79-4e40-b180-0035e8c9327d?action=share&source=collection_link&creator=35826830"
+	},
+	"item": [
+		{
+			"name": "Generate Questions and Save .md file",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/download?name=Ibrahem10122&interviewer_name=Meefr&random=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"download"
+					],
+					"query": [
+						{
+							"key": "beginner",
+							"value": "1 2 14 17",
+							"description": "A space-separated string of numbers representing the beginner-level questions.",
+							"disabled": true
+						},
+						{
+							"key": "intermediate",
+							"value": "3 5 15 18 21",
+							"description": "A space-separated string of numbers representing the intermediate-level questions.",
+							"disabled": true
+						},
+						{
+							"key": "advanced",
+							"value": "3 4 17 21 24",
+							"description": "A space-separated string of numbers representing the advanced-level questions.",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Ibrahem10122",
+							"description": "The name of the candidate being interviewed. This will be used to personalize the evaluation process."
+						},
+						{
+							"key": "interviewer_name",
+							"value": "Meefr",
+							"description": "The name of the interviewer conducting the session. Helps in tracking and documentation purposes."
+						},
+						{
+							"key": "random",
+							"value": "1",
+							"description": "If set to any positive value (true), it overrides the beginner, intermediate, and advanced parameters by generating a completely random selection of questions based on the predefined constraints."
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
