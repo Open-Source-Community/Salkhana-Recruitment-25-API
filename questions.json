@@ -1,268 +1,398 @@
 {
   "Beginner": [
     {
-      "question": "<details> What will the following code output?",
-      "code": "console.log(typeof \"Hello, World!\");"
+      "question": "What will the following code output?",
+      "code": "console.log(typeof \"Hello, World!\");",
+      "answer": "string",
+      "explanation": "The typeof operator returns a string indicating the type of the operand. Since \"Hello, World!\" is a string, it returns \"string\"."
     },
     {
-      "question": "<details> How do you create a function in JavaScript?",
-      "code": ""
+      "question": "How do you create a function in JavaScript?",
+      "code": "",
+      "answer": "Using the function keyword or arrow syntax: function myFunc() {} or const myFunc = () => {}",
+      "explanation": "There are several ways to create functions in JavaScript. The traditional way uses the function keyword, while ES6 introduced arrow function syntax which is more concise."
     },
     {
-      "question": "<details> What is the output of the following code?",
-      "code": "let x = 5;\nlet y = \"5\";\nconsole.log(x == y);"
+      "question": "What is the output of the following code?",
+      "code": "let x = 5;\nlet y = \"5\";\nconsole.log(x == y);",
+      "answer": "true",
+      "explanation": "The == operator performs type coercion before comparison, so it converts the string \"5\" to the number 5 before comparing, making them equal."
     },
     {
-      "question": "<details> What will the following code output?",
-      "code": "console.log(5 + \"5\");"
+      "question": "What will the following code output?",
+      "code": "console.log(5 + \"5\");",
+      "answer": "\"55\"",
+      "explanation": "When using the + operator with a number and string, JavaScript performs string concatenation rather than addition, converting the number to a string first."
     },
     {
-      "question": "<details> How do you declare a variable in JavaScript?",
-      "code": ""
+      "question": "How do you declare a variable in JavaScript?",
+      "code": "",
+      "answer": "Using var, let, or const keywords: var x; let y; const z = 1;",
+      "explanation": "JavaScript provides three ways to declare variables. var is function-scoped, let is block-scoped and can be reassigned, const is block-scoped but cannot be reassigned after declaration."
     },
     {
-      "question": "<details> What does the following code produce?",
-      "code": "let num = 10;\nnum++;\nconsole.log(num);"
+      "question": "What does the following code produce?",
+      "code": "let num = 10;\nnum++;\nconsole.log(num);",
+      "answer": "11",
+      "explanation": "The ++ operator increments the value of num by 1. After num++ executes, num becomes 11, which is then logged to the console."
     },
     {
-      "question": "<details> What will the output be?",
-      "code": "console.log(3 * 3 == 9);"
+      "question": "What will the output be?",
+      "code": "console.log(3 * 3 == 9);",
+      "answer": "true",
+      "explanation": "The expression 3 * 3 equals 9, and the == comparison between 9 and 9 returns true. This is a straightforward mathematical comparison."
     },
     {
-      "question": "<details> How do you create an array in JavaScript?",
-      "code": ""
+      "question": "How do you create an array in JavaScript?",
+      "code": "",
+      "answer": "Using array literal syntax: const arr = []; or with the Array constructor: const arr = new Array();",
+      "explanation": "Arrays can be created using literal syntax (recommended) or the Array constructor. The literal syntax is more concise and preferred in most cases."
     },
     {
-      "question": "<details> What does the following code return?",
-      "code": "const greet = () => \"Hello, World!\";\nconsole.log(greet());"
+      "question": "What does the following code return?",
+      "code": "const greet = () => \"Hello, World!\";\nconsole.log(greet());",
+      "answer": "\"Hello, World!\"",
+      "explanation": "This is an arrow function that implicitly returns the string \"Hello, World!\". When greet() is called, it returns and logs this string."
     },
     {
-      "question": "<details> What does the following code produce?",
-      "code": "let num = 10;\nnum++;\nconsole.log(num++);"
+      "question": "What does the following code produce?",
+      "code": "let num = 10;\nnum++;\nconsole.log(num++);",
+      "answer": "11",
+      "explanation": "num++ first increments num to 11, then console.log prints 11. The second num++ happens after the log, so it doesn't affect the output."
     },
     {
-      "question": "<details> What will this code output?",
-      "code": "let x = \"5\";\nlet y = 2;\nconsole.log(x * y);"
+      "question": "What will this code output?",
+      "code": "let x = \"5\";\nlet y = 2;\nconsole.log(x * y);",
+      "answer": "10",
+      "explanation": "When using * with a string and number, JavaScript attempts to convert the string to a number. \"5\" becomes 5, and 5 * 2 equals 10."
     },
     {
-      "question": "<details> What is the difference between null and undefined?",
-      "code": ""
+      "question": "What is the difference between null and undefined?",
+      "code": "",
+      "answer": "undefined means a variable has been declared but not assigned a value. null is an assignment value representing no value.",
+      "explanation": "undefined is the default value for uninitialized variables, while null must be explicitly assigned. typeof null returns 'object' (a historical bug), while typeof undefined returns 'undefined'."
     },
     {
-      "question": "<details> What is a callback function?",
-      "code": ""
+      "question": "What is a callback function?",
+      "code": "",
+      "answer": "A function passed as an argument to another function to be executed later.",
+      "explanation": "Callback functions are a fundamental concept in JavaScript, allowing asynchronous operations. They're called after the completion of the function they're passed to."
     },
     {
-      "question": "<details> What is the difference between HTTP GET and POST methods?",
-      "code": ""
+      "question": "What is the difference between HTTP GET and POST methods?",
+      "code": "",
+      "answer": "GET requests retrieve data, POST requests send data to be processed. GET is idempotent, POST is not.",
+      "explanation": "GET requests should only retrieve data without side effects. POST requests are used when creating or modifying resources. GET data is visible in URL, POST data is in the request body."
     },
     {
-      "question": "<details> What is a server? Give a real-world analogy.",
-      "code": ""
+      "question": "What is a server? Give a real-world analogy.",
+      "code": "",
+      "answer": "A server is a computer that provides data/services to other computers (clients). Analogy: A restaurant kitchen serves food to customers.",
+      "explanation": "Like a kitchen prepares food for diners, a server processes requests and serves responses to clients. Both handle multiple requests efficiently."
     },
     {
-      "question": "<details> Write a function to count how many unique characters are in a string.",
-      "code": ""
+      "question": "Write a function to count how many unique characters are in a string.",
+      "code": "",
+      "answer": "function countUniqueChars(str) {\n  return new Set(str).size;\n}",
+      "explanation": "A Set automatically stores only unique values. By converting the string to a Set and checking its size, we get the count of unique characters."
     },
     {
-      "question": "<details> Write a function to capitalize the first letter of each word in a string.",
-      "code": ""
+      "question": "Write a function to capitalize the first letter of each word in a string.",
+      "code": "",
+      "answer": "function capitalizeWords(str) {\n  return str.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');\n}",
+      "explanation": "This splits the string into words, capitalizes the first letter of each word, then joins them back together with spaces."
     },
     {
-      "question": "<details> Write a function to find the most frequent item in an array.",
-      "code": ""
+      "question": "Write a function to find the most frequent item in an array.",
+      "code": "",
+      "answer": "function mostFrequent(arr) {\n  const freq = {};\n  arr.forEach(item => freq[item] = (freq[item] || 0) + 1);\n  return Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);\n}",
+      "explanation": "This creates a frequency map, then reduces it to find the key with the highest value, which is the most frequent item."
     }
   ],
   "Intermediate": [
     {
-      "question": "<details> What will be the output of the following code?",
-      "code": "let a = [1, 2, 3];\nlet b = a;\nb.push(4);\nconsole.log(a);"
+      "question": "What will be the output of the following code?",
+      "code": "let a = [1, 2, 3];\nlet b = a;\nb.push(4);\nconsole.log(a);",
+      "answer": "[1, 2, 3, 4]",
+      "explanation": "Arrays are reference types in JavaScript. When we assign a to b, both variables reference the same array. Modifying b also modifies a."
     },
     {
-      "question": "<details> How can you remove the last element from an array?",
-      "code": ""
+      "question": "How can you remove the last element from an array?",
+      "code": "",
+      "answer": "Using the pop() method: array.pop();",
+      "explanation": "The pop() method removes the last element from an array and returns that element. This method changes the length of the array."
     },
     {
-      "question": "<details> What does the following code print?",
-      "code": "const obj = { a: 1, b: 2 };\nconst clone = { ...obj };\nclone.a = 3;\nconsole.log(obj.a);"
+      "question": "What does the following code print?",
+      "code": "const obj = { a: 1, b: 2 };\nconst clone = { ...obj };\nclone.a = 3;\nconsole.log(obj.a);",
+      "answer": "1",
+      "explanation": "The spread operator (...) creates a shallow copy of obj. Changing clone.a doesn't affect obj.a because they're separate objects."
     },
     {
-      "question": "<details> What will the following code output?",
-      "code": "const numbers = [1, 2, 3, 4, 5];\nconst result = numbers.reduce((acc, curr) => acc + curr, 0);\nconsole.log(result);"
+      "question": "What will the following code output?",
+      "code": "const numbers = [1, 2, 3, 4, 5];\nconst result = numbers.reduce((acc, curr) => acc + curr, 0);\nconsole.log(result);",
+      "answer": "15",
+      "explanation": "The reduce() method applies a function against an accumulator and each element to reduce it to a single value. Here it sums all numbers in the array."
     },
     {
-      "question": "<details> What will this code produce?",
-      "code": "let str = \"Hello\";\nstr[0] = \"h\";\nconsole.log(str);"
+      "question": "What will this code produce?",
+      "code": "let str = \"Hello\";\nstr[0] = \"h\";\nconsole.log(str);",
+      "answer": "\"Hello\"",
+      "explanation": "Strings in JavaScript are immutable. While you can access characters by index, you cannot modify them this way. The original string remains unchanged."
     },
     {
-      "question": "<details> What will the output of the following code be?",
-      "code": "function test() {\n  var x = 1;\n  if (true) {\n    var x = 2;\n    console.log(x);\n  }\n  console.log(x);\n}\ntest();"
+      "question": "What will the output of the following code be?",
+      "code": "function test() {\n  var x = 1;\n  if (true) {\n    var x = 2;\n    console.log(x);\n  }\n  console.log(x);\n}\ntest();",
+      "answer": "2\n2",
+      "explanation": "var is function-scoped, not block-scoped. The second declaration of x overwrites the first one throughout the entire function."
     },
     {
-      "question": "<details> What will the output of the following code be?",
-      "code": "function test() {\n  let x = 1;\n  if (true) {\n    let x = 2;\n    console.log(x);\n  }\n  console.log(x);\n}\ntest();"
+      "question": "What will the output of the following code be?",
+      "code": "function test() {\n  let x = 1;\n  if (true) {\n    let x = 2;\n    console.log(x);\n  }\n  console.log(x);\n}\ntest();",
+      "answer": "2\n1",
+      "explanation": "let is block-scoped. The x inside the if block is a separate variable from the x outside. The inner x shadows the outer x only within the if block."
     },
     {
-      "question": "<details> What does the following code return?",
-      "code": "const person = { name: \"Meefr\", age: 25 };\nconst { name, age } = person;\nconsole.log(name, age);"
+      "question": "What does the following code return?",
+      "code": "const person = { name: \"Meefr\", age: 25 };\nconst { name, age } = person;\nconsole.log(name, age);",
+      "answer": "Meefr 25",
+      "explanation": "This demonstrates object destructuring. It extracts the name and age properties from the person object into separate variables with the same names."
     },
     {
-      "question": "<details> What will be the output of this code?",
-      "code": "console.log(null == undefined);"
+      "question": "What will be the output of this code?",
+      "code": "console.log(null == undefined);",
+      "answer": "true",
+      "explanation": "The == operator considers null and undefined equal to each other (but not to other falsy values). This is a special case in JavaScript's type coercion rules."
     },
     {
-      "question": "<details> What does the following code log?",
-      "code": "const getSum = (a, b) => a + b;\nconsole.log(getSum(5, 10));"
+      "question": "What does the following code log?",
+      "code": "const getSum = (a, b) => a + b;\nconsole.log(getSum(5, 10));",
+      "answer": "15",
+      "explanation": "This is a simple arrow function that takes two parameters and returns their sum. When called with 5 and 10, it returns 15."
     },
     {
-      "question": "<details> What will this code output?",
-      "code": "let arr = [1, 2, 3, 4];\narr[10] = 10;\nconsole.log(arr.length);"
+      "question": "What will this code output?",
+      "code": "let arr = [1, 2, 3, 4];\narr[10] = 10;\nconsole.log(arr.length);",
+      "answer": "11",
+      "explanation": "Setting an element at index 10 extends the array length to 11. The missing indices (4-9) are empty slots (not undefined, but truly empty)."
     },
     {
-      "question": "<details> What does this code produce?",
-      "code": "const greet = (name = \"stranger\") => `Hello, ${name}!`;\nconsole.log(greet(\"Meefr\"));\nconsole.log(greet());"
+      "question": "What does this code produce?",
+      "code": "const greet = (name = \"stranger\") => `Hello, ${name}!`;\nconsole.log(greet(\"Meefr\"));\nconsole.log(greet());",
+      "answer": "Hello, Meefr!\nHello, stranger!",
+      "explanation": "The function has a default parameter value. When called with an argument, it uses that; when called without, it falls back to the default \"stranger\"."
     },
     {
-      "question": "<details> What will be the output of the following code?",
-      "code": "console.log(typeof NaN);"
+      "question": "What will be the output of the following code?",
+      "code": "console.log(typeof NaN);",
+      "answer": "\"number\"",
+      "explanation": "NaN stands for 'Not a Number', but it's technically of type number in JavaScript. This is a historical oddity of the language."
     },
     {
-      "question": "<details> What does the following code output?",
-      "code": "const x = 10;\nx += 5;\nconsole.log(x);"
+      "question": "What does the following code output?",
+      "code": "const x = 10;\nx += 5;\nconsole.log(x);",
+      "answer": "15",
+      "explanation": "The += operator adds the right operand to the left operand and assigns the result to the left operand. Here, it adds 5 to x (10), resulting in 15."
     },
     {
-      "question": "<details> What is a foreign key in SQL databases?",
-      "code": ""
+      "question": "What is a foreign key in SQL databases?",
+      "code": "",
+      "answer": "A column that references the primary key of another table to create a relationship between tables.",
+      "explanation": "Foreign keys enforce referential integrity by ensuring the value exists in the referenced table. They create relationships between tables in a relational database."
     },
     {
-      "question": "<details> What are database indexes and when would you use them?",
-      "code": ""
+      "question": "What are database indexes and when would you use them?",
+      "code": "",
+      "answer": "Indexes are special lookup tables that speed up data retrieval. Use them on columns frequently searched or used in joins.",
+      "explanation": "Indexes improve query performance but slow down writes. They're ideal for columns in WHERE clauses, JOIN conditions, or as primary/foreign keys."
     },
     {
-      "question": "<details> What is the difference between SQL and NoSQL databases?",
-      "code": ""
+      "question": "What is the difference between SQL and NoSQL databases?",
+      "code": "",
+      "answer": "SQL databases are relational, table-based, and use structured query language. NoSQL databases are non-relational, flexible (document, key-value, etc.), and scale horizontally.",
+      "explanation": "SQL databases prioritize ACID properties and structured data. NoSQL prioritizes flexibility, scalability, and handling unstructured data."
     },
     {
-      "question": "<details> What is the difference between synchronous and asynchronous programming?",
-      "code": ""
+      "question": "What is the difference between synchronous and asynchronous programming?",
+      "code": "",
+      "answer": "Synchronous executes code sequentially, blocking until completion. Asynchronous allows operations to complete in the background and uses callbacks/promises for results.",
+      "explanation": "Synchronous is simpler but can be inefficient for I/O operations. Asynchronous improves performance by not blocking the main thread during long operations."
     },
     {
-      "question": "<details> What is the purpose of `package.json` in Node.js?",
-      "code": ""
+      "question": "What is the purpose of `package.json` in Node.js?",
+      "code": "",
+      "answer": "It defines project metadata, dependencies, scripts, and configuration for Node.js projects.",
+      "explanation": "package.json is the manifest file for Node.js projects. It lists required packages, version info, author details, and scripts for building/running the project."
     },
     {
-      "question": "<details> What does CRUD stand for in backend development?",
-      "code": ""
+      "question": "What does CRUD stand for in backend development?",
+      "code": "",
+      "answer": "Create, Read, Update, Delete - the four basic operations of persistent storage.",
+      "explanation": "CRUD represents the fundamental operations needed for data management. In REST APIs, they often map to POST, GET, PUT/PATCH, and DELETE HTTP methods respectively."
     },
     {
-      "question": "<details> What is an API?",
-      "code": ""
+      "question": "What is an API?",
+      "code": "",
+      "answer": "Application Programming Interface - a set of rules/protocols for building and interacting with software applications.",
+      "explanation": "APIs define how different software components should interact. Web APIs allow communication between different systems over the internet using standardized protocols."
     }
   ],
   "Advanced": [
     {
-      "question": "<details> What is the output of the following code?",
-      "code": "console.log(0.1 + 0.2 === 0.3);"
+      "question": "What is the output of the following code?",
+      "code": "console.log(0.1 + 0.2 === 0.3);",
+      "answer": "false",
+      "explanation": "Due to floating-point precision issues in JavaScript (and most programming languages), 0.1 + 0.2 actually equals approximately 0.30000000000000004, not exactly 0.3."
     },
     {
-      "question": "<details> What will the following code return?",
-      "code": "function multiplyBy(factor) {\n  return function (x) {\n    return x * factor;\n  };\n}\nconst double = multiplyBy(2);\nconsole.log(double(5));"
+      "question": "What will the following code return?",
+      "code": "function multiplyBy(factor) {\n  return function (x) {\n    return x * factor;\n  };\n}\nconst double = multiplyBy(2);\nconsole.log(double(5));",
+      "answer": "10",
+      "explanation": "This demonstrates closure and currying. multiplyBy returns a function that remembers the factor value. When we call double(5), it multiplies 5 by the remembered factor (2)."
     },
     {
-      "question": "<details> What does the following code produce?",
-      "code": "const numbers = [1, 2, 3, 4, 5];\nconst doubled = numbers.map((n) => n * 2).filter((n) => n > 5);\nconsole.log(doubled);"
+      "question": "What does the following code produce?",
+      "code": "const numbers = [1, 2, 3, 4, 5];\nconst doubled = numbers.map((n) => n * 2).filter((n) => n > 5);\nconsole.log(doubled);",
+      "answer": "[6, 8, 10]",
+      "explanation": "The map() creates a new array with each number doubled ([2,4,6,8,10]). filter() then returns only elements greater than 5, resulting in [6,8,10]."
     },
     {
-      "question": "<details> What will the following code output?",
-      "code": "console.log(1 + \"2\" - 1);"
+      "question": "What will the following code output?",
+      "code": "console.log(1 + \"2\" - 1);",
+      "answer": "11",
+      "explanation": "First, 1 + \"2\" performs string concatenation resulting in \"12\". Then \"12\" - 1 forces string-to-number conversion, resulting in 12 - 1 = 11."
     },
     {
-      "question": "<details> What will this code log?",
-      "code": "function foo() {\n  console.log(this);\n}\nfoo();"
+      "question": "What will this code log?",
+      "code": "function foo() {\n  console.log(this);\n}\nfoo();",
+      "answer": "window (browser) or global (Node.js)",
+      "explanation": "In non-strict mode, this in a regular function call refers to the global object. In strict mode, it would be undefined."
     },
     {
-      "question": "<details> What does the following code produce?",
-      "code": "console.log(2 ** 3);"
+      "question": "What does the following code produce?",
+      "code": "console.log(2 ** 3);",
+      "answer": "8",
+      "explanation": "The ** operator is the exponentiation operator. 2 ** 3 means 2 raised to the power of 3, which equals 8."
     },
     {
-      "question": "<details> What will the following code output?",
-      "code": "const obj = { a: 1, b: 2, c: 3 };\nconst { a, ...rest } = obj;\nconsole.log(rest);"
+      "question": "What will the following code output?",
+      "code": "const obj = { a: 1, b: 2, c: 3 };\nconst { a, ...rest } = obj;\nconsole.log(rest);",
+      "answer": "{ b: 2, c: 3 }",
+      "explanation": "This uses object destructuring with rest properties. It extracts a, then collects the remaining properties into rest, resulting in { b: 2, c: 3 }."
     },
     {
-      "question": "<details> What will this code log?",
-      "code": "const promise = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"Done!\"), 1000);\n});\npromise.then((result) => console.log(result));"
+      "question": "What will this code log?",
+      "code": "const promise = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"Done!\"), 1000);\n});\npromise.then((result) => console.log(result));",
+      "answer": "\"Done!\" (after 1 second)",
+      "explanation": "This creates a promise that resolves after 1 second. The .then() callback executes when the promise resolves, logging \"Done!\" after the delay."
     },
     {
-      "question": "<details> What does the following code return?",
-      "code": "const arr = [1, 2, 3, 4, 5];\nconst newArr = arr.filter((num) => num > 3);\nconsole.log(newArr);"
+      "question": "What does the following code return?",
+      "code": "const arr = [1, 2, 3, 4, 5];\nconst newArr = arr.filter((num) => num > 3);\nconsole.log(newArr);",
+      "answer": "[4, 5]",
+      "explanation": "The filter() method creates a new array with all elements that pass the test (num > 3). Only 4 and 5 satisfy this condition."
     },
     {
-      "question": "<details> What will be the output of the following code?",
-      "code": "(function () {\n  console.log(a);\n  var a = 1;\n})();"
+      "question": "What will be the output of the following code?",
+      "code": "(function () {\n  console.log(a);\n  var a = 1;\n})();",
+      "answer": "undefined",
+      "explanation": "Due to hoisting, var declarations are moved to the top of their scope. The variable a exists when logged, but hasn't been assigned yet, so it's undefined."
     },
     {
-      "question": "<details> What will this code produce?",
-      "code": "const arr = [1, 2, 3];\nconst doubled = arr.map((x) => x * 2);\nconsole.log(doubled);"
+      "question": "What will this code produce?",
+      "code": "const arr = [1, 2, 3];\nconst doubled = arr.map((x) => x * 2);\nconsole.log(doubled);",
+      "answer": "[2, 4, 6]",
+      "explanation": "The map() method creates a new array by applying the callback function to each element. Here, it doubles each number in the original array."
     },
     {
-      "question": "<details> What will this code produce?",
-      "code": "const arr = [1, 2, 3, 4];\nconst result = arr.find((num) => num > 2);\nconsole.log(result);"
+      "question": "What will this code produce?",
+      "code": "const arr = [1, 2, 3, 4];\nconst result = arr.find((num) => num > 2);\nconsole.log(result);",
+      "answer": "3",
+      "explanation": "The find() method returns the first element in the array that satisfies the provided testing function. 3 is the first number greater than 2."
     },
     {
-      "question": "<details> How does the Node.js event loop handle different phases (timers, I/O, etc.)?",
-      "code": ""
+      "question": "How does the Node.js event loop handle different phases (timers, I/O, etc.)?",
+      "code": "",
+      "answer": "The event loop has multiple phases: timers (setTimeout/setInterval), pending callbacks, idle/prepare, poll (I/O), check (setImmediate), and close callbacks.",
+      "explanation": "Each phase has a FIFO queue of callbacks. The loop processes one phase completely before moving to the next. Understanding this helps optimize performance and avoid bottlenecks."
     },
     {
-      "question": "<details> How do you handle asynchronous errors in Node.js?",
-      "code": "async function fetchData() {\n  // Your implementation here\n}"
+      "question": "How do you handle asynchronous errors in Node.js?",
+      "code": "",
+      "answer": "Using try/catch with async/await or .catch() with promises.",
+      "explanation": "For async/await: \nasync function fetchData() {\n  try {\n    const data = await someAsyncOp();\n  } catch (err) {\n    // Handle error\n  }\n}\nFor promises: someAsyncOp().then().catch(err => {});"
     },
     {
-      "question": "<details> What is the recommended folder structure for a Node.js project?",
-      "code": ""
+      "question": "What is the recommended folder structure for a Node.js project?",
+      "code": "",
+      "answer": "Common structure: /src (source), /config (configs), /routes (API routes), /models (data models), /controllers (business logic), /middleware, /tests",
+      "explanation": "This separation of concerns makes the project more maintainable. Larger projects might use domain-driven structure with features/modules containing their own routes, models, etc."
     },
     {
-      "question": "<details> What is JWT?",
-      "code": ""
+      "question": "What is JWT?",
+      "code": "",
+      "answer": "JSON Web Token - a compact, URL-safe means of representing claims to be transferred between parties.",
+      "explanation": "JWTs are digitally signed tokens containing JSON data. They're commonly used for authentication (containing user info) and information exchange. Consist of header, payload, and signature."
     },
     {
-      "question": "<details> How should we store user passwords in a database?",
-      "code": ""
+      "question": "How should we store user passwords in a database?",
+      "code": "",
+      "answer": "Never store plain text. Use strong, slow hashing algorithms like bcrypt with salt.",
+      "explanation": "Hashing transforms passwords into irreversible strings. Salting adds random data to each password before hashing, preventing rainbow table attacks. bcrypt handles both hashing and salting."
     },
     {
-      "question": "<details> What are the security risks of storing JWTs in localStorage?",
-      "code": ""
+      "question": "What are the security risks of storing JWTs in localStorage?",
+      "code": "",
+      "answer": "Vulnerable to XSS attacks since JavaScript can access localStorage. No automatic expiration like cookies.",
+      "explanation": "If an XSS vulnerability exists, attackers can steal localStorage tokens. HttpOnly cookies are more secure for tokens, but have different tradeoffs regarding CSRF protection."
     },
     {
-      "question": "<details> What is the purpose of caching in backend development?",
-      "code": ""
+      "question": "What is the purpose of caching in backend development?",
+      "code": "",
+      "answer": "To improve performance by storing frequently accessed data in faster storage, reducing database/API calls.",
+      "explanation": "Caching reduces latency, decreases server load, and improves scalability. Common cache targets include database queries, API responses, and rendered pages."
     },
     {
-      "question": "<details> How and where can we cache data?",
-      "code": ""
+      "question": "How and where can we cache data?",
+      "code": "",
+      "answer": "In-memory (Redis, Memcached), CDN, browser cache, database cache, or application-level cache.",
+      "explanation": "Choose based on needs: in-memory caches are fastest for frequently accessed data, CDNs for static assets, browser cache for client-side resources, etc."
     },
     {
-      "question": "<details> What is a collection in MongoDB?",
-      "code": ""
+      "question": "What is a collection in MongoDB?",
+      "code": "",
+      "answer": "The equivalent of a table in relational databases - a grouping of MongoDB documents.",
+      "explanation": "Collections don't enforce a schema, so documents within can have different structures. They provide a way to organize and query related documents."
     },
     {
-      "question": "<details> When would you use embedded documents vs references in MongoDB?",
-      "code": ""
+      "question": "When would you use embedded documents vs references in MongoDB?",
+      "code": "",
+      "answer": "Embed for frequently accessed, small related data. Reference for large data or when relationships are complex.",
+      "explanation": "Embedding provides better read performance (single query) but can lead to duplication. References are more flexible but require multiple queries (populate/lookup)."
     },
     {
-      "question": "<details> How do you connect a Node.js application to a MongoDB database?",
-      "code": "// Your implementation here"
+      "question": "How do you connect a Node.js application to a MongoDB database?",
+      "code": "",
+      "answer": "Using Mongoose or the native MongoDB driver:\nconst mongoose = require('mongoose');\nmongoose.connect('mongodb://localhost/mydb', {useNewUrlParser: true});",
+      "explanation": "Mongoose provides schema validation and easier query building. The connection string specifies protocol, host, and database name. Options ensure using the latest URL parser."
     },
     {
-      "question": "<details> What is a middleware in backend development?",
-      "code": ""
+      "question": "What is a middleware in backend development?",
+      "code": "",
+      "answer": "Software that provides services beyond what's provided by the OS to facilitate communication between components.",
+      "explanation": "In frameworks like Express, middleware are functions that have access to request/response objects and can execute code, modify requests, or end the request-response cycle."
     },
     {
-      "question": "<details> What is REST in web development?",
-      "code": ""
+      "question": "What is REST in web development?",
+      "code": "",
+      "answer": "Representational State Transfer - an architectural style for designing networked applications using HTTP protocols.",
+      "explanation": "REST uses HTTP methods (GET, POST, etc.) to perform CRUD operations on resources identified by URLs. It's stateless, cacheable, and uses standard status codes."
     },
     {
-      "question": "<details> What is an environment variable in backend development?",
-      "code": ""
+      "question": "What is an environment variable in backend development?",
+      "code": "",
+      "answer": "Dynamic values that can affect how running processes behave, set outside the application code.",
+      "explanation": "Environment variables store configuration like database URLs, API keys, or feature flags. They keep sensitive data out of code and allow different configurations per environment (dev, prod, etc.)."
     }
   ]
 }

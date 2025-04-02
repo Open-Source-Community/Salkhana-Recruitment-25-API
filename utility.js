@@ -16,11 +16,20 @@ const getQuestions = (level, numbers) => {
 const convertToMarkdown = (questions) => {
   let markdownContent = "";
   questions.forEach((q) => {
-    markdownContent += `\n\n${q.index}. **Question:** \n${q.question}\n\n`;
+    markdownContent += `\n\n${q.index}. **Question:** \n<details><summary></summary>\n<br>\n${q.question}\n\n`;
     if (q.code) {
       markdownContent += "```javascript\n" + q.code + "\n```\n";
     }
-    markdownContent += "</details>\n\n\n";
+    markdownContent +=
+      "<br>\n</details>\n<br><details>\n<summary>Notes</summary>\n<!-- Write Notes Here -->\n\n</details>\n<br>\n<br>\n";
+  });
+  return markdownContent;
+};
+const convertAnswers = (questions) => {
+  let markdownContent = "";
+
+  questions.forEach((q) => {
+    markdownContent += `\n\nQuestion ${q.index} \n<br>\n\n**Answer:** ${q.answer}\n\n**Explanation:** ${q.explanation}\n\n<br>\n`;
   });
   return markdownContent;
 };
@@ -41,7 +50,12 @@ const generateMarkdownFile = (data, name, interviewer_name) => {
     markdown += `\n# ${level} Questions\n\n`;
     markdown += convertToMarkdown(data[level]);
   });
-
+  markdown += "<details>\n<summary>Answers</summary>\n<br>\n";
+  Object.keys(data).forEach((level) => {
+    markdown += `\n# ${level} Answers\n\n`;
+    markdown += convertAnswers(data[level]);
+  });
+  markdown += "</details>\n<br>\n";
   // Define the path where the .md file will be saved
   const dirPath = path.join(__dirname, "/data");
 
@@ -143,7 +157,7 @@ function validateQuestions(beginnerStr, intermediateStr, advancedStr) {
 
   const isValidBeginner = validateBeginner(beginner);
   const isValidIntermediate = validateIntermediate(intermediate);
-  const isValidAdvanced = validateAdvanced(advanced);  
+  const isValidAdvanced = validateAdvanced(advanced);
   return isValidBeginner && isValidIntermediate && isValidAdvanced;
 }
 
