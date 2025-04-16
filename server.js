@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
+app.use(express.json());
 const PORT = 3000;
 const {
   stringToArr,
@@ -14,7 +17,8 @@ app.get("/download", (req, res) => {
   let { beginner, intermediate, advanced, name, interviewer_name, random } =
     req.query;
   let q = {};
-
+  console.log(req.query);
+  
   if (!name) return res.status({ msg: "Add interviewee name!" });
   name = name.replace(" ", "_");
   const checkName = checkFileName(name);
