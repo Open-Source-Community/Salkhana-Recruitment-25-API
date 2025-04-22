@@ -27,7 +27,7 @@ app.get("/download", (req, res) => {
       msg: "Interviewee did an interview before, make sure to enter new interviewee name",
     });
   }
-  if (random) {
+  if (random == '1') {
     x = generateRandomQuestions();
 
     beginner = x.beginner;
