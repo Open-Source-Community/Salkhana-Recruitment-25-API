@@ -40,40 +40,45 @@ const checkFileName = (name) => {
   // Ensure the 'data' directory exists
   return fs.existsSync(filePath);
 };
-const generateMarkdownFile = (data, name, interviewer_name) => {
-  let markdown = `## Name: \`${name.replace(
-    "_",
-    " "
-  )}\`\n## Interviewer name: \`${interviewer_name}\`\n## Results: \`\`\n\n`;
+function generateMarkdownFile(q, name, interviewer_name) {
+  const markdownsDir = path.join(__dirname, "markdowns");
+  if (!fs.existsSync(markdownsDir)) fs.mkdirSync(markdownsDir);
 
-  Object.keys(data).forEach((level) => {
-    markdown += `\n# ${level} Questions\n\n`;
-    markdown += convertToMarkdown(data[level]);
-  });
-  markdown += "<details>\n<summary>Answers</summary>\n<br>\n";
-  Object.keys(data).forEach((level) => {
-    markdown += `\n# ${level} Answers\n\n`;
-    markdown += convertAnswers(data[level]);
-  });
-  markdown += "</details>\n<br>\n";
-  // Define the path where the .md file will be saved
-  const dirPath = path.join(__dirname, "/data");
+  const filePath = path.join(markdownsDir, `${name}.md`);
 
-  // Ensure the 'data' directory exists
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
+  let content = `# Interview with ${name}\n**Interviewer:** ${interviewer_name}\n\n`;
+
+  for (const [level, questions] of Object.entries(q)) {
+    content += `## ${level} Questions\n\n`;
+
+    questions.forEach((question, index) => {
+      // Question text
+      content += `### ${index + 1}. ${question.question}\n\n`;
+
+      // Always show code (if exists)
+      if (question.code) {
+        content += `\`\`\`js\n${question.code}\n\`\`\`\n\n`;
+      }
+
+      // Toggle for answer + explanation
+      content += `<details>\n<summary>Show Answer</summary>\n\n`;
+
+      if (question.answer) {
+        content += `**Answer:**  \n${question.answer}\n\n`;
+      }
+      if (question.explanation) {
+        content += `**Explanation:**  \n${question.explanation}\n\n`;
+      }
+
+      content += `</details>\n\n---\n\n`;
+    });
   }
 
-  const filePath = path.join(dirPath, `${name}.md`);
+  fs.writeFileSync(filePath, content);
+  return filePath;
+}
 
-  try {
-    fs.writeFileSync(filePath, markdown);
-    console.log("Markdown file written successfully!");
-  } catch (error) {
-    console.error("Error writing file:", error);
-  }
-  return filePath; // Return the file path for download
-};
+
 function getRandomNumbers(range) {
   const [start, end] = range;
   const numbers = [];

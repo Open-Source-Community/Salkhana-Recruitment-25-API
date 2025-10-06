@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Questions Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Interview Questions Generator</h2>
+
+    <label>Interviewee Name</label>
+    <input id="name" placeholder="e.g. Omnia Ibrahim" />
+
+    <label>Interviewer Name</label>
+    <input id="interviewer" placeholder="e.g. Ahmed Hatem" />
+
+    <label>Beginner Questions (comma separated)</label>
+    <input id="beginner" placeholder="e.g. 1,2,3" />
+
+    <label>Intermediate Questions</label>
+    <input id="intermediate" placeholder="e.g. 4,5,6" />
+
+    <label>Advanced Questions</label>
+    <input id="advanced" placeholder="e.g. 7,8,9" />
+
+    <label>Generate Random?</label>
+    <select id="random">
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+
+    <button onclick="generate()">Generate</button>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    async function generate() {
+      const name = document.getElementById('name').value.trim();
+      const interviewer = document.getElementById('interviewer').value.trim();
+      const beginner = document.getElementById('beginner').value.trim();
+      const intermediate = document.getElementById('intermediate').value.trim();
+      const advanced = document.getElementById('advanced').value.trim();
+      const random = document.getElementById('random').value;
+
+      if (!name) {
+        alert("Please enter the interviewee's name.");
+        return;
+      }
+
+      const params = new URLSearchParams({
+        name,
+        interviewer_name: interviewer,
+        beginner,
+        intermediate,
+        advanced,
+        random
+      });
+
+      const res = await fetch(`http://localhost:3000/download?${params.toString()}`);
+      const data = await res.json();
+
+      const msgBox = document.getElementById('message');
+
+      if (data.filePath) {
+        // Show success message
+        msgBox.innerHTML = `<p class="success">✅ Markdown file generated successfully!</p>
+                            <p>Location: <b>${data.filePath}</b></p>`;
+
+        // Automatically open the markdown file
+        //window.open(`http://localhost:3000/${data.filePath}`, '_blank');
+      } else {
+        msgBox.innerHTML = `<p style="color:red;">❌ ${data.msg || 'Error generating file'}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
