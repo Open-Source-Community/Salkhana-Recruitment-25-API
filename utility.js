@@ -33,6 +33,8 @@ const convertAnswers = (questions) => {
   });
   return markdownContent;
 };
+
+
 const checkFileName = (name) => {
   // Define the path where the .md file will be saved
   const dirPath = path.join(__dirname, "/data");
@@ -51,9 +53,9 @@ function generateMarkdownFile(q, name, interviewer_name) {
   for (const [level, questions] of Object.entries(q)) {
     content += `## ${level} Questions\n\n`;
 
-    questions.forEach((question, index) => {
-      // Question text
-      content += `### ${index + 1}. ${question.question}\n\n`;
+    questions.forEach((question) => {
+      // used the original index of the question
+      content += `### ${question.index}. ${question.question}\n\n`;
 
       // Always show code (if exists)
       if (question.code) {
