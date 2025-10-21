@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
+const { exec } = require('child_process');
 
 const {
   stringToArr,
@@ -20,6 +21,17 @@ const PORT = 3000;
 
 // Serve markdown files so the browser can access them if needed
 app.use("/markdowns", express.static(path.join(__dirname, "markdowns")));
+
+let openMarkDown = (filePath) => {
+  let opsys = process.platform;
+  if (opsys == "darwin") {
+    exec(`open "${filePath}"`);
+  } else if (opsys == "win32") {
+    exec(`start "" "${filePath}"`);
+  } else if (opsys == "linux") {
+    exec(`xdg-open "${filePath}"`);
+  }
+}
 
 app.get("/download", (req, res) => {
   let { beginner, intermediate, advanced, name, interviewer_name, random } = req.query;
@@ -83,7 +95,7 @@ app.get("/download", (req, res) => {
   //  Generate markdown file
   let filePath = generateMarkdownFile(q, name, interviewer_name);
   filePath = filePath.replace(/\\/g, "/");
-
+  openMarkDown(filePath);
   //  Send response only once — no redirects
   return res.json({
     status: 200,

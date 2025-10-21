@@ -20,30 +20,62 @@
     }
     input, select, button {
       width: 100%;
-      margin: 10px 0;
+      margin: 8px 0;
       padding: 10px;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 14px;
     }
-    button {
+    .field-group {
+      margin-bottom: 15px;
+    }
+    .input-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .input-row input {
+      flex: 1;
+    }
+    .add-btn, .remove-btn {
+      width: 40px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .add-btn:hover {
+      background: #218838;
+    }
+    .remove-btn {
+      background: #dc3545;
+    }
+    .remove-btn:hover {
+      background: #b02a37;
+    }
+    button.generate-btn {
       background-color: #007bff;
       color: white;
       border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    pre {
-      background: #eee;
-      padding: 10px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
       border-radius: 6px;
-      overflow-x: auto;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button.generate-btn:hover {
+      background-color: #0056b3;
     }
     .success {
       color: green;
       font-weight: bold;
+      margin-top: 10px;
+    }
+    .error {
+      color: red;
       margin-top: 10px;
     }
   </style>
@@ -58,63 +90,124 @@
     <label>Interviewer Name</label>
     <input id="interviewer" placeholder="e.g. Ahmed Hatem" />
 
-    <label>Beginner Questions (comma separated)</label>
-    <input id="beginner" placeholder="e.g. 1,2,3" />
+    <!-- Beginner Questions -->
+    <div class="field-group">
+      <label>Beginner Questions <br><br> Criteria: (2) 1 → 13, (1) 14 → 15, (1) 16 → 18</label>
+      <div id="beginner-container">
+        <div class="input-row">
+          <input type="number" placeholder="Enter question number" />
+          <button class="remove-btn" onclick="removeField(this)">−</button>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addField('beginner-container')">+</button>
+    </div>
 
-    <label>Intermediate Questions</label>
-    <input id="intermediate" placeholder="e.g. 4,5,6" />
+    <!-- Intermediate Questions -->
+    <div class="field-group">
+      <label>Intermediate Questions <br><br> Criteria: (2) 1 → 14, (1) 15 → 17, (1) 18 → 19, (1) 20 → 21</label>
+      <div id="intermediate-container">
+        <div class="input-row">
+          <input type="number" placeholder="Enter question number" />
+          <button class="remove-btn" onclick="removeField(this)">−</button>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addField('intermediate-container')">+</button>
+    </div>
 
-    <label>Advanced Questions</label>
-    <input id="advanced" placeholder="e.g. 7,8,9" />
+    <!-- Advanced Questions -->
+    <div class="field-group">
+      <label>Advanced Questions  <br><br> Criteria: (∞) 1 → 26</label>
+      <div id="advanced-container">
+        <div class="input-row">
+          <input type="number" placeholder="Enter question number" />
+          <button class="remove-btn" onclick="removeField(this)">−</button>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addField('advanced-container')">+</button>
+    </div>
 
     <label>Generate Random?</label>
-    <select id="random">
+    <select id="random" onchange="toggleManualInputs()">
       <option value="0">No</option>
       <option value="1">Yes</option>
     </select>
 
-    <button onclick="generate()">Generate</button>
+    <button class="generate-btn" onclick="generate()">Generate</button>
 
     <div id="message"></div>
   </div>
 
   <script>
+    //addition button
+    function addField(containerId) {
+      const container = document.getElementById(containerId);
+      const div = document.createElement('div');
+      div.className = 'input-row';
+      div.innerHTML = `
+        <input type="number" placeholder="Enter question number" />
+        <button class="remove-btn" onclick="removeField(this)">−</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function removeField(btn) {
+      btn.parentElement.remove();
+    }
+
+    function toggleManualInputs() {
+      const random = document.getElementById('random').value === '1';
+      ['beginner-container','intermediate-container','advanced-container']
+        .forEach(id => {
+          document.getElementById(id)
+            .querySelectorAll('input')
+            .forEach(inp => inp.disabled = random);
+        });
+    }
+
     async function generate() {
       const name = document.getElementById('name').value.trim();
       const interviewer = document.getElementById('interviewer').value.trim();
-      const beginner = document.getElementById('beginner').value.trim();
-      const intermediate = document.getElementById('intermediate').value.trim();
-      const advanced = document.getElementById('advanced').value.trim();
       const random = document.getElementById('random').value;
 
-      if (!name) {
-        alert("Please enter the interviewee's name.");
+      if (!name || !interviewer) {
+        alert("Please fill in both Interviewee and Interviewer names.");
         return;
+      }
+
+      let beginner = [], intermediate = [], advanced = [];
+
+      if (random === '0') {
+        beginner = Array.from(document.querySelectorAll('#beginner-container input'))
+                        .map(i => i.value.trim()).filter(v => v);
+        intermediate = Array.from(document.querySelectorAll('#intermediate-container input'))
+                        .map(i => i.value.trim()).filter(v => v);
+        advanced = Array.from(document.querySelectorAll('#advanced-container input'))
+                        .map(i => i.value.trim()).filter(v => v);
       }
 
       const params = new URLSearchParams({
         name,
         interviewer_name: interviewer,
-        beginner,
-        intermediate,
-        advanced,
+        beginner: beginner.join(' '),
+        intermediate: intermediate.join(' '),
+        advanced: advanced.join(' '),
         random
       });
 
-      const res = await fetch(`http://localhost:3000/download?${params.toString()}`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`http://localhost:3000/download?${params.toString()}`);
+        const data = await res.json();
 
-      const msgBox = document.getElementById('message');
-
-      if (data.filePath) {
-        // Show success message
-        msgBox.innerHTML = `<p class="success">✅ Markdown file generated successfully!</p>
-                            <p>Location: <b>${data.filePath}</b></p>`;
-
-        // Automatically open the markdown file
-        //window.open(`http://localhost:3000/${data.filePath}`, '_blank');
-      } else {
-        msgBox.innerHTML = `<p style="color:red;">❌ ${data.msg || 'Error generating file'}</p>`;
+        const msgBox = document.getElementById('message');
+        if (data.filePath) {
+          msgBox.innerHTML = `<p class="success">✅ Markdown file generated successfully!</p>
+                              <p>Location: <b>${data.filePath}</b></p>`;
+        } else {
+          msgBox.innerHTML = `<p class="error">❌ ${data.msg || 'Error generating file'}</p>`;
+        }
+      } catch (err) {
+        document.getElementById('message').innerHTML =
+          `<p class="error">❌ Failed to reach the server.</p>`;
       }
     }
   </script>
