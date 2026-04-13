@@ -65,10 +65,24 @@
     .badge-intermediate{background:rgba(108,99,255,0.12);color:#9b93ff;border:1px solid rgba(108,99,255,0.2)}
     .badge-advanced{background:rgba(255,101,132,0.12);color:#ff8ba0;border:1px solid rgba(255,101,132,0.2)}
 
+    .theme-toggle{position:fixed;top:20px;right:20px;z-index:100;background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;border-radius:100px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.2s}
+    .theme-toggle:hover{color:var(--text);border-color:rgba(255,255,255,0.15)}
+
+    body.light{--bg:#f4f4f8;--surface:#ffffff;--card:#ffffff;--border:rgba(0,0,0,0.08);--accent:#6c63ff;--accent2:#ff6584;--text:#111118;--muted:#6b6b8a}
+    body.light input[type=text],body.light input[type=number],body.light select{background:#f0f0f6;border-color:rgba(0,0,0,0.1);color:var(--text)}
+    body.light input[type=text]::placeholder,body.light input[type=number]::placeholder{color:var(--muted)}
+    body.light select option{background:#ffffff}
+    body.light header::after{background:radial-gradient(ellipse,rgba(108,99,255,0.12) 0%,transparent 70%)}
+
     @media(max-width:600px){header{padding:60px 20px 40px}.two-col{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">
+  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="theme-icon"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <span id="theme-label">Light mode</span>
+</button>
 
 <header>
   <div class="committee-label">Interview Tools</div>
@@ -157,6 +171,15 @@
 </main>
 
 <script>
+  const moonIcon = `<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`;
+  const sunIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+
+  function toggleTheme() {
+    const isLight = document.body.classList.toggle('light');
+    document.getElementById('theme-label').textContent = isLight ? 'Dark mode' : 'Light mode';
+    document.getElementById('theme-icon').innerHTML = isLight ? sunIcon : moonIcon;
+  }
+
   function addField(containerId) {
     const container = document.getElementById(containerId);
     const div = document.createElement('div');
