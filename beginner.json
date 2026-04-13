@@ -1,0 +1,94 @@
+[{
+  "question": "Write a function that returns the sum of all numbers in an array.",
+  "code": "// Input: [1, 2, 3, 4, 5]\n// Output: 15",
+  "answer": "function sum(arr) {\n  return arr.reduce((acc, curr) => acc + curr, 0);\n}",
+  "explanation": "reduce() goes through each element, adding it to the accumulator starting at 0. Simple and clean — no need for a loop."
+},
+{
+  "question": "Write a function that reverses a string.",
+  "code": "// Input: 'hello'\n// Output: 'olleh'",
+  "answer": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+  "explanation": "split('') converts the string to an array of characters. reverse() reverses the array in place. join('') converts it back to a string."
+},
+{
+  "question": "Write a function that returns true if a number is even, false if odd.",
+  "code": "// Input: 4 → true\n// Input: 7 → false",
+  "answer": "function isEven(num) {\n  return num % 2 === 0;\n}",
+  "explanation": "The modulo operator (%) returns the remainder of division. If a number divided by 2 has no remainder, it's even."
+}
+,
+{
+  "question": "What is the difference between == and === in JavaScript?",
+  "code": "console.log(5 == '5');\nconsole.log(5 === '5');",
+  "answer": "true\nfalse",
+  "explanation": "== checks value only and performs type coercion (converts types before comparing). === checks both value and type with no conversion. Always prefer === to avoid unexpected behavior."
+},
+{
+  "question": "What will this code output?",
+  "code": "console.log(Boolean(0));\nconsole.log(Boolean(''));\nconsole.log(Boolean('hello'));\nconsole.log(Boolean(null));",
+  "answer": "false\nfalse\ntrue\nfalse",
+  "explanation": "Falsy values in JavaScript: 0, '', null, undefined, NaN, false. Everything else is truthy. Boolean() explicitly converts a value to true or false."
+},
+
+
+{
+  "question": "What is the difference between a client and a server?",
+  "code": "",
+  "answer": "A client requests data or services. A server provides them.",
+  "explanation": "The client (e.g. browser) sends requests, the server processes them and sends back responses. This is called the client-server model. Examples: your browser is a client, google.com is a server."
+},
+{
+  "question": "What is an HTTP request and what does it contain?",
+  "code": "",
+  "answer": "An HTTP request is a message sent from client to server asking for data or an action. It contains a method, URL, headers, and optionally a body.",
+  "explanation": "Method (GET, POST...) defines the action. URL defines the resource. Headers carry metadata like content type or auth tokens. Body carries data (used in POST/PUT requests)."
+},
+{
+  "question": "What is JSON and why do we use it in APIs?",
+  "code": "",
+  "answer": "JSON (JavaScript Object Notation) is a lightweight text format for storing and transferring data.",
+  "explanation": "JSON is easy to read and write for humans, and easy to parse for machines. It's the standard format for sending data between a client and server in REST APIs because it works with almost every programming language."
+} ,
+{
+  "question": "Write a function that finds the maximum number in an array.",
+  "code": "// Input: [3, 7, 2, 9, 5]\n// Output: 9",
+  "answer": "function getMax(arr) {\n  return Math.max(...arr);\n}",
+  "explanation": "The spread operator (...) expands the array into individual values, which Math.max can handle."
+},
+{
+  "question": "Write a function that counts how many times a value appears in an array.",
+  "code": "// Input: [1,2,2,3,2], 2\n// Output: 3",
+  "answer": "function countOccurrences(arr, val) {\n  return arr.filter(x => x === val).length;\n}",
+  "explanation": "filter() returns a new array with matching values, then we count them using length."
+},
+{
+  "question": "What will this code output?",
+  "code": "console.log(typeof null);",
+  "answer": "object",
+  "explanation": "This is a known JavaScript bug. null is a primitive value but typeof returns 'object'."
+},
+{
+  "question": "What is a Promise in JavaScript?",
+  "code": "",
+  "answer": "An object that represents the result of an asynchronous operation.",
+  "explanation": "A Promise has 3 states: pending, fulfilled, rejected. It helps handle async code instead of callbacks."
+},
+{
+  "question": "What will this code output?",
+  "code": "setTimeout(() => console.log('A'), 0);\nconsole.log('B');",
+  "answer": "B\nA",
+  "explanation": "Even with 0 delay, setTimeout runs after the current call stack (event loop), so 'B' prints first."
+},
+{
+  "question": "Write a function that removes duplicates from an array.",
+  "code": "// Input: [1,2,2,3]\n// Output: [1,2,3]",
+  "answer": "function removeDuplicates(arr) {\n  return [...new Set(arr)];\n}",
+  "explanation": "Set automatically removes duplicates, then we convert it back to an array."
+},
+{
+  "question": "What is Express.js?",
+  "code": "",
+  "answer": "A web framework for Node.js.",
+  "explanation": "It simplifies building APIs and handling routes, middleware, and requests."
+}
+]
