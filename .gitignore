@@ -1,1 +1,5 @@
 markdowns/
+node_modules/
+.env
+*.vscode/
+*.vs/
