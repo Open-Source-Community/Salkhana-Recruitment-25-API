@@ -108,6 +108,7 @@
       "answer": "function mostFrequent(arr) {\n  const freq = {};\n  arr.forEach(item => freq[item] = (freq[item] || 0) + 1);\n  return Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);\n}",
       "explanation": "This creates a frequency map, then reduces it to find the key with the highest value, which is the most frequent item."
     }
+  
   ],
   "Intermediate": [
     {
@@ -116,6 +117,127 @@
       "answer": "[1, 2, 3, 4]",
       "explanation": "Arrays are reference types in JavaScript. When we assign a to b, both variables reference the same array. Modifying b also modifies a."
     },
+    {
+  "question": "What is the difference between stateful and stateless protocols?",
+  "code": "",
+  "answer": "Stateful protocols remember previous interactions. Stateless protocols treat every request independently with no memory of past requests.",
+  "explanation": "HTTP is stateless — each request is independent, the server doesn't remember you. This is why we use cookies/sessions/tokens to maintain state. TCP is stateful — it tracks the connection state throughout the session. Stateless systems are easier to scale since any server can handle any request."
+    }
+    ,{
+      "question": "What is the difference between session-based and token-based authentication?",
+      "code": "",
+      "answer": "Session-based stores login state on the server. Token-based (JWT) stores it on the client inside a token sent with every request.",
+      "explanation": "Session-based: after login, server saves your session and gives you a session ID in a cookie. Every request, server checks that ID against its storage.\nToken-based: after login, server gives you a JWT. You send it with every request, server just verifies the signature — no storage needed.\nMain difference: sessions are stateful (server remembers you), JWTs are stateless (token carries all the info)."
+    },
+    {
+      "question": "What is the difference between authentication and authorization?",
+      "code": "",
+      "answer": "Authentication verifies who you are. Authorization determines what you're allowed to do.",
+      "explanation": "Authentication is the login process (proving identity). Authorization happens after — checking if the authenticated user has permission to access a resource (e.g., admin vs regular user)."
+    },
+    {
+      "question": "What is the difference between PUT and PATCH HTTP methods?",
+      "code": "",
+      "answer": "PUT replaces the entire resource. PATCH updates only specific fields.",
+      "explanation": "PUT requires sending the full resource representation — missing fields may be removed. PATCH is partial — only the provided fields are updated, making it more efficient for small changes."
+    },
+    {
+      "question": "What is middleware in Express.js and how does it work?",
+      "code": "app.use((req, res, next) => {\n  console.log('Request received:', req.method);\n  next();\n});",
+      "answer": "Middleware are functions that execute during the request-response cycle, with access to req, res, and next.",
+      "explanation": "Middleware can modify req/res, end the cycle, or call next() to pass control. They run in order of definition and are used for logging, auth, parsing, error handling, etc."
+    },
+    {
+      "question": "What is the difference between HTTP and HTTPS?",
+      "code": "",
+      "answer": "HTTP transfers data in plain text. HTTPS encrypts data using TLS/SSL.",
+      "explanation": "HTTPS protects data in transit from eavesdropping and tampering. It uses TLS handshake to establish an encrypted connection before any data is sent."
+    },
+    {
+  "question": "What is the difference between TCP and UDP?",
+  "code": "",
+  "answer": "TCP is reliable, ordered, and connection-based. UDP is faster, connectionless, and has no delivery guarantee.",
+  "explanation": "TCP uses a 3-way handshake and ensures all packets arrive in order — ideal for HTTP, emails. UDP skips this overhead — ideal for live video, gaming, or DNS where speed matters more than reliability."
+},
+{
+  "question": "What are HTTP status codes and what do the main ranges mean?",
+  "code": "",
+  "answer": "1xx: informational, 2xx: success, 3xx: redirection, 4xx: client error, 5xx: server error.",
+  "explanation": "200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 500 Internal Server Error. Using correct status codes makes APIs predictable and easier to debug."
+},
+{
+  "question": "What is the difference between cookies and sessions?",
+  "code": "",
+  "answer": "Cookies store data on the client. Sessions store data on the server, with only a session ID stored in a cookie.",
+  "explanation": "Cookies are limited in size and visible to the client. Sessions keep sensitive data server-side and are more secure. Sessions expire when the server clears them or the session cookie expires."
+},
+    {
+      "question": "What happens when you type a URL in the browser and hit Enter?",
+      "code": "",
+      "answer": "DNS lookup → TCP connection → TLS handshake (if HTTPS) → HTTP request → Server response → Browser renders the page.",
+      "explanation": "DNS resolves the domain to an IP. TCP establishes connection (3-way handshake). The browser sends an HTTP request, the server responds, and the browser parses HTML/CSS/JS to render the page."
+    },
+    {
+      "question": "What is CORS and why does it exist?",
+      "code": "",
+      "answer": "Cross-Origin Resource Sharing — a browser security mechanism that restricts web pages from making requests to a different domain than the one that served the page.",
+      "explanation": "CORS prevents malicious sites from making unauthorized requests on behalf of users. Servers must explicitly allow cross-origin requests by sending appropriate headers like Access-Control-Allow-Origin."
+    },
+
+    {
+      "question": "What are HTTP status codes and what do the main ranges mean?",
+      "code": "",
+      "answer": "1xx: informational, 2xx: success, 3xx: redirection, 4xx: client error, 5xx: server error.",
+      "explanation": "HTTP status codes are 3-digit numbers the server sends back to tell the client what happened with the request.\n\n• 200 OK — request succeeded\n• 201 Created — new resource was created (e.g. after POST)\n• 204 No Content — success but nothing to return\n\n• 301 Moved Permanently — resource has a new URL forever\n• 304 Not Modified — use your cached version\n\n• 400 Bad Request — client sent invalid or malformed data (e.g. missing required field)\n• 401 Unauthorized — not logged in, authentication required\n• 403 Forbidden — logged in but no permission to access this resource\n• 404 Not Found — resource doesn't exist\n• 409 Conflict — request conflicts with current state (e.g. duplicate email)\n• 422 Unprocessable Entity — data format is valid but fails validation rules\n\n• 500 Internal Server Error — something crashed on the server\n• 503 Service Unavailable — server is down or overloaded"
+     },
+     {
+      "question": "Write a function that returns the intersection of two arrays.",
+      "code": "// Input: [1, 2, 3, 4], [2, 4, 6]\n// Output: [2, 4]",
+      "answer": "function intersection(arr1, arr2) {\n  const set = new Set(arr2);\n  return arr1.filter(item => set.has(item));\n}",
+      "explanation": "Converting arr2 to a Set makes lookups O(1). Then we filter arr1 keeping only elements that exist in the Set. Time complexity: O(n + m)."
+    },
+    {
+      "question": "Write a function that checks if a string is a palindrome.",
+      "code": "// Input: 'racecar'\n// Output: true\n// Input: 'hello'\n// Output: false",
+      "answer": "function isPalindrome(str) {\n  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return cleaned === cleaned.split('').reverse().join('');\n}",
+      "explanation": "We clean the string first (lowercase, remove non-alphanumeric). Then compare it to its reverse. This handles edge cases like spaces and punctuation."
+    },
+    {
+  "question": "What is the difference between hashing and encryption?",
+  "code": "",
+  "answer": "Hashing is one-way and irreversible. Encryption is two-way and can be decrypted with a key.",
+  "explanation": "Hashing transforms data into a fixed-length string that cannot be reversed — used for passwords. Encryption encodes data so it can be decoded later with the correct key — used for sensitive data in transit like credit cards."
+},
+{
+  "question": "What is database normalization?",
+  "code": "",
+  "answer": "The process of organizing a database to reduce redundancy and improve data integrity.",
+  "explanation": "Normalization splits data into related tables to avoid duplication. For example, instead of storing a user's city in every order row, you store it once in a users table and reference it. This makes updates easier and prevents inconsistencies."
+},
+{
+  "question": "What is the difference between a primary key and a unique key?",
+  "code": "",
+  "answer": "Primary key: uniquely identifies each row, cannot be null, one per table. Unique key: also enforces uniqueness but can be null and a table can have multiple.",
+  "explanation": "Every table should have one primary key as its main identifier (e.g. user id). Unique keys enforce no duplicates on other columns like email or username, but they're not the main row identifier."
+},
+{
+  "question": "Write a function that removes duplicates from an array without using Set.",
+  "code": "// Input: [1, 2, 2, 3, 4, 4, 5]\n// Output: [1, 2, 3, 4, 5]",
+  "answer": "function removeDuplicates(arr) {\n  return arr.filter((item, index) => arr.indexOf(item) === index);\n}",
+  "explanation": "indexOf returns the first occurrence index of an element. If the current index matches, it's the first occurrence — keep it. If not, it's a duplicate — filter it out."
+},
+{
+  "question": "Write a function that returns the second largest number in an array.",
+  "code": "// Input: [10, 5, 8, 3, 10]\n// Output: 8",
+  "answer": "function secondLargest(arr) {\n  const unique = [...new Set(arr)].sort((a, b) => b - a);\n  return unique[1];\n}",
+  "explanation": "First remove duplicates using Set, then sort descending. The second element is the second largest. Removing duplicates handles cases like [10, 10, 5] where the answer should be 5, not 10."
+},
+{
+  "question": "Write a function that chunks an array into groups of a given size.",
+  "code": "// Input: ([1,2,3,4,5], 2)\n// Output: [[1,2],[3,4],[5]]",
+  "answer": "function chunk(arr, size) {\n  const result = [];\n  for (let i = 0; i < arr.length; i += size) {\n    result.push(arr.slice(i, i + size));\n  }\n  return result;\n}",
+  "explanation": "Loop through the array jumping by size each iteration. Use slice to extract each chunk. The last chunk may be smaller if the array length isn't divisible by size."
+},
     {
       "question": "How can you remove the last element from an array?",
       "code": "",
@@ -128,6 +250,7 @@
       "answer": "1",
       "explanation": "The spread operator (...) creates a shallow copy of obj. Changing clone.a doesn't affect obj.a because they're separate objects."
     },
+
     {
       "question": "What will the following code output?",
       "code": "const numbers = [1, 2, 3, 4, 5];\nconst result = numbers.reduce((acc, curr) => acc + curr, 0);\nconsole.log(result);",
