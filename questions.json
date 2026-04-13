@@ -184,12 +184,7 @@
       "explanation": "CORS prevents malicious sites from making unauthorized requests on behalf of users. Servers must explicitly allow cross-origin requests by sending appropriate headers like Access-Control-Allow-Origin."
     },
 
-    {
-      "question": "What are HTTP status codes and what do the main ranges mean?",
-      "code": "",
-      "answer": "1xx: informational, 2xx: success, 3xx: redirection, 4xx: client error, 5xx: server error.",
-      "explanation": "HTTP status codes are 3-digit numbers the server sends back to tell the client what happened with the request.\n\n• 200 OK — request succeeded\n• 201 Created — new resource was created (e.g. after POST)\n• 204 No Content — success but nothing to return\n\n• 301 Moved Permanently — resource has a new URL forever\n• 304 Not Modified — use your cached version\n\n• 400 Bad Request — client sent invalid or malformed data (e.g. missing required field)\n• 401 Unauthorized — not logged in, authentication required\n• 403 Forbidden — logged in but no permission to access this resource\n• 404 Not Found — resource doesn't exist\n• 409 Conflict — request conflicts with current state (e.g. duplicate email)\n• 422 Unprocessable Entity — data format is valid but fails validation rules\n\n• 500 Internal Server Error — something crashed on the server\n• 503 Service Unavailable — server is down or overloaded"
-     },
+    
      {
       "question": "Write a function that returns the intersection of two arrays.",
       "code": "// Input: [1, 2, 3, 4], [2, 4, 6]\n// Output: [2, 4]",
