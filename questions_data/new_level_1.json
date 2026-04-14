@@ -29,8 +29,6 @@
   "answer": "false\nfalse\ntrue\nfalse",
   "explanation": "Falsy values in JavaScript: 0, '', null, undefined, NaN, false. Everything else is truthy. Boolean() explicitly converts a value to true or false."
 },
-
-
 {
   "question": "What is the difference between a client and a server?",
   "code": "",
