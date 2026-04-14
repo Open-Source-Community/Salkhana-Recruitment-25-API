@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const data = JSON.parse(fs.readFileSync("./questions.json", "utf8"));
+const data = JSON.parse(fs.readFileSync("./questions_data/questions.json", "utf8"));
 const stringToArr = (str) => {
   if (str) return str.split(" ");
   return [];

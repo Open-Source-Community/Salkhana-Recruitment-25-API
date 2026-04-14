@@ -21,7 +21,6 @@ const PORT = 3000;
 
 // Serve markdown files so the browser can access them if needed
 app.use("/markdowns", express.static(path.join(__dirname, "markdowns")));
-
 let openMarkDown = (filePath) => {
   let opsys = process.platform;
   if (opsys == "darwin") {
