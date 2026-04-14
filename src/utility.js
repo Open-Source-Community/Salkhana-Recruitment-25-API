@@ -43,7 +43,7 @@ const checkFileName = (name) => {
   return fs.existsSync(filePath);
 };
 function generateMarkdownFile(q, name, interviewer_name) {
-  const markdownsDir = path.join(__dirname, "markdowns");
+  const markdownsDir = path.join(__dirname,"..","markdowns");
   if (!fs.existsSync(markdownsDir)) fs.mkdirSync(markdownsDir);
 
   const filePath = path.join(markdownsDir, `${name}.md`);
