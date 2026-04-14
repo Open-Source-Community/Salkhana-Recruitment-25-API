@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Write a function that returns the sum of all numbers in an array.",
+    "code": "// Input: [1, 2, 3, 4, 5]\n// Output: 15",
+    "answer": "function sum(arr) {\n  return arr.reduce((acc, curr) => acc + curr, 0);\n}",
+    "explanation": "reduce() goes through each element, adding it to the accumulator starting at 0."
+  },
+  {
+    "question": "Write a function that reverses a string.",
+    "code": "// Input: 'hello'\n// Output: 'olleh'",
+    "answer": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+    "explanation": "split('') converts the string to an array, reverse it, then join it back."
+  },
+  {
+    "question": "Write a function that returns true if a number is even, false if odd.",
+    "code": "// Input: 4 → true\n// Input: 7 → false",
+    "answer": "function isEven(num) {\n  return num % 2 === 0;\n}",
+    "explanation": "Uses modulo operator to check even/odd."
+  },
+  {
+    "question": "What is the difference between == and === in JavaScript?",
+    "code": "console.log(5 == '5');\nconsole.log(5 === '5');",
+    "answer": "true\nfalse",
+    "explanation": "== compares value with type coercion, === compares value and type strictly."
+  },
+  {
+    "question": "What will this code output?",
+    "code": "console.log(Boolean(0));\nconsole.log(Boolean(''));\nconsole.log(Boolean('hello'));\nconsole.log(Boolean(null));",
+    "answer": "false\nfalse\ntrue\nfalse",
+    "explanation": "Shows JavaScript falsy values."
+  },
+  {
+    "question": "What will this code output?",
+    "code": "console.log(typeof null);",
+    "answer": "object",
+    "explanation": "Known JavaScript bug: typeof null returns object."
+  },
+  {
+    "question": "What will this code output?",
+    "code": "setTimeout(() => console.log('A'), 0);\nconsole.log('B');",
+    "answer": "B\nA",
+    "explanation": "setTimeout runs after current call stack (event loop)."
+  },
+  {
+    "question": "Write a function that finds the maximum number in an array.",
+    "code": "// Input: [3, 7, 2, 9, 5]\n// Output: 9",
+    "answer": "function getMax(arr) {\n  return Math.max(...arr);\n}",
+    "explanation": "Uses spread operator with Math.max."
+  },
+  {
+    "question": "Write a function that counts how many times a value appears in an array.",
+    "code": "// Input: [1,2,2,3,2], 2\n// Output: 3",
+    "answer": "function countOccurrences(arr, val) {\n  return arr.filter(x => x === val).length;\n}",
+    "explanation": "Filters matching values then counts them."
+  },
+  {
+    "question": "Write a function that removes duplicates from an array.",
+    "code": "// Input: [1,2,2,3]\n// Output: [1,2,3]",
+    "answer": "function removeDuplicates(arr) {\n  return [...new Set(arr)];\n}",
+    "explanation": "Set removes duplicates."
+  }
+]

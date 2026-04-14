@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What is the difference between a client and a server?",
+    "code": "",
+    "answer": "A client requests data or services. A server provides them.",
+    "explanation": "The client (e.g. browser) sends requests, the server processes them and sends back responses. This is called the client-server model. Examples: your browser is a client, google.com is a server."
+  },
+  {
+    "question": "What is an HTTP request and what does it contain?",
+    "code": "",
+    "answer": "An HTTP request is a message sent from client to server asking for data or an action. It contains a method, URL, headers, and optionally a body.",
+    "explanation": "Method (GET, POST...) defines the action. URL defines the resource. Headers carry metadata like content type or auth tokens. Body carries data (used in POST/PUT requests)."
+  },
+  {
+    "question": "What is JSON and why do we use it in APIs?",
+    "code": "",
+    "answer": "JSON (JavaScript Object Notation) is a lightweight text format for storing and transferring data.",
+    "explanation": "JSON is easy to read and write for humans, and easy to parse for machines. It's the standard format for sending data between a client and server in REST APIs because it works with almost every programming language."
+  },
+  {
+    "question": "What is Express.js?",
+    "code": "",
+    "answer": "A web framework for Node.js.",
+    "explanation": "It simplifies building APIs and handling routes, middleware, and requests."
+  },
+  {
+    "question": "What is a Promise in JavaScript?",
+    "code": "",
+    "answer": "An object that represents the result of an asynchronous operation.",
+    "explanation": "A Promise has 3 states: pending, fulfilled, rejected. It helps handle async code instead of callbacks."
+  }
+]

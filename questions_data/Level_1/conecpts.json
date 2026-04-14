@@ -1,0 +1,118 @@
+[
+  {
+    "question": "What is the difference between stateful and stateless protocols?",
+    "code": "",
+    "answer": "Stateful protocols remember previous interactions. Stateless protocols treat every request independently with no memory of past requests.",
+    "explanation": "HTTP is stateless — each request is independent, the server doesn't remember you. This is why we use cookies/sessions/tokens to maintain state. TCP is stateful — it tracks the connection state throughout the session. Stateless systems are easier to scale since any server can handle any request."
+  },
+  {
+    "question": "What is the difference between session-based and token-based authentication?",
+    "code": "",
+    "answer": "Session-based stores login state on the server. Token-based (JWT) stores it on the client inside a token sent with every request.",
+    "explanation": "Session-based: after login, server saves your session and gives you a session ID in a cookie. Every request, server checks that ID against its storage.\nToken-based: after login, server gives you a JWT. You send it with every request, server just verifies the signature — no storage needed.\nMain difference: sessions are stateful (server remembers you), JWTs are stateless (token carries all the info)."
+  },
+  {
+    "question": "What is the difference between authentication and authorization?",
+    "code": "",
+    "answer": "Authentication verifies who you are. Authorization determines what you're allowed to do.",
+    "explanation": "Authentication is the login process (proving identity). Authorization happens after — checking if the authenticated user has permission to access a resource (e.g., admin vs regular user)."
+  },
+  {
+    "question": "What is the difference between PUT and PATCH HTTP methods?",
+    "code": "",
+    "answer": "PUT replaces the entire resource. PATCH updates only specific fields.",
+    "explanation": "PUT requires sending the full resource representation — missing fields may be removed. PATCH is partial — only the provided fields are updated, making it more efficient for small changes."
+  },
+  {
+    "question": "What is the difference between HTTP and HTTPS?",
+    "code": "",
+    "answer": "HTTP transfers data in plain text. HTTPS encrypts data using TLS/SSL.",
+    "explanation": "HTTPS protects data in transit from eavesdropping and tampering. It uses TLS handshake to establish an encrypted connection before any data is sent."
+  },
+  {
+    "question": "What is the difference between TCP and UDP?",
+    "code": "",
+    "answer": "TCP is reliable, ordered, and connection-based. UDP is faster, connectionless, and has no delivery guarantee.",
+    "explanation": "TCP uses a 3-way handshake and ensures all packets arrive in order — ideal for HTTP, emails. UDP skips this overhead — ideal for live video, gaming, or DNS where speed matters more than reliability."
+  },
+  {
+    "question": "What is the difference between cookies and sessions?",
+    "code": "",
+    "answer": "Cookies store data on the client. Sessions store data on the server, with only a session ID stored in a cookie.",
+    "explanation": "Cookies are limited in size and visible to the client. Sessions keep sensitive data server-side and are more secure. Sessions expire when the server clears them or the session cookie expires."
+  },
+  {
+    "question": "What happens when you type a URL in the browser and hit Enter?",
+    "code": "",
+    "answer": "DNS lookup → TCP connection → TLS handshake (if HTTPS) → HTTP request → Server response → Browser renders the page.",
+    "explanation": "DNS resolves the domain to an IP. TCP establishes connection (3-way handshake). The browser sends an HTTP request, the server responds, and the browser parses HTML/CSS/JS to render the page."
+  },
+  {
+    "question": "What is CORS and why does it exist?",
+    "code": "",
+    "answer": "Cross-Origin Resource Sharing — a browser security mechanism that restricts web pages from making requests to a different domain than the one that served the page.",
+    "explanation": "CORS prevents malicious sites from making unauthorized requests on behalf of users. Servers must explicitly allow cross-origin requests by sending appropriate headers like Access-Control-Allow-Origin."
+  },
+  {
+    "question": "What is hashing and encryption difference?",
+    "code": "",
+    "answer": "Hashing is one-way and irreversible. Encryption is two-way and can be decrypted with a key.",
+    "explanation": "Hashing transforms data into a fixed-length string that cannot be reversed — used for passwords. Encryption encodes data so it can be decoded later with the correct key — used for sensitive data in transit like credit cards."
+  },
+
+  
+  { 
+    "question": "What is database normalization?",
+    "code": "",
+    "answer": "The process of organizing a database to reduce redundancy and improve data integrity.",
+    "explanation": "Normalization splits data into related tables to avoid duplication. For example, instead of storing a user's city in every order row, you store it once in a users table and reference it. This makes updates easier and prevents inconsistencies."
+  },
+  {
+    "question": "What is the difference between a primary key and a unique key?",
+    "code": "",
+    "answer": "Primary key: uniquely identifies each row, cannot be null, one per table. Unique key: also enforces uniqueness but can be null and a table can have multiple.",
+    "explanation": "Every table should have one primary key as its main identifier (e.g. user id). Unique keys enforce no duplicates on other columns like email or username, but they're not the main row identifier."
+  },
+  {
+    "question": "Which SQL statement is used to extract data from a database?",
+    "code": "",
+    "answer": "SELECT",
+    "explanation": ""
+  },
+  {
+    "question": "Which SQL statement is used to update data in a database?",
+    "code": "",
+    "answer": "UPDATE",
+    "explanation": ""
+  },
+  {
+    "question": "With SQL, how do you select all the columns from a table named 'Persons'?",
+    "code": "",
+    "answer": "SELECT * FROM Persons",
+    "explanation": ""
+  },
+  {
+    "question": "What is a relational database?",
+    "code": "",
+    "answer": "A database that stores data in tables with rows and columns and uses relationships between tables.",
+    "explanation": ""
+  },
+  {
+    "question": "What is the difference between SQL and NoSQL databases?",
+    "code": "",
+    "answer": "SQL databases are structured and use tables, while NoSQL databases are flexible and use documents, key-value, or graph structures.",
+    "explanation": ""
+  },
+  {
+    "question": "What is a NoSQL database?",
+    "code": "",
+    "answer": "A database that stores data in non-relational formats such as documents, key-value pairs, wide-column, or graphs.",
+    "explanation": ""
+  },
+  {
+    "question": "What is a schema in SQL databases?",
+    "code": "",
+    "answer": "The structure that defines tables, columns, and relationships in a database.",
+    "explanation": ""
+  }
+]

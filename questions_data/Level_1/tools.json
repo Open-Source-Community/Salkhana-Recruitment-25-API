@@ -1,0 +1,38 @@
+[ 
+  {
+    "question": "What is middleware in Express.js and how does it work?",
+    "code": "app.use((req, res, next) => {\n  console.log('Request received:', req.method);\n  next();\n});",
+    "answer": "Middleware are functions that execute during the request-response cycle, with access to req, res, and next.",
+    "explanation": "Middleware can modify req/res, end the cycle, or call next() to pass control. They run in order of definition and are used for logging, auth, parsing, error handling, etc."
+  },
+  {
+    "question": "Write a function that returns the intersection of two arrays.",
+    "code": "// Input: [1, 2, 3, 4], [2, 4, 6]\n// Output: [2, 4]",
+    "answer": "function intersection(arr1, arr2) {\n  const set = new Set(arr2);\n  return arr1.filter(item => set.has(item));\n}",
+    "explanation": "Converting arr2 to a Set makes lookups O(1). Then we filter arr1 keeping only elements that exist in the Set. Time complexity: O(n + m)."
+  },
+  {
+    "question": "Write a function that checks if a string is a palindrome.",
+    "code": "// Input: 'racecar'\n// Output: true\n// Input: 'hello'\n// Output: false",
+    "answer": "function isPalindrome(str) {\n  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return cleaned === cleaned.split('').reverse().join('');\n}",
+    "explanation": "We clean the string first (lowercase, remove non-alphanumeric). Then compare it to its reverse. This handles edge cases like spaces and punctuation."
+  },
+  {
+    "question": "Write a function that removes duplicates from an array without using Set.",
+    "code": "// Input: [1, 2, 2, 3, 4, 4, 5]\n// Output: [1, 2, 3, 4, 5]",
+    "answer": "function removeDuplicates(arr) {\n  return arr.filter((item, index) => arr.indexOf(item) === index);\n}",
+    "explanation": "indexOf returns the first occurrence index of an element. If the current index matches, it's the first occurrence — keep it. If not, it's a duplicate — filter it out."
+  },
+  {
+    "question": "Write a function that returns the second largest number in an array.",
+    "code": "// Input: [10, 5, 8, 3, 10]\n// Output: 8",
+    "answer": "function secondLargest(arr) {\n  const unique = [...new Set(arr)].sort((a, b) => b - a);\n  return unique[1];\n}",
+    "explanation": "First remove duplicates using Set, then sort descending. The second element is the second largest. Removing duplicates handles cases like [10, 10, 5] where the answer should be 5, not 10."
+  },
+  {
+    "question": "Write a function that chunks an array into groups of a given size.",
+    "code": "// Input: ([1,2,3,4,5], 2)\n// Output: [[1,2],[3,4],[5]]",
+    "answer": "function chunk(arr, size) {\n  const result = [];\n  for (let i = 0; i < arr.length; i += size) {\n    result.push(arr.slice(i, i + size));\n  }\n  return result;\n}",
+    "explanation": "Loop through the array jumping by size each iteration. Use slice to extract each chunk. The last chunk may be smaller if the array length isn't divisible by size."
+  }
+]

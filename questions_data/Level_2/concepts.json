@@ -1,0 +1,162 @@
+[
+  {
+    "question": "Why is there many frameworks for backend?",
+    "code": "",
+    "answer": "As every framework has it's pros/cons, for example spring boot is mainly used for Banking systems while nodeJS is used for beginners to learn how servers primarily work.",
+    "explanation": ""
+  },
+  {
+    "question": "What is the main difference between JS and TS?",
+    "code": "",
+    "answer": "Compile time errors instead of runtime surprises, static typing addition rather than dynamic typing, at large codebases JS starts degrading the quality of code written",
+    "explanation": ""
+  },
+  {
+    "question": "What is a transpiler and how does it work?",
+    "code": "",
+    "answer": "A transpiler is what transforms code from one high-level language to another high-level language. in our case it transforms TS into JS.",
+    "explanation": ""
+  },
+  {
+    "question": "How does TS work on the web despite the web being built on JS engines?",
+    "code": "",
+    "answer": "It doesn't work directly on the web but is rather translated into JS first so that switching from JS to TS is as smooth as possible for websites already built on JS.",
+    "explanation": ""
+  },
+  {
+    "question": "What is the difference between NestJS and NodeJS/ExpressJS?",
+    "code": "",
+    "answer": "NestJS enforces a structure for code to be written in, it follows a standard pattern so that different developers write similar code, it manages dependencies automatically.",
+    "explanation": ""
+  },
+  {
+    "question": "What are the main components of a NestJS backend server?",
+    "code": "",
+    "answer": "Controller, Modules, Service, Middleware, Guards, Pipelines, interceptors, exception filters.",
+    "explanation": ""
+  },
+  {
+    "question": "What is the main lifecycle of a request and a response in NestJS?",
+    "code": "",
+    "answer": "Incoming Request, Middleware (Global -> Module), Guards (Global -> Controller -> Route), Interceptors (Pre-Controller logic), Pipes (Transformation/Validation), Controller Handler (Your business logic), Interceptors (Post-Controller logic), Exception Filters (If error occurs), Server Response.",
+    "explanation": ""
+  },
+  {
+    "question": "What is a middleware?",
+    "code": "",
+    "answer": "Functions that run before the route handler, Execute code, Make changes to the request and response objects, End the request-response cycle, Call the next middleware function.",
+    "explanation": ""
+  },
+  {
+    "question": "What are guards?",
+    "code": "",
+    "answer": "Single responsibility -> Authorization, Determine if a request should be handled by the route handler.",
+    "explanation": ""
+  },
+  {
+    "question": "What are interceptors?",
+    "code": "",
+    "answer": "Wrap the execution of the route handler, Bind extra logic before/after method execution, transform the result returned from a function.",
+    "explanation": ""
+  },
+  {
+    "question": "What are pipes?",
+    "code": "",
+    "answer": "Transform input data to the desired form (e.g., string \"1\" to number 1), evaluate input data and throw an exception if invalid.",
+    "explanation": ""
+  },
+  {
+    "question": "How can we achieve real-time communication between server and client?",
+    "code": "",
+    "answer": "through websockets that enables simultaneous two-way communication over a single TCP connection.",
+    "explanation": ""
+  },
+  {
+    "question": "What is the main difference between websockets and HTTP Keep-alive?",
+    "code": "",
+    "answer": "websockets are bidirectional, either side can start a connection in a websocket.",
+    "explanation": ""
+  },
+  {
+    "question": "Why do websockets use TCP?",
+    "code": "",
+    "answer": "Reliability > Speed for most use cases.",
+    "explanation": ""
+  },
+  {
+    "question": "How do websockets work?",
+    "code": "",
+    "answer": "Handshake (HTTP Upgrade) then establish connection then they start bidirectional communication then after either side closes the connection the websocket is terminated.",
+    "explanation": ""
+  },
+  {
+    "question": "What are webhooks?",
+    "code": "",
+    "answer": "Event-driven method for one application to send real-time data to another via HTTP POST requests.",
+    "explanation": ""
+  },
+  {
+    "question": "When to use webhooks over websockets?",
+    "code": "",
+    "answer": "when it is a single request in real-time, when it is a 1-way connection, when we need the connection only when a certain event happens.",
+    "explanation": ""
+  },
+
+
+  
+  {
+    "question": "Which SQL statement is used to extract data from a database?",
+    "code": "",
+    "answer": "SELECT",
+    "explanation": ""
+  },
+  {
+    "question": "Which SQL statement is used to update data in a database?",
+    "code": "",
+    "answer": "UPDATE",
+    "explanation": ""
+  },
+  {
+    "question": "With SQL, how do you select all the columns from a table named 'Persons'?",
+    "code": "",
+    "answer": "SELECT * FROM Persons",
+    "explanation": ""
+  },
+  {
+    "question": "What is a relational database?",
+    "code": "",
+    "answer": "A database that stores data in tables with rows and columns and uses relationships between tables.",
+    "explanation": ""
+  },
+  {
+    "question": "What is the difference between SQL and NoSQL databases?",
+    "code": "",
+    "answer": "SQL databases are structured and use tables, while NoSQL databases are flexible and use documents, key-value, or graph structures.",
+    "explanation": ""
+  },
+  {
+    "question": "What is a NoSQL database?",
+    "code": "",
+    "answer": "A database that stores data in non-relational formats such as documents, key-value pairs, wide-column, or graphs.",
+    "explanation": ""
+  },
+  {
+    "question": "What is a schema in SQL databases?",
+    "code": "",
+    "answer": "The structure that defines tables, columns, and relationships in a database.",
+    "explanation": ""
+  },
+  {
+    "question": "What is database normalization?",
+    "code": "",
+    "answer": "The process of organizing a database to reduce redundancy and improve data integrity.",
+    "explanation": "Normalization splits data into related tables to avoid duplication. For example, instead of storing a user's city in every order row, you store it once in a users table and reference it. This makes updates easier and prevents inconsistencies."
+  },
+  {
+    "question": "What is the difference between a primary key and a unique key?",
+    "code": "",
+    "answer": "Primary key: uniquely identifies each row, cannot be null, one per table. Unique key: also enforces uniqueness but can be null and a table can have multiple.",
+    "explanation": "Every table should have one primary key as its main identifier (e.g. user id). Unique keys enforce no duplicates on other columns like email or username, but they're not the main row identifier."
+  }
+
+]
