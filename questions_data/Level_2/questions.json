@@ -1,0 +1,470 @@
+{
+  "Beginner": [
+    {
+      "question": "What is the difference between `var`, `let`, and `const` in terms of scope and reassignment?",
+      "code": "",
+      "answer": "`var` is function-scoped and can be redeclared; `let` is block-scoped and can be reassigned but not redeclared in the same scope; `const` is block-scoped and cannot be reassigned.",
+      "explanation": "`const` does not make an object immutable; it only prevents assigning a different value to that binding. Properties of a `const` object may still change.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What is the difference between `==` and `===`?",
+      "code": "",
+      "answer": "`==` allows type coercion before comparison; `===` compares without coercing types.",
+      "explanation": "Prefer strict equality (`===`) in most application code because it avoids surprising conversions such as `5 == \"5\"` being true.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What will this code output?",
+      "code": "const user = { name: \"Ali\" };\nconst copy = user;\ncopy.name = \"Mona\";\nconsole.log(user.name);",
+      "answer": "\"Mona\"",
+      "explanation": "Both variables reference the same object. Assigning `user` to `copy` does not create a separate object.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What is the difference between an IP address, a port, and a domain name?",
+      "code": "",
+      "answer": "An IP address identifies a network interface or host; a port identifies a service endpoint on that host; a domain name is a human-friendly name that DNS resolves to IP address records.",
+      "explanation": "For example, a domain can resolve to an IP, and port 3000 can identify a development server on that host.",
+      "category": "Network"
+    },
+    {
+      "question": "What is DNS, and when is it used in an HTTP request?",
+      "code": "",
+      "answer": "DNS resolves a domain name to network address information so the client can connect to the correct server.",
+      "explanation": "DNS resolution typically occurs before establishing the TCP connection; caching means it does not necessarily happen for every request.",
+      "category": "Network"
+    },
+    {
+      "question": "What does it mean that HTTP is stateless?",
+      "code": "",
+      "answer": "Each HTTP request is independent at the protocol level; HTTP does not automatically remember the user's previous requests.",
+      "explanation": "Applications can add state using cookies, server-side sessions, tokens, or persistent storage.",
+      "category": "Network"
+    },
+    {
+      "question": "What does REST mean in API design, and what is a resource?",
+      "code": "",
+      "answer": "REST is an architectural style for networked systems. A resource is a conceptual entity or collection exposed through a consistent identifier such as a URL.",
+      "explanation": "A REST-style API typically uses nouns in paths and HTTP methods to describe operations, such as `GET /users/42`.",
+      "category": "Network"
+    },
+    {
+      "question": "What is the difference between a primary key and a foreign key?",
+      "code": "",
+      "answer": "A primary key uniquely identifies a row in its table; a foreign key references a key in another (or the same) table to enforce a relationship.",
+      "explanation": "Foreign keys help maintain referential integrity by preventing references to nonexistent related rows, subject to the database constraints.",
+      "category": "SQL"
+    },
+    {
+      "question": "What is the difference between a SQL table/row and a MongoDB collection/document?",
+      "code": "",
+      "answer": "A table contains rows and columns; a MongoDB collection contains BSON documents with fields that can vary between documents.",
+      "explanation": "Both models can enforce data rules; MongoDB's document flexibility does not mean applications should avoid schemas or validation.",
+      "category": "NoSQL"
+    },
+    {
+      "question": "What is the difference between MongoDB and Mongoose?",
+      "code": "",
+      "answer": "MongoDB is the database system; Mongoose is an ODM library for Node.js that provides schemas, models, validation, and convenient database operations.",
+      "explanation": "Mongoose does not replace understanding how the underlying MongoDB queries and data model behave.",
+      "category": "NoSQL"
+    },
+    {
+      "question": "What is Express.js, and what does it add on top of Node.js?",
+      "code": "",
+      "answer": "Express is a web framework for Node.js that provides routing, middleware composition, and convenient request/response APIs.",
+      "explanation": "Node.js provides the runtime and low-level networking capabilities; Express simplifies building web applications and APIs.",
+      "category": "Express JS"
+    },
+    {
+      "question": "What is the purpose of `express.json()`?",
+      "code": "",
+      "answer": "It parses incoming requests with JSON bodies and makes the parsed data available on `req.body`.",
+      "explanation": "The middleware must be registered before routes that need it. Request-body data should still be validated.",
+      "category": "Express JS"
+    },
+    {
+      "question": "What is middleware in Express, and what are the three common things middleware can do?",
+      "code": "",
+      "answer": "Middleware is a function that receives `req`, `res`, and `next`. It can run logic or modify request/response state, end the response, or call `next()` to pass control onward.",
+      "explanation": "If middleware neither sends a response nor calls `next()`, the request may hang.",
+      "category": "Express JS"
+    },
+    {
+      "question": "What is the difference between a path parameter and a query parameter?",
+      "code": "",
+      "answer": "A path parameter identifies a specific resource or route segment, such as `/users/42`; a query parameter modifies how a request is interpreted, often for filtering, sorting, searching, or pagination.",
+      "explanation": "Path parameters are normally part of the resource path; query parameters follow `?` and can be combined with `&`.",
+      "category": "Params vs Query"
+    },
+    {
+      "question": "For `GET /products?category=books&page=2`, which values are path parameters and which are query parameters?",
+      "code": "",
+      "answer": "There are no path parameters in this URL. `category=books` and `page=2` are query parameters.",
+      "explanation": "The endpoint path is `/products`. Query parameters are commonly used for optional filtering or pagination.",
+      "category": "Params vs Query"
+    },
+    {
+      "question": "What does CRUD stand for, and how does it commonly map to HTTP methods?",
+      "code": "",
+      "answer": "Create, Read, Update, Delete. Common mappings are POST, GET, PUT/PATCH, and DELETE respectively.",
+      "explanation": "This is a convention rather than an exact one-to-one rule; an API should document its actual behavior.",
+      "category": "CRUD"
+    },
+    {
+      "question": "What is the difference between GET and POST?",
+      "code": "",
+      "answer": "GET requests a representation of a resource and should not cause intended state changes; POST submits data for processing and often creates a subordinate resource.",
+      "explanation": "GET is safe and idempotent by HTTP semantics; POST is not generally idempotent.",
+      "category": "HTTP Methods"
+    },
+    {
+      "question": "Which HTTP method and status code would you choose to create a user successfully?",
+      "code": "",
+      "answer": "Usually POST to `/users`, returning 201 Created and often a representation or `Location` header for the new resource.",
+      "explanation": "A robust API also validates the input and returns suitable 4xx responses for invalid or conflicting data.",
+      "category": "HTTP Methods"
+    },
+    {
+      "question": "What is the difference between authentication and authorization?",
+      "code": "",
+      "answer": "Authentication verifies who the user is; authorization determines what that user is allowed to do.",
+      "explanation": "A valid login does not automatically grant permission to perform every operation.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "What is Postman used for when developing a backend API?",
+      "code": "",
+      "answer": "Postman sends HTTP requests and displays responses, making it useful for testing methods, URLs, headers, query parameters, request bodies, and status codes without a frontend.",
+      "explanation": "It can also organize requests into collections and environments for repeatable testing.",
+      "category": "Postman"
+    },
+    {
+      "question": "How would you test a protected endpoint in Postman?",
+      "code": "",
+      "answer": "Send the required access token using the API's expected mechanism, commonly `Authorization: Bearer <token>`, then inspect the status and response.",
+      "explanation": "Also test missing, malformed, expired, and insufficient-permission tokens.",
+      "category": "Postman"
+    },
+    {
+      "question": "What does deployment mean for a backend API?",
+      "code": "",
+      "answer": "Deployment makes the application available in a target environment where clients can reach it, with its runtime, configuration, network settings, and dependencies properly set up.",
+      "explanation": "A deployed API also needs monitoring, error logging, security controls, and appropriate data persistence.",
+      "category": "Deployment"
+    },
+    {
+      "question": "Why should `.env` usually be excluded from Git, while `.env.example` may be committed?",
+      "code": "",
+      "answer": "`.env` often contains real credentials and secrets; `.env.example` documents the required variable names with placeholder values.",
+      "explanation": "Never include real database passwords or token-signing secrets in the example file.",
+      "category": "Deployment"
+    },
+    {
+      "question": "Problem solving: Write a function that returns the largest number in an array without using `Math.max()`.",
+      "code": "findLargest([3, 9, 2, 7]);",
+      "answer": "function findLargest(numbers) {\n  if (numbers.length === 0) return undefined;\n  let largest = numbers[0];\n  for (const number of numbers) {\n    if (number > largest) largest = number;\n  }\n  return largest;\n}",
+      "explanation": "Start with the first element and compare each number with the current largest value. This takes O(n) time.",
+      "category": "Problem Solving"
+    },
+    {
+      "question": "Problem solving: Write a function that counts how many times a given character appears in a string.",
+      "code": "countCharacter(\"banana\", \"a\");",
+      "answer": "function countCharacter(text, character) {\n  let count = 0;\n  for (const current of text) {\n    if (current === character) count++;\n  }\n  return count;\n}",
+      "explanation": "Loop through the string and increase the counter whenever a character matches. The example returns 3.",
+      "category": "Problem Solving"
+    }
+  ],
+  "Intermediate": [
+    {
+      "question": "What is the output, and why?",
+      "code": "function demo() {\n  console.log(value);\n  var value = 2;\n  console.log(value);\n}\ndemo();",
+      "answer": "The output is `undefined` then `2`.",
+      "explanation": "`var` declarations are hoisted to the top of their function scope, but their assignments are not. The first log occurs before the assignment.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What is the difference between synchronous and asynchronous code, and what is the purpose of async and await?",
+      "code": "",
+      "answer": "Synchronous code executes operations one after another, waiting for each operation to finish. Asynchronous code allows operations to complete later while other work can continue. In JavaScript, async makes a function return a Promise, while await allows you to wait for a Promise to settle and get its result or handle its error.",
+      "explanation": "Asynchronous operations are important in backend development because network requests and database operations can take time. Using async and await makes asynchronous code easier to read and write without blocking the entire JavaScript thread while waiting for typical asynchronous operations.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What does TypeScript add to JavaScript, and does the type system validate data at runtime?",
+      "code": "",
+      "answer": "TypeScript adds static type checking and language features, but its types are mostly erased when compiled and do not automatically validate runtime data.",
+      "explanation": "A request body from a client must still be validated at runtime even if a TypeScript interface describes the expected shape.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What is a union type, and how do you safely use a value of type `string | number`?",
+      "code": "function formatId(id: string | number): string {\n  if (typeof id === \"string\") return id.toUpperCase();\n  return id.toFixed(0);\n}",
+      "answer": "A union type allows a value to be one of several types. Use a type guard such as `typeof value === \"string\"` to narrow the type before applying type-specific operations.",
+      "explanation": "Narrowing lets TypeScript verify that each branch uses only operations supported by the current type.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What is the purpose of an interface in TypeScript?",
+      "code": "",
+      "answer": "An interface describes the expected shape of an object, including its properties and method signatures.",
+      "explanation": "Interfaces improve readability and detect incompatible object shapes during type checking; they do not validate objects at runtime.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What will this code output, and in what order do the callbacks run?",
+      "code": "console.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");",
+      "answer": "A, D, C, B",
+      "explanation": "Synchronous code runs first. Promise callbacks run as microtasks before the timer callback is processed.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "Compare TCP and UDP and give a use case for each.",
+      "code": "",
+      "answer": "TCP provides a reliable, ordered byte stream with connection management; UDP sends datagrams without TCP's delivery and ordering guarantees.",
+      "explanation": "HTTP/1.1 and HTTP/2 generally use TCP, while real-time protocols may use UDP when lower latency is more important. HTTP/3 uses QUIC over UDP.",
+      "category": "Network"
+    },
+    {
+      "question": "What is the purpose of the OSI model?",
+      "code": "",
+      "answer": "It is a conceptual seven-layer model used to describe and reason about network communication and troubleshooting.",
+      "explanation": "It helps separate concerns such as application protocols, transport, addressing/routing, and physical transmission; real-world protocols do not always map perfectly to the model.",
+      "category": "Network"
+    },
+    {
+      "question": "What happens when a client requests `https://example.com:443/users` at a high level?",
+      "code": "",
+      "answer": "The client resolves the domain, establishes the relevant transport connection, negotiates TLS for HTTPS, sends an HTTP request, and receives an HTTP response.",
+      "explanation": "The exact transport steps vary by HTTP version. HTTPS protects confidentiality and integrity in transit and lets the client authenticate the server certificate.",
+      "category": "Network"
+    },
+    {
+      "question": "What is the difference between request headers, the request body, and the URL?",
+      "code": "",
+      "answer": "The URL identifies the target resource and may carry path/query information; headers carry metadata; the body carries the representation or input data when the method permits it.",
+      "explanation": "Credentials should not be placed in query strings because URLs can be logged, cached, or exposed through history and referrer data.",
+      "category": "Network"
+    },
+    {
+      "question": "What are HTTP status codes, and can you give examples of when an API might return different status codes?",
+      "code": "",
+      "answer": "HTTP status codes indicate the result of an HTTP request. For example, 200 means the request succeeded, 201 means a resource was created, 400 means the request contains invalid data, 401 means authentication is missing or invalid, 403 means the user is not allowed to perform the action, 404 means the resource was not found, and 500 means an internal server error occurred.",
+      "explanation": "The candidate does not need to memorize specific status codes. Focus on whether they understand why an API returns different responses and can give reasonable examples. They may mention other valid status codes as well.",
+      "category": "Network"
+    },
+    {
+      "question": "What is pagination, and why is it important for list endpoints?",
+      "code": "",
+      "answer": "Pagination divides large result sets into smaller pages or batches using mechanisms such as limit/offset or cursors.",
+      "explanation": "It reduces response size and resource usage. Cursor-based pagination can be more stable and efficient for changing or large datasets.",
+      "category": "Network"
+    },
+    {
+      "question": "What is database normalization, and why use it?",
+      "code": "",
+      "answer": "Normalization organizes relational data into related tables to reduce unnecessary duplication and update anomalies.",
+      "explanation": "Storing customer data once and referencing it from orders avoids having conflicting copies of the same customer address.",
+      "category": "SQL"
+    },
+    {
+      "question": "What is an index, and what trade-off does it introduce?",
+      "code": "",
+      "answer": "An index is a data structure that helps the database find rows more efficiently for certain queries.",
+      "explanation": "Indexes consume storage and add work to inserts, updates, and deletes, so index columns based on query patterns rather than indexing everything.",
+      "category": "SQL"
+    },
+    {
+      "question": "Why might `SELECT *` be discouraged in application queries?",
+      "code": "",
+      "answer": "It retrieves columns the application may not need, increases data transfer, and can make code sensitive to schema changes.",
+      "explanation": "Selecting only needed columns can improve efficiency and make the expected data shape explicit.",
+      "category": "SQL"
+    },
+    {
+      "question": "Does NoSQL mean a database has no schema or no constraints?",
+      "code": "",
+      "answer": "No. NoSQL describes data models beyond traditional relational tables; document databases can still use schema validation, application rules, indexes, and constraints.",
+      "explanation": "Flexible document shape does not remove the need for consistent data design.",
+      "category": "NoSQL"
+    },
+    {
+      "question": "What is the purpose of Mongoose's `populate()`?",
+      "code": "",
+      "answer": "`populate()` replaces configured reference IDs in query results with documents from the referenced collection.",
+      "explanation": "It is convenient for related data but may add database work; avoid populating large or unnecessary relationships blindly.",
+      "category": "NoSQL"
+    },
+    {
+      "question": "What happens if an Express middleware neither sends a response nor calls `next()`?",
+      "code": "",
+      "answer": "The request usually remains pending and the client may eventually time out.",
+      "explanation": "Every middleware should intentionally end the request-response cycle or pass control to the next middleware.",
+      "category": "Express JS"
+    },
+    {
+      "question": "What is the difference between a route handler and a controller?",
+      "code": "",
+      "answer": "A route handler is the function registered to respond to a matching request; a controller is a code-organization pattern for grouping request-handling/business logic separately from route declarations.",
+      "explanation": "In a small app they may be the same function. Separating them can make routes easier to read and logic easier to test.",
+      "category": "Express JS"
+    },
+    {
+      "question": "An endpoint supports filtering and pagination for a product list. Which information belongs in path parameters and which belongs in query parameters?",
+      "code": "",
+      "answer": "The category is a path parameter because it identifies the requested category route; page and limit are query parameters because they control pagination.",
+      "explanation": "Path parameters commonly identify a resource or route segment, while query parameters modify the result through filtering, sorting, or pagination.",
+      "category": "Params vs Query"
+    },
+    {
+      "question": "What is the difference between PUT and PATCH for updating a user profile?",
+      "code": "",
+      "answer": "PUT generally replaces the full representation; PATCH updates only specified fields.",
+      "explanation": "If PATCH receives only `{ \"displayName\": \"Ali\" }`, fields not present should normally remain unchanged.",
+      "category": "CRUD"
+    },
+    {
+      "question": "Why is HTTP described as stateless, and how can an application remember a logged-in user?",
+      "code": "",
+      "answer": "HTTP requests do not automatically carry application memory from previous requests. The application can use sessions/cookies or signed tokens to recognize the user across requests.",
+      "explanation": "The server must verify the session or token on each protected request.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "What are the three parts of a JWT?",
+      "code": "",
+      "answer": "Header, payload, and signature.",
+      "explanation": "The payload is encoded, not inherently encrypted. Do not place passwords or other secrets in ordinary JWT claims.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "A logged-in student calls an admin-only endpoint. What should happen?",
+      "code": "",
+      "answer": "The API should deny access, commonly with 403 Forbidden, unless the user has the required permission.",
+      "explanation": "Authentication proves identity; authorization enforces permissions on every protected operation.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "Why use Postman environments and variables when testing an API?",
+      "code": "",
+      "answer": "They let you reuse values such as the base URL or access token across requests and switch configuration between environments without editing every request.",
+      "explanation": "For example, a baseUrl variable can point to a local server in development and a deployed API in staging. Sensitive values should be handled carefully and not shared publicly.",
+      "category": "Postman"
+    },
+    {
+      "question": "What is CORS, and does it replace authentication?",
+      "code": "",
+      "answer": "CORS is a browser-enforced policy controlling whether frontend JavaScript from one origin may read responses from another origin.",
+      "explanation": "CORS is not an authentication or authorization mechanism; non-browser clients can still call the API.",
+      "category": "Deployment"
+    },
+    {
+      "question": "What is Swagger/OpenAPI used for?",
+      "code": "",
+      "answer": "OpenAPI is a standard description of an HTTP API; Swagger is a set of tools commonly used to create, display, and interact with that description.",
+      "explanation": "Documentation can describe paths, methods, parameters, schemas, authentication, and response codes so clients know how to use the API.",
+      "category": "Swagger"
+    },
+    {
+      "question": "Problem solving: Write a function that returns the first character in a string that appears only once. Return `null` if there is no such character.",
+      "code": "firstUniqueCharacter(\"swiss\");",
+      "answer": "function firstUniqueCharacter(text) {\n  const counts = new Map();\n  for (const character of text) {\n    counts.set(character, (counts.get(character) || 0) + 1);\n  }\n  for (const character of text) {\n    if (counts.get(character) === 1) return character;\n  }\n  return null;\n}",
+      "explanation": "The first pass counts each character; the second pass returns the first character with a count of one. The example returns \"w\".",
+      "category": "Problem Solving"
+    },
+    {
+      "question": "Problem solving: Write a function that removes duplicate values from an array while preserving their original order.",
+      "code": "removeDuplicates([3, 1, 3, 2, 1]);",
+      "answer": "function removeDuplicates(values) {\n  const seen = new Set();\n  const result = [];\n  for (const value of values) {\n    if (!seen.has(value)) {\n      seen.add(value);\n      result.push(value);\n    }\n  }\n  return result;\n}",
+      "explanation": "A `Set` tracks values already seen, while the result array preserves first-appearance order. The example returns `[3, 1, 2]`.",
+      "category": "Problem Solving"
+    }
+  ],
+  "Advanced": [
+    {
+      "question": "What does it mean that JavaScript functions are first-class values?",
+      "code": "",
+      "answer": "Functions can be stored in variables, passed as arguments, returned from other functions, and stored in objects or arrays.",
+      "explanation": "This enables callbacks, higher-order functions, composition, and many common asynchronous patterns.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "What is the difference between `type` and `interface`?",
+      "code": "",
+      "answer": "Both can describe object shapes. Interfaces are extendable and declaration-mergeable; type aliases can name unions, intersections, primitives, tuples, and other types.",
+      "explanation": "There is overlap; choose based on the modelling need and keep the project's conventions consistent.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "Behind the scenes: What is the JavaScript event loop responsible for?",
+      "code": "",
+      "answer": "It coordinates when queued callbacks can run after the current call stack is clear, allowing JavaScript to handle asynchronous work without running all callbacks immediately.",
+      "explanation": "The event loop works with the call stack and task queues. The exact runtime details differ between browsers and Node.js.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "Behind the scenes: What is the difference between the call stack, the task queue, and the microtask queue?",
+      "code": "",
+      "answer": "The call stack tracks currently executing function calls. The task queue holds callbacks such as timer tasks. The microtask queue holds jobs such as promise reactions and `queueMicrotask()` callbacks.",
+      "explanation": "In common browser execution, microtasks are drained after the current stack finishes and before the next task begins. Node.js has additional event-loop and scheduling details.",
+      "category": "JavaScript/TypeScript"
+    },
+    {
+      "question": "A backend works by IP address but not by domain name. Which network component would you investigate first, and why?",
+      "code": "",
+      "answer": "Investigate DNS resolution and its records or caching, because the domain name must resolve to the correct server address before the client can connect by name.",
+      "explanation": "Also check whether the resolved address is current and whether a proxy, load balancer, or TLS certificate configuration depends on the hostname.",
+      "category": "Network"
+    },
+    {
+      "question": "What is the purpose of separating routes, controllers, models, and configuration?",
+      "code": "",
+      "answer": "It separates HTTP mapping, request handling/business logic, database structure/access, and application configuration.",
+      "explanation": "Separation of concerns supports readability, reuse, testing, and maintenance as the codebase grows.",
+      "category": "Express JS"
+    },
+    {
+      "question": "How should passwords be stored in a user database?",
+      "code": "",
+      "answer": "Store a password hash produced by a suitable password-hashing algorithm such as bcrypt or Argon2, never a plaintext password.",
+      "explanation": "Password hashing algorithms are deliberately expensive and use salts to make large-scale guessing harder.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "What is the difference between hashing and encryption?",
+      "code": "",
+      "answer": "Hashing is designed to be one-way; encryption is designed to be reversible with the correct key.",
+      "explanation": "Passwords should generally be hashed, while data that must be recovered later may require encryption at rest.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "What is the difference between an access token and a refresh token?",
+      "code": "",
+      "answer": "An access token is used to authorize API requests and is usually short-lived; a refresh token is used to obtain new access tokens and should be protected more carefully.",
+      "explanation": "Refresh tokens often need rotation, revocation, and reuse detection depending on the system.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "Can a user change their role in a JWT payload and still be authorized?",
+      "code": "",
+      "answer": "Not successfully if the server verifies the token signature correctly; modifying the payload invalidates the signature.",
+      "explanation": "The server must also ensure the token was signed with an accepted algorithm/key and apply any needed role freshness or revocation checks.",
+      "category": "Authentication & Authorization"
+    },
+    {
+      "question": "Problem solving: Write a function that checks whether two strings are anagrams, ignoring spaces and letter case.",
+      "code": "areAnagrams(\"Dormitory\", \"Dirty room\");",
+      "answer": "function areAnagrams(first, second) {\n  const normalize = (value) => value.toLowerCase().replace(/\\s/g, \"\");\n  const a = normalize(first);\n  const b = normalize(second);\n  if (a.length !== b.length) return false;\n  const counts = new Map();\n  for (const character of a) {\n    counts.set(character, (counts.get(character) || 0) + 1);\n  }\n  for (const character of b) {\n    const count = counts.get(character) || 0;\n    if (count === 0) return false;\n    counts.set(character, count - 1);\n  }\n  return true;\n}",
+      "explanation": "Anagrams are words or phrases that contain exactly the same letters with the same frequency, but arranged in a different order. For example, \"Dormitory\" and \"Dirty room\" are anagrams when spaces and letter case are ignored. The function normalizes both strings, counts the characters, and checks whether their frequencies match.",
+      "category": "Problem Solving"
+    },
+    {
+      "question": "Problem solving: Given a sorted array and a target, write a function that returns the target's index using binary search, or -1 if it is absent.",
+      "code": "binarySearch([1, 3, 5, 7, 9], 7);",
+      "answer": "function binarySearch(numbers, target) {\n  let left = 0;\n  let right = numbers.length - 1;\n  while (left <= right) {\n    const middle = Math.floor((left + right) / 2);\n    if (numbers[middle] === target) return middle;\n    if (numbers[middle] < target) left = middle + 1;\n    else right = middle - 1;\n  }\n  return -1;\n}",
+      "explanation": "Each comparison discards half of the remaining search range. The time complexity is O(log n), and the example returns index 3.",
+      "category": "Problem Solving"
+    }
+  ]
+}

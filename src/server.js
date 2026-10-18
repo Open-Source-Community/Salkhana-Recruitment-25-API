@@ -1,3 +1,7 @@
+// Keep the original implementation available for reference; run the current API server.
+if (require.main === module) {
+  require("./api-server");
+} else {
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -104,3 +108,4 @@ app.get("/download", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+}

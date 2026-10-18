@@ -255,6 +255,13 @@
       "category": "Asynchronous Programming"
     },
     {
+      "question": "What is the difference between synchronous and asynchronous operations?",
+      "code": "",
+      "answer": "Synchronous operations execute one after another, while asynchronous operations allow other code to run while waiting for a task to complete.",
+      "explanation": "Asynchronous programming helps prevent the program from waiting unnecessarily for slow operations, such as fetching data from a server.",
+      "category": "Asynchronous Programming"
+    },
+    {
       "question": "What is the purpose of `package.json` in Node.js?",
       "code": "",
       "answer": "It defines project metadata, dependencies, scripts, and configuration for Node.js projects.",
@@ -275,13 +282,13 @@
       "explanation": "APIs define how different software components should interact. Web APIs allow communication between different systems over the internet using standardized protocols.",
       "category": "Node.js & Backend Fundamentals"
     },
-      {
+    {
       "question": "What is the difference between authentication and authorization?",
       "code": "",
       "answer": "Authentication verifies who a user is, while authorization determines what the authenticated user is allowed to access.",
       "explanation": "Authentication usually involves checking credentials such as a password or token. Authorization checks permissions and roles before allowing access to a resource.",
       "category": "Authentication & Security"
-      }
+    }
   ],
   "Advanced": [
     {

@@ -1,239 +1,365 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interview Questions Generator</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#14100b" />
+  <title>OSC — Interview Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    :root{--bg:#0a0a0f;--surface:#111118;--card:#16161f;--border:rgba(255,255,255,0.07);--accent:#6c63ff;--accent2:#ff6584;--text:#f0f0f8;--muted:#7a7a9a}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
-    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+    :root{
+      color-scheme:dark;
+      --bg:#14100b;--panel:#1c1610;--panel2:#261c12;--line:#3d3022;
+      --ink:#fff6e6;--muted:#b9a88f;
+      --accent:#ff8a1f;--accent2:#ffc247;--mustard:#e3a008;
+      --danger:#ff7777;--green:#8fdaa9;
+      --shadow:0 24px 80px #0008;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;
+      background:
+        radial-gradient(900px 520px at 88% -8%, #ff8a1f30, transparent 62%),
+        radial-gradient(760px 520px at -10% 18%, #e3a00826, transparent 60%),
+        radial-gradient(900px 400px at 50% 120%, #ff8a1f1a, transparent 70%),
+        var(--bg);
+      overflow-x:hidden;position:relative;
+    }
+    /* falling snow */
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;z-index:0;
+      background-image:radial-gradient(circle,#fff4 1.6px,transparent 2.2px),radial-gradient(circle,#ffc24744 1px,transparent 1.6px);
+      background-size:97px 97px,53px 53px;background-position:0 0,22px 31px;
+      animation:snow 38s linear infinite;
+    }
+    @keyframes snow{to{background-position:44px 970px,-26px 1060px}}
+    h1,h2,p{margin:0}
+    .hidden{display:none!important}
+    .shell{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:28px 22px 60px}
 
-    header{position:relative;padding:80px 40px 60px;text-align:center;overflow:hidden}
-    header::after{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(108,99,255,0.2) 0%,transparent 70%);pointer-events:none}
-    .committee-label{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(108,99,255,0.3);padding:6px 16px;border-radius:100px;margin-bottom:28px}
-    h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:20px}
-    h1 span{background:linear-gradient(135deg,#6c63ff,#ff6584);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .subtitle{font-size:17px;color:var(--muted);font-weight:300;max-width:500px;margin:0 auto}
+    /* top bar */
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:46px}
+    .brand{display:flex;align-items:center;gap:11px;font:800 13px Manrope,sans-serif;letter-spacing:.12em}
+    .brand-mark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent2),var(--accent));box-shadow:0 8px 24px #ff8a1f55}
+    .brand-mark svg{width:26px;height:30px}
+    .top-note{color:var(--muted);font-size:12px;padding:7px 13px;border:1px solid var(--line);border-radius:99px;background:#1c161099}
 
-    main{max-width:680px;margin:0 auto;padding:0 24px 80px;position:relative;z-index:1}
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;margin-bottom:36px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:#2e2110;border:1px solid #5d4119;color:var(--accent2);font:700 11px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    .eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px #ff8a1f33}
+    h1{margin:18px 0 14px;font:800 clamp(40px,7vw,66px)/1.02 Manrope,sans-serif;letter-spacing:-.035em}
+    h1 .grad{background:linear-gradient(100deg,var(--accent2),var(--accent) 60%,#ff5a36);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{max-width:440px;color:var(--muted);font-size:16px;line-height:1.6}
+    .hero-art{position:relative;width:200px;display:flex;flex-direction:column;align-items:center;padding-top:30px}
+    .hero-art .peng-big{width:164px;height:192px;position:relative;z-index:2;animation:bob 3.4s ease-in-out infinite;filter:drop-shadow(0 14px 18px #0007)}
+    .ice{width:190px;height:34px;margin-top:-22px;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#f2fbfd,#b7dbe4 70%);box-shadow:0 12px 30px #0008, inset 0 -5px 10px #7eb6c455}
+    .bubble{position:absolute;top:0;left:-18px;z-index:3;padding:8px 14px;border-radius:16px 16px 16px 4px;background:var(--accent2);color:#2a1904;font:800 12px Manrope,sans-serif;box-shadow:0 8px 20px #0006;animation:bob 3.4s ease-in-out infinite reverse}
+    @keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-9px) rotate(1.5deg)}}
 
-    .form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px}
-    .section-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+    /* progress */
+    .progress{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}
+    .step{display:flex;align-items:center;gap:9px;color:var(--muted);font:600 12px Manrope,sans-serif;transition:.25s}
+    .step-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid #4a3a28;font-size:11px;transition:.25s}
+    .step.active{color:var(--ink)}
+    .step.active .step-num{background:linear-gradient(135deg,var(--accent2),var(--accent));border-color:transparent;color:#1d1105;box-shadow:0 0 0 5px #ff8a1f26}
+    .step.done{color:var(--accent2)}
+    .step.done .step-num{background:#3b2a10;border-color:var(--mustard);color:var(--accent2)}
+    .step-line{width:42px;height:2px;background:var(--line);border-radius:2px}
 
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500}
-    input[type=text],input[type=number],select{width:100%;background:#0d0d14;border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;border-radius:8px;outline:none;transition:border-color 0.2s;margin-bottom:0}
-    input[type=text]:focus,input[type=number]:focus,select:focus{border-color:rgba(108,99,255,0.5)}
-    input[type=text]::placeholder,input[type=number]::placeholder{color:var(--muted)}
-    select{appearance:none;cursor:pointer}
-    select option{background:#16161f}
+    /* card */
+    .card{max-width:790px;margin:0 auto;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);overflow:hidden;animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    .card-head{position:relative;padding:30px 34px 24px;border-bottom:1px solid var(--line);background:radial-gradient(420px 160px at 100% 0,#ff8a1f24,transparent 70%)}
+    .kicker{margin:0 0 9px;color:var(--accent2);font:700 11px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+    .card-head h2{font:800 29px Manrope,sans-serif;letter-spacing:-.02em;margin-bottom:7px}
+    .card-head p{color:var(--muted);font-size:14px;line-height:1.55}
+    .card-body{padding:30px 34px 32px}
 
-    .field-group{margin-bottom:28px}
-    .criteria-label{font-size:12px;color:var(--muted);opacity:0.7;margin-bottom:10px;line-height:1.5}
+    /* fields */
+    .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px}
+    .field label{display:block;margin-bottom:8px;color:var(--muted);font:600 12px Manrope,sans-serif;letter-spacing:.04em}
+    .field input{width:100%;height:52px;padding:0 16px;color:var(--ink);background:#120e09;border:1px solid #473827;border-radius:13px;font:500 15px 'DM Sans',sans-serif;outline:none;transition:.18s}
+    .field input::placeholder{color:#6f6250}
+    .field input:hover{border-color:#6a5136}
+    .field input:focus{border-color:var(--accent);box-shadow:0 0 0 4px #ff8a1f24}
+    .field input.invalid{border-color:var(--danger);box-shadow:0 0 0 4px #ff777722}
+    .field-error{margin-top:7px;color:var(--danger);font-size:12px}
+    .field-error:empty{display:none}
 
-    .input-row{display:flex;gap:8px;margin-bottom:8px}
-    .input-row input{flex:1;margin-bottom:0}
+    /* levels */
+    .level-title{margin:0 0 13px;color:var(--muted);font:700 11px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+    .levels{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .levels.invalid{outline:1.5px solid var(--danger);outline-offset:6px;border-radius:20px}
+    .level-card{position:relative;display:block;min-height:176px;padding:20px 20px 18px;cursor:pointer;background:#15100a;border:1.5px solid var(--line);border-radius:20px;overflow:hidden;transition:.22s}
+    .level-card input{position:absolute;opacity:0;pointer-events:none}
+    .level-card:hover{transform:translateY(-4px);border-color:#7c5622;box-shadow:0 16px 36px #0006}
+    .level-card.selected{border-color:var(--accent);background:linear-gradient(160deg,#ff8a1f1f,#15100a 70%);box-shadow:0 0 0 4px #ff8a1f1f,0 18px 40px #ff8a1f1c}
+    .level-top{display:flex;align-items:center;justify-content:space-between}
+    .level-name{font:800 17px Manrope,sans-serif}
+    .radio{display:block;width:22px;height:22px;border-radius:50%;border:2px solid #6d5a42;transition:.2s}
+    .level-card.selected .radio{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 0 40%,transparent 44%)}
+    .level-card p{max-width:78%;margin:12px 0 15px;color:var(--muted);font-size:13px;line-height:1.6}
+    .pill{display:inline-block;padding:6px 12px;border-radius:99px;background:#2e2212;border:1px solid #5a3f16;color:var(--accent2);font:700 11px Manrope,sans-serif}
+    .lvl-peng{position:absolute;right:12px;bottom:6px;width:64px;height:76px;transition:.25s;filter:drop-shadow(0 8px 10px #0006)}
+    .level-card:hover .lvl-peng,.level-card.selected .lvl-peng{transform:translateY(-6px) rotate(-5deg)}
+    .mode-card{min-height:190px;font:inherit;text-align:left;color:var(--ink)}
+    .mode-card .level-name{display:block;margin:6px 0 12px;font-size:20px}
 
-    .icon-btn{width:36px;height:36px;border-radius:8px;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0}
-    .add-btn{background:rgba(108,99,255,0.15);color:var(--accent)}
-    .add-btn:hover{background:rgba(108,99,255,0.25)}
-    .remove-btn{background:rgba(255,101,132,0.12);color:var(--accent2)}
-    .remove-btn:hover{background:rgba(255,101,132,0.22)}
+    /* actions & buttons */
+    .actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:30px}
+    .hint{color:var(--muted);font-size:12px}
+    .primary,.secondary{height:52px;padding:0 26px;border-radius:14px;font:800 14px Manrope,sans-serif;cursor:pointer;transition:.2s;white-space:nowrap}
+    .primary{border:0;color:#1d1105;background:linear-gradient(135deg,var(--accent2),var(--accent));box-shadow:0 12px 30px #ff8a1f45}
+    .primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 16px 36px #ff8a1f66}
+    .primary:disabled{opacity:.7;cursor:wait}
+    .secondary{background:transparent;border:1px solid #5a4326;color:var(--accent2)}
+    .secondary:hover{background:#2e2110;border-color:var(--mustard)}
+    .text-btn{background:none;border:0;color:var(--muted);font:600 13px 'DM Sans',sans-serif;cursor:pointer;padding:10px 4px}
+    .text-btn:hover{color:var(--ink)}
+    :focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
 
-    .add-row-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--accent);background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:6px 14px;cursor:pointer;transition:all 0.2s;margin-top:4px}
-    .add-row-btn:hover{background:rgba(108,99,255,0.15)}
+    /* questions */
+    .difficulty{margin-bottom:22px;padding:16px;background:#17130f;border:1px solid #3c3022;border-radius:16px}.difficulty:last-child{margin-bottom:0}.difficulty-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.difficulty-name{display:flex;align-items:center;gap:9px;font:700 14px Manrope,sans-serif}.difficulty-name::before{content:'';width:10px;height:10px;flex:none;border-radius:50%;background:var(--dc,var(--accent));box-shadow:0 0 0 4px color-mix(in srgb,var(--dc,var(--accent)) 22%,transparent)}.difficulty-count{color:var(--muted);font-size:11px;white-space:nowrap}.topic-group{margin-top:22px}.difficulty>.difficulty-head+.topic-group{margin-top:0}.topic-group .difficulty-head{margin-bottom:12px;padding:0 2px}.topic-group .difficulty-name{gap:9px}.topic-group .pill{margin-left:3px}.topic-group+.topic-group{padding-top:18px;border-top:1px solid #382d20}.advanced-options{margin-top:0}.question-options{display:grid;grid-template-columns:1fr;gap:8px;max-height:390px;overflow-y:auto;padding:2px 5px 2px 2px}.question-option{display:grid;grid-template-columns:22px 48px minmax(0,1fr);align-items:start;gap:10px;padding:12px 13px;border:1px solid #40372c;border-radius:12px;background:linear-gradient(120deg,#1d1914,#15120e);color:#e9e0d2;font-size:13px;line-height:1.5;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}.question-option:hover{border-color:#8b6127;transform:translateY(-1px)}.question-option input{appearance:none;width:19px;height:19px;margin:1px 0 0;border:1.5px solid #786448;border-radius:6px;background:#100d09;display:grid;place-items:center;cursor:pointer}.question-option input::after{content:'';width:9px;height:5px;border-left:2px solid #211405;border-bottom:2px solid #211405;transform:rotate(-45deg) scale(0);transition:transform .12s}.question-option input:checked{border-color:var(--accent);background:linear-gradient(135deg,var(--accent2),var(--accent))}.question-option input:checked::after{transform:rotate(-45deg) scale(1)}.question-option:has(input:checked){border-color:var(--accent);background:linear-gradient(110deg,#ff8a1f20,#17130f 82%);box-shadow:inset 3px 0 var(--accent)}.question-option:has(input:disabled:not(:checked)){opacity:.45;cursor:not-allowed}.question-number{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:25px;border:1px solid #584326;border-radius:8px;background:#302313;color:var(--accent2);font:800 11px Manrope,sans-serif}.question-option-text{display:block;padding-top:2px}
+    .d-Beginner{--dc:#ffc247}.d-Intermediate{--dc:#ff8a1f}.d-Advanced{--dc:#ff5a36}
+    .mode-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:19px;padding:15px 18px;background:#14100b;border:1px solid #3a2e20;border-radius:14px}.mode-row strong{display:block;font-size:13px}.mode-row small{color:var(--muted);font-size:11px}.count-control{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px}.count-control select{height:38px;padding:0 30px 0 11px;color:var(--ink);background:#120e09;border:1px solid #473827;border-radius:10px;font:600 13px 'DM Sans',sans-serif}
+    .switch{position:relative;width:46px;height:26px;flex:none}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#514a3f;border-radius:99px;transition:.2s;cursor:pointer}.slider:before{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:linear-gradient(135deg,var(--mustard),var(--accent))}.switch input:checked+.slider:before{transform:translateX(20px)}
+    .notice{margin-bottom:16px;padding:12px 14px;color:#f1d58e;background:#332810;border:1px solid #72531a;border-radius:12px;font-size:12px}
+    #question-lists{margin-top:4px}
 
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-    .field{display:flex;flex-direction:column;gap:6px}
+    /* result */
+    .result{display:flex;align-items:center;gap:15px;max-width:790px;margin:18px auto 0;padding:16px 20px;border-radius:16px;font-size:13px;line-height:1.55;animation:rise .4s both}
+    .result .mini{flex:none;width:44px;height:52px}
+    .result.success{color:var(--green);background:#16281d;border:1px solid #315b3c}
+    .result.error{color:#ffaaaa;background:#2c1918;border:1px solid #67322f}
+    .result a{display:inline-block;margin-top:6px;color:var(--accent2);font-weight:700}
+    .loading{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid #21180570;border-top-color:#211805;border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    footer{margin:30px auto 0;text-align:center;color:#7b6e5b;font-size:11px}
 
-    .divider{height:1px;background:var(--border);margin:24px 0}
-
-    .generate-btn{width:100%;padding:14px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--accent),#9b59ff);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;letter-spacing:0.01em}
-    .generate-btn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(108,99,255,0.3)}
-    .generate-btn:active{transform:translateY(0)}
-
-    .message-box{margin-top:16px;padding:16px 20px;border-radius:10px;font-size:14px}
-    .success{background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.25);color:#4ecba0}
-    .error{background:rgba(220,53,69,0.1);border:1px solid rgba(220,53,69,0.25);color:#ff6b7a}
-    .file-path{font-family:monospace;font-size:12px;opacity:0.7;margin-top:6px;word-break:break-all}
-
-    .badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:100px;margin-left:8px}
-    .badge-beginner{background:rgba(29,158,117,0.12);color:#4ecba0;border:1px solid rgba(29,158,117,0.2)}
-    .badge-intermediate{background:rgba(108,99,255,0.12);color:#9b93ff;border:1px solid rgba(108,99,255,0.2)}
-    .badge-advanced{background:rgba(255,101,132,0.12);color:#ff8ba0;border:1px solid rgba(255,101,132,0.2)}
-
-    .theme-toggle{position:fixed;top:20px;right:20px;z-index:100;background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;border-radius:100px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.2s}
-    .theme-toggle:hover{color:var(--text);border-color:rgba(255,255,255,0.15)}
-
-    body.light{--bg:#f4f4f8;--surface:#ffffff;--card:#ffffff;--border:rgba(0,0,0,0.08);--accent:#6c63ff;--accent2:#ff6584;--text:#111118;--muted:#6b6b8a}
-    body.light input[type=text],body.light input[type=number],body.light select{background:#f0f0f6;border-color:rgba(0,0,0,0.1);color:var(--text)}
-    body.light input[type=text]::placeholder,body.light input[type=number]::placeholder{color:var(--muted)}
-    body.light select option{background:#ffffff}
-    body.light header::after{background:radial-gradient(ellipse,rgba(108,99,255,0.12) 0%,transparent 70%)}
-
-    @media(max-width:600px){header{padding:60px 20px 40px}.two-col{grid-template-columns:1fr}}
+    @media(max-width:620px){
+      .shell{padding:22px 15px 45px}
+      .topbar{margin-bottom:30px}.top-note{font-size:11px}
+      .hero{grid-template-columns:1fr;gap:6px}
+      .hero-art{order:-1;justify-self:start;width:170px}
+      .hero-art .peng-big{width:130px;height:152px}.ice{width:150px}
+      .card-head{padding:23px 21px 19px}.card-body{padding:23px 20px}
+      .field-grid,.levels,.question-grid{grid-template-columns:1fr;gap:12px}
+      .field-grid{margin-bottom:24px}
+      .progress{gap:6px}.step{gap:5px;font-size:10px}.step-line{width:15px}
+      .actions{flex-wrap:wrap;gap:12px}.hint{width:100%;max-width:none}
+      .primary,.secondary{padding:0 18px}
+      .level-card p{max-width:72%}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
+  <!-- penguin sprites -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="peng" viewBox="0 0 120 140">
+        <ellipse cx="44" cy="131" rx="14" ry="6" fill="#ff8a1f"/>
+        <ellipse cx="76" cy="131" rx="14" ry="6" fill="#ff8a1f"/>
+        <path d="M24 72C6 88 8 112 22 116C30 104 32 88 30 74Z" fill="#2b231b"/>
+        <path d="M96 72C114 88 112 112 98 116C90 104 88 88 90 74Z" fill="#2b231b"/>
+        <ellipse cx="60" cy="78" rx="38" ry="52" fill="#2b231b"/>
+        <ellipse cx="60" cy="92" rx="25" ry="37" fill="#fff4dc"/>
+        <path d="M60 36C42 30 26 44 30 60C34 74 50 78 60 70C70 78 86 74 90 60C94 44 78 30 60 36Z" fill="#fff4dc"/>
+        <circle cx="38" cy="67" r="6" fill="#ff8a1f" opacity=".35"/>
+        <circle cx="82" cy="67" r="6" fill="#ff8a1f" opacity=".35"/>
+        <circle cx="48" cy="56" r="6.5" fill="#1a130c"/>
+        <circle cx="72" cy="56" r="6.5" fill="#1a130c"/>
+        <circle cx="50" cy="54" r="2.3" fill="#fff"/>
+        <circle cx="74" cy="54" r="2.3" fill="#fff"/>
+        <path d="M52 64Q60 60 68 64Q64 76 60 77Q56 76 52 64Z" fill="#ff8a1f"/>
+      </symbol>
+      <symbol id="scarf" viewBox="0 0 120 140">
+        <path d="M26 82Q60 104 94 82L96 94Q60 116 24 94Z" fill="#e3a008"/>
+        <path d="M76 98L88 98L92 124L78 122Z" fill="#ffc247"/>
+        <path d="M38 89.5L39 99M52 93.5L52.5 103.5M68 93.5L68.5 103.5M82 89.5L82.5 99" stroke="#ff8a1f" stroke-width="3.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="cap" viewBox="0 0 120 140">
+        <path d="M44 38V48Q60 56 76 48V38L60 45Z" fill="#c68500"/>
+        <path d="M30 30L60 16L90 30L60 44Z" fill="#e3a008"/>
+        <path d="M88 31V46" stroke="#ffc247" stroke-width="2"/>
+        <circle cx="88" cy="48" r="3" fill="#ffc247"/>
+      </symbol>
+    </defs>
+  </svg>
 
-<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">
-  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="theme-icon"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-  <span id="theme-label">Light mode</span>
-</button>
+  <div class="shell">
+    <nav class="topbar"><div class="brand"><span class="brand-mark"><svg viewBox="0 0 120 140"><use href="#peng"/></svg></span><span>OSC <span style="color:#a79e90;font-weight:500">/ INTERVIEW STUDIO</span></span></div><div class="top-note">Recruitment Committee · 2027</div></nav>
 
-<header>
-  <div class="committee-label">Interview Tools</div>
-  <h1>Questions<br/><span>Generator</span></h1>
-  <p class="subtitle">Generate structured interview question sets for committee evaluations.</p>
-</header>
-
-<main>
-  <div class="form-card">
-    <div class="section-title">Participants</div>
-    <div class="two-col">
-      <div class="field">
-        <label>Interviewee Name</label>
-        <input type="text" id="name" placeholder="e.g. Omnia Ibrahim" />
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Thoughtful interviews start here</div>
+        <h1>Build a better<br/><span class="grad">conversation.</span></h1>
+        <p>Create a balanced, structured question set that helps every candidate show how they think.</p>
       </div>
-      <div class="field">
-        <label>Interviewer Name</label>
-        <input type="text" id="interviewer" placeholder="e.g. Ahmed Hatem" />
+      <div class="hero-art" aria-hidden="true">
+        <span class="bubble">Let's talk! 🧡</span>
+        <svg class="peng-big" viewBox="0 0 120 140"><use href="#peng"/><use href="#scarf"/></svg>
+        <span class="ice"></span>
       </div>
-    </div>
+    </header>
 
-    <div class="divider"></div>
-    <div class="section-title">Generate Random?</div>
-    <div class="field" style="margin-bottom:0">
-      <select id="random" onchange="toggleManualInputs()">
-        <option value="0">No — I'll enter question numbers manually</option>
-        <option value="1">Yes — generate randomly</option>
-      </select>
-    </div>
+    <div class="progress" aria-label="Progress"><div class="step active" id="progress-1"><span class="step-num">01</span><span>Choose level</span></div><span class="step-line"></span><div class="step" id="progress-2"><span class="step-num">02</span><span>Question mode</span></div></div>
+
+    <section class="card" id="step-level"><div class="card-head"><p class="kicker">Step 01 · Interview setup</p><h2>Who are you meeting?</h2><p>Add the names, then choose the right starting point for the candidate.</p></div><div class="card-body">
+      <div class="field-grid"><div class="field"><label for="candidate">Candidate name</label><input id="candidate" autocomplete="name" placeholder="e.g. Salma Hassan" aria-describedby="candidate-error"/><div class="field-error" id="candidate-error"></div></div><div class="field"><label for="interviewer">Interviewer name</label><input id="interviewer" placeholder="e.g. Muhammed Elsiny" aria-describedby="interviewer-error"/><div class="field-error" id="interviewer-error"></div></div></div>
+      <div class="level-title">Choose an interview level</div>
+      <div class="levels" id="levels">
+        <label class="level-card" data-level="level1"><input type="radio" name="level" value="level1"/><div class="level-top"><span class="level-name">Level 1 <span style="color:#aaa195;font-weight:500">· Foundations</span></span><i class="radio"></i></div><p>Programming basics, light problem solving, JavaScript fundamentals, and backend essentials.</p><span class="pill">A welcoming starting point</span><svg class="lvl-peng" viewBox="0 0 120 140" aria-hidden="true"><use href="#peng"/></svg></label>
+        <label class="level-card" data-level="level2"><input type="radio" name="level" value="level2"/><div class="level-top"><span class="level-name">Level 2 <span style="color:#aaa195;font-weight:500">· Development</span></span><i class="radio"></i></div><p>Deeper JavaScript, data structures, APIs, databases, and backend engineering.</p><span class="pill">Build on the fundamentals</span><svg class="lvl-peng" viewBox="0 0 120 140" aria-hidden="true"><use href="#peng"/><use href="#scarf"/><use href="#cap"/></svg></label>
+      </div>
+      <div class="field-error" id="level-error"></div>
+      <div class="actions"><span class="hint">You can switch levels any time.</span><button type="button" class="primary" id="continue">Continue <span aria-hidden="true">→</span></button></div>
+    </div></section>
+
+    <section class="card hidden" id="step-mode"><div class="card-head"><p class="kicker">Step 02 · Question mode</p><h2>How would you like to build the pack?</h2><p>Level 1 packs contain 21 questions with fixed counts for each topic.</p></div><div class="card-body"><div id="mode-error" class="field-error" role="alert"></div><div class="levels"><button class="level-card mode-card" id="choose-random" type="button"><span class="level-name">Random questions</span><p>Pick the required count from each Level 1 topic, with four random Advanced questions.</p><span class="pill">Generate question pack</span></button><button class="level-card mode-card" id="choose-manual" type="button"><span class="level-name">Manual questions</span><p>Choose the required number of questions from each topic.</p><span class="pill">You choose the questions</span></button></div><div class="actions"><button class="text-btn" id="back-level">← Back</button></div></div></section>
+
+    <section class="card hidden" id="step-questions"><div class="card-head"><p class="kicker">Step 03 · Manual question set</p><h2 id="question-heading">Choose questions by topic</h2><p>Select the required number from every topic to complete your pack.</p></div><div class="card-body"><div class="notice" id="selection-count" aria-live="polite">0 questions selected</div><div id="questions-error" class="field-error" role="alert"></div><div id="question-lists"></div><div class="actions"><button type="button" class="text-btn" id="back-mode">← Back</button><button type="button" class="primary" id="generate">Generate interview pack</button></div><button class="hidden" id="back" type="button"></button><button class="hidden" id="switch-level" type="button"></button></div></section>
+
+    <div id="result" aria-live="polite"></div>
+    <footer>Made for better conversations · OSC Recruitment 🐧</footer>
   </div>
-
-  <div class="form-card" id="manual-section">
-    <div class="section-title">Question Numbers</div>
-
-    <!-- Beginner -->
-    <div class="field-group">
-      <label>Beginner Questions <span class="badge badge-beginner">Beginner</span></label>
-      <div class="criteria-label">Criteria: (2) 1→13 · (1) 14→15 · (1) 16→18</div>
-      <div id="beginner-container">
-        <div class="input-row">
-          <input type="number" placeholder="Question number" />
-          <button class="icon-btn remove-btn" onclick="removeField(this)">−</button>
-        </div>
-      </div>
-      <button class="add-row-btn" onclick="addField('beginner-container')">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-        Add question
-      </button>
-    </div>
-
-    <!-- Intermediate -->
-    <div class="field-group">
-      <label>Intermediate Questions <span class="badge badge-intermediate">Intermediate</span></label>
-      <div class="criteria-label">Criteria: (2) 1→14 · (1) 15→17 · (1) 18→19 · (1) 20→21</div>
-      <div id="intermediate-container">
-        <div class="input-row">
-          <input type="number" placeholder="Question number" />
-          <button class="icon-btn remove-btn" onclick="removeField(this)">−</button>
-        </div>
-      </div>
-      <button class="add-row-btn" onclick="addField('intermediate-container')">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-        Add question
-      </button>
-    </div>
-
-    <!-- Advanced -->
-    <div class="field-group" style="margin-bottom:0">
-      <label>Advanced Questions <span class="badge badge-advanced">Advanced</span></label>
-      <div class="criteria-label">Criteria: (∞) 1→26</div>
-      <div id="advanced-container">
-        <div class="input-row">
-          <input type="number" placeholder="Question number" />
-          <button class="icon-btn remove-btn" onclick="removeField(this)">−</button>
-        </div>
-      </div>
-      <button class="add-row-btn" onclick="addField('advanced-container')">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-        Add question
-      </button>
-    </div>
-  </div>
-
-  <button class="generate-btn" onclick="generate()">Generate Questions</button>
-  <div id="message"></div>
-</main>
 
 <script>
-  const moonIcon = `<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`;
-  const sunIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
-
-  function toggleTheme() {
-    const isLight = document.body.classList.toggle('light');
-    document.getElementById('theme-label').textContent = isLight ? 'Dark mode' : 'Light mode';
-    document.getElementById('theme-icon').innerHTML = isLight ? sunIcon : moonIcon;
+  const $ = (id) => document.getElementById(id);
+  const API_BASE = `${window.location.protocol === 'file:' ? 'http:' : window.location.protocol}//${window.location.hostname || 'localhost'}:3001`;
+  const state = { level: null, questions: null };
+  const difficulties = ['Beginner','Intermediate','Advanced'];
+  document.querySelectorAll('.level-card input').forEach((radio) => radio.addEventListener('change', () => {
+    state.level = radio.value;
+    document.querySelectorAll('.level-card').forEach((card) => card.classList.toggle('selected', card.dataset.level === state.level));
+    clearError('level');
+  }));
+  function clearError(field) {
+    const control = field === 'level' ? document.querySelector('.levels') : $(field);
+    const error = $(`${field}-error`);
+    if (control) control.classList.remove('invalid');
+    if (error) error.textContent = '';
   }
-
-  function addField(containerId) {
-    const container = document.getElementById(containerId);
-    const div = document.createElement('div');
-    div.className = 'input-row';
-    div.innerHTML = `<input type="number" placeholder="Question number" /><button class="icon-btn remove-btn" onclick="removeField(this)">−</button>`;
-    container.appendChild(div);
-  }
-
-  function removeField(btn) {
-    btn.parentElement.remove();
-  }
-
-  function toggleManualInputs() {
-    const random = document.getElementById('random').value === '1';
-    document.getElementById('manual-section').style.display = random ? 'none' : 'block';
-  }
-
-  async function generate() {
-    const name = document.getElementById('name').value.trim();
-    const interviewer = document.getElementById('interviewer').value.trim();
-    const random = document.getElementById('random').value;
-
-    if (!name || !interviewer) {
-      alert('Please fill in both Interviewee and Interviewer names.');
-      return;
+  function renderErrors(errors = {}) {
+    for (const [field, message] of Object.entries(errors)) {
+      const control = field === 'level' ? document.querySelector('.levels') : $(field);
+      const error = $(`${field}-error`);
+      if (control) control.classList.add('invalid');
+      if (error) error.textContent = message;
     }
-
-    let beginner = [], intermediate = [], advanced = [];
-
-    if (random === '0') {
-      beginner = Array.from(document.querySelectorAll('#beginner-container input')).map(i => i.value.trim()).filter(v => v);
-      intermediate = Array.from(document.querySelectorAll('#intermediate-container input')).map(i => i.value.trim()).filter(v => v);
-      advanced = Array.from(document.querySelectorAll('#advanced-container input')).map(i => i.value.trim()).filter(v => v);
-    }
-
-    const params = new URLSearchParams({ name, interviewer_name: interviewer, beginner: beginner.join(' '), intermediate: intermediate.join(' '), advanced: advanced.join(' '), random });
-
-    const msgBox = document.getElementById('message');
-
+  }
+  ['candidate','interviewer'].forEach((id) => $(id).addEventListener('input', () => clearError(id)));
+  $('continue').addEventListener('click', continueToMode);
+  function continueToMode() {
+    const errors = {};
+    if (!$('candidate').value.trim()) errors.candidate = "Enter the candidate's name.";
+    if (!$('interviewer').value.trim()) errors.interviewer = "Enter the interviewer's name.";
+    if (!state.level) errors.level = 'Choose a level to continue.';
+    Object.keys(errors).forEach(clearError); renderErrors(errors);
+    if (Object.keys(errors).length) { document.querySelector('.field input.invalid')?.focus(); return; }
+    $('step-level').classList.add('hidden'); $('step-mode').classList.remove('hidden');
+    $('progress-1').classList.remove('active'); $('progress-1').classList.add('done'); $('progress-2').classList.add('active');
+    $('result').innerHTML = ''; window.scrollTo({top:0,behavior:'smooth'});
+  }
+  $('back-level').addEventListener('click', () => { $('step-mode').classList.add('hidden'); $('step-level').classList.remove('hidden'); $('progress-1').classList.remove('done'); $('progress-1').classList.add('active'); $('progress-2').classList.remove('active'); });
+  $('choose-random').addEventListener('click', () => generate('random'));
+  $('choose-manual').addEventListener('click', loadManualQuestions);
+  $('back-mode').addEventListener('click', () => { $('step-questions').classList.add('hidden'); $('step-mode').classList.remove('hidden'); $('result').innerHTML = ''; });
+  async function loadManualQuestions() {
+    $('choose-manual').disabled = true; $('choose-manual').querySelector('.pill').textContent = 'Loading questions…';
     try {
-      const res = await fetch(`http://localhost:3000/download?${params.toString()}`);
-      const data = await res.json();
-
-      if (data.filePath) {
-        msgBox.innerHTML = `<div class="message-box success">
-          <div style="font-weight:500;margin-bottom:4px">✓ File generated successfully</div>
-          <div class="file-path">${data.filePath}</div>
-        </div>`;
-      } else {
-        msgBox.innerHTML = `<div class="message-box error">${data.msg || 'Error generating file'}</div>`;
+      const response = await fetch(`${API_BASE}/api/questions/${state.level}`);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || `Question API returned ${response.status} ${response.statusText}.`);
+      if (!data || !difficulties.every((difficulty) => Array.isArray(data[difficulty]))) throw new Error('The question API returned an invalid response. Restart the project server and refresh the page.');
+      state.questions = data; renderQuestions();
+      $('step-mode').classList.add('hidden'); $('step-questions').classList.remove('hidden'); $('result').innerHTML = '';
+      $('question-heading').textContent = state.level === 'level1' ? 'Level 1 · Foundations: choose 21 questions by topic' : 'Level 2 · Development: choose 20 questions';
+      window.scrollTo({top:0,behavior:'smooth'});
+    } catch (error) {
+      $('mode-error').textContent = window.location.protocol === 'file:' ? 'Open the app at http://localhost:3001 so it can reach the API.' : error instanceof TypeError ? `Could not reach the question API at ${window.location.origin}. Restart the server with npm run dev.` : error.message;
+    } finally { $('choose-manual').disabled = false; $('choose-manual').querySelector('.pill').textContent = 'You choose the questions'; }
+  }
+  function renderQuestions() {
+    state.topicQuotas = state.level === 'level1' ? {
+      Beginner: { 'JavaScript Basics': 5, 'Problem Solving': 1, 'HTTP & Web Basics': 2 },
+      Intermediate: { 'JS Intermediate': 3, 'Database Concepts': 2, 'Asynchronous Programming': 2, 'Node.js & Backend Fundamentals': 2 },
+      Advanced: { '__all__': 4 }
+    } : { Beginner: { '__all__': 7 }, Intermediate: { '__all__': 8 }, Advanced: { '__all__': 5 } };
+    state.quotas = Object.fromEntries(difficulties.map((d) => [d, Object.values(state.topicQuotas[d]).reduce((a,b) => a+b, 0)]));
+    state.totalQuota = Object.values(state.quotas).reduce((a,b) => a+b, 0);
+    $('question-lists').innerHTML = difficulties.map((difficulty) => {
+      const items = state.questions[difficulty] || [];
+      const topics = state.topicQuotas[difficulty];
+      const topicHTML = Object.entries(topics).map(([topic, quota]) => {
+        const belongs = (q) => topic === '__all__' || (difficulty === 'Intermediate' && topic === 'JS Intermediate' ? q.category === 'JS Intermediate Level' : q.category === topic);
+        const topicItems = items.filter(belongs);
+        const label = topic === '__all__' ? 'All Advanced topics' : topic;
+        const options = `<div class="question-options">${topicItems.map((q) => `<label class="question-option"><input type="checkbox" name="selected-question" data-difficulty="${difficulty}" data-topic="${escapeHTML(topic)}" value="${q.id}"/><span class="question-number">Q${q.id}</span><span class="question-option-text">${escapeHTML(q.question)}</span></label>`).join('')}</div>`;
+        if (topic === '__all__') return `<div class="topic-group advanced-options">${options}</div>`;
+        return `<div class="topic-group"><div class="difficulty-head"><span class="difficulty-name">${escapeHTML(label)} <span class="pill">Choose ${quota} · ${topicItems.length} available</span></span><span class="difficulty-count" data-topic-count="${escapeHTML(difficulty+'|'+topic)}">0 / ${quota} selected</span></div>${options}</div>`;
+      }).join('');
+      const headerCount = difficulty === 'Advanced' ? `Choose ${state.quotas[difficulty]}` : `${state.quotas[difficulty]} questions`;
+      return `<section class="difficulty d-${difficulty}"><div class="difficulty-head"><span class="difficulty-name">${difficulty} <span class="pill">${headerCount}</span></span><span class="difficulty-count" id="count-${difficulty}">0 / ${state.quotas[difficulty]} selected</span></div>${topicHTML}</section>`;
+    }).join('');
+    document.querySelectorAll('[name="selected-question"]').forEach((input) => input.addEventListener('change', updateSelectionCount)); updateSelectionCount();
+  }
+  function escapeHTML(value) { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function calculateQuotas(data, total) { return { Beginner: 7, Intermediate: 8, Advanced: 5 }; }
+  function updateSelectionCount() { const total = document.querySelectorAll('[name="selected-question"]:checked').length; $('selection-count').textContent = `${total} of ${state.totalQuota} selected`; difficulties.forEach((d) => { const n = document.querySelectorAll(`[data-difficulty="${d}"]:checked`).length; const c = $(`count-${d}`); if (c) c.textContent = `${n} / ${state.quotas[d]} selected`; for (const [topic, quota] of Object.entries(state.topicQuotas[d])) { const chosen = document.querySelectorAll(`[data-difficulty="${d}"][data-topic="${CSS.escape(topic)}"]:checked`).length; const counter = [...document.querySelectorAll('[data-topic-count]')].find((el) => el.dataset.topicCount === d+'|'+topic); if (counter) counter.textContent = `${chosen} / ${quota} selected`; document.querySelectorAll(`[data-difficulty="${d}"][data-topic="${CSS.escape(topic)}"]:not(:checked)`).forEach((input) => input.disabled = chosen >= quota || total >= state.totalQuota); } }); clearError('questions'); }
+  $('back').addEventListener('click', () => { $('step-questions').classList.add('hidden'); $('step-level').classList.remove('hidden'); $('progress-1').classList.remove('done'); $('progress-1').classList.add('active'); $('progress-2').classList.remove('active'); $('result').innerHTML = ''; window.scrollTo({top:0,behavior:'smooth'}); });
+  $('switch-level').addEventListener('click', async () => { state.level = state.level === 'level1' ? 'level2' : 'level1'; document.querySelector(`.level-card input[value="${state.level}"]`).checked = true; document.querySelectorAll('.level-card').forEach((card) => card.classList.toggle('selected', card.dataset.level === state.level)); await openQuestions(); });
+  $('generate').addEventListener('click', () => generate('manual'));
+  async function generate() {
+    const selected = Object.fromEntries(difficulties.map((difficulty) => [difficulty, [...document.querySelectorAll(`[data-difficulty="${difficulty}"]:checked`)].map(input => Number(input.value))]));
+    clearError('questions');
+    if (!$('random').checked && difficulties.some((difficulty) => !selected[difficulty].length)) { renderErrors({questions:'For a manual pack, choose at least one question from Beginner, Intermediate, and Advanced.'}); return; }
+    $('generate').disabled = true; $('generate').innerHTML = '<span class="loading"></span>Building your pack';
+    try {
+      const response = await fetch(`${API_BASE}/api/generate`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('candidate').value,interviewer:$('interviewer').value,level:state.level,random:$('random').checked,count:Number($('question-count').value),selected})});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) { if (data.fieldErrors?.name) renderErrors({candidate:data.fieldErrors.name}); if (data.fieldErrors?.interviewer) renderErrors({interviewer:data.fieldErrors.interviewer}); if (data.fieldErrors?.questions) renderErrors({questions:data.fieldErrors.questions}); showResult('error', escapeHTML(data.message || 'Could not generate the interview pack.')); return; }
+      showResult('success', `${escapeHTML(data.message)}<br><a href="${encodeURI(data.filePath)}" target="_blank" rel="noopener">Open the interview pack →</a>`);
+    } catch (error) { showResult('error', 'Could not reach the server. Start it with npm run dev and try again.'); }
+    finally { $('generate').disabled = false; $('generate').textContent = 'Generate interview pack'; }
+  }
+  function updateSelectionCount() {
+    const counts = Object.fromEntries(difficulties.map((d) => [d, document.querySelectorAll(`[name="selected-question"][data-difficulty="${d}"]:checked`).length]));
+    const totalSelected = Object.values(counts).reduce((a,b) => a+b, 0);
+    $('selection-count').textContent = `${totalSelected} of ${state.totalQuota} selected`;
+    difficulties.forEach((d) => {
+      const count = $(`count-${d}`); if (count) count.textContent = `${counts[d]} / ${state.quotas[d]} selected`;
+      for (const [topic, quota] of Object.entries(state.topicQuotas[d])) {
+        const selected = document.querySelectorAll(`[data-difficulty="${d}"][data-topic="${CSS.escape(topic)}"]:checked`).length;
+        const counter = [...document.querySelectorAll('[data-topic-count]')].find((el) => el.dataset.topicCount === d+'|'+topic);
+        if (counter) counter.textContent = `${selected} / ${quota} selected`;
+        document.querySelectorAll(`[data-difficulty="${d}"][data-topic="${CSS.escape(topic)}"]:not(:checked)`).forEach((input) => { input.disabled = selected >= quota || totalSelected >= state.totalQuota; });
       }
-    } catch (err) {
-      msgBox.innerHTML = `<div class="message-box error">Could not reach the server. Make sure it's running on port 3000.</div>`;
-    }
+    });
+    if ($('questions-error')) $('questions-error').textContent = '';
+  }
+  async function generate(mode = 'manual') {
+    const selected = Object.fromEntries(difficulties.map((d) => [d, [...document.querySelectorAll(`[name="selected-question"][data-difficulty="${d}"]:checked`)].map((input) => Number(input.value))]));
+    if (mode === 'manual' && difficulties.some((d) => selected[d].length !== state.quotas[d])) { $('questions-error').textContent = `Select exactly ${state.totalQuota} questions following the number shown for every topic.`; return; }
+    const button = mode === 'random' ? $('choose-random') : $('generate'); button.disabled = true;
+    const pill = button.querySelector('.pill'); if (pill) pill.textContent = 'Building your question pack…';
+    if (mode === 'manual') button.innerHTML = '<span class="loading"></span>Building your pack';
+    try {
+      const response = await fetch(`${API_BASE}/api/generate`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('candidate').value,interviewer:$('interviewer').value,level:state.level,mode,selected})});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) { if (data.fieldErrors?.name) renderErrors({candidate:data.fieldErrors.name}); if (data.fieldErrors?.interviewer) renderErrors({interviewer:data.fieldErrors.interviewer}); if (data.fieldErrors?.questions) $('questions-error').textContent = data.fieldErrors.questions; showResult('error', escapeHTML(data.message || 'Could not generate the interview pack.')); return; }
+      showResult('success', `${escapeHTML(data.message)}<br><a href="${API_BASE}${encodeURI(data.filePath)}" target="_blank" rel="noopener">Open the interview pack →</a>`);
+    } catch (error) { showResult('error', 'Could not reach the API server. Start it with npm run dev and open http://localhost:3001.'); }
+    finally { button.disabled = false; if (mode === 'manual') button.textContent = 'Generate interview pack'; else if (pill) pill.textContent = 'Generate question pack'; }
+  }
+  function showResult(type, message) {
+    const icon = type === 'success' ? '<svg class="mini" viewBox="0 0 120 140" aria-hidden="true"><use href="#peng"/><use href="#scarf"/></svg>' : '';
+    $('result').innerHTML = `<div class="result ${type}">${icon}<div>${message}</div></div>`;
+    $('result').scrollIntoView({behavior:'smooth',block:'center'});
   }
 </script>
 </body>

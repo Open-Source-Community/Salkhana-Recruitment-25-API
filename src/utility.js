@@ -1,17 +1,16 @@
 const fs = require("fs");
 const path = require("path");
-const data = JSON.parse(fs.readFileSync("./questions_data/questions.json", "utf8"));
+const levels = { level1: "Level_1", level2: "Level_2" };
+const difficulties = ["Beginner", "Intermediate", "Advanced"];
 const stringToArr = (str) => {
   if (str) return str.split(" ");
   return [];
 };
-const getQuestions = (level, numbers) => {
-  return data[level]
-    .map((item, index) => ({ ...item, originalIndex: index }))
-    .filter((item) =>
-      numbers.some((num) => num === String(item.originalIndex + 1))
-    )
-    .map((item) => ({ ...item, index: item.originalIndex + 1 }));
+const getQuestions = (level) => {
+  const dir = levels[level];
+  if (!dir) return null;
+  const data = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "questions_data", dir, "questions.json"), "utf8"));
+  return Object.fromEntries(difficulties.map((difficulty) => [difficulty, (data[difficulty] || []).map((q, index) => ({ ...q, id: q.id || index + 1 }))]));
 };
 const convertToMarkdown = (questions) => {
   let markdownContent = "";
@@ -37,25 +36,27 @@ const convertAnswers = (questions) => {
 
 const checkFileName = (name) => {
   // Define the path where the .md file will be saved
-  const dirPath = path.join(__dirname, "/data");
+  const dirPath = path.join(__dirname, "..", "markdowns");
   const filePath = path.join(dirPath, `${name}.md`);
   // Ensure the 'data' directory exists
   return fs.existsSync(filePath);
 };
-function generateMarkdownFile(q, name, interviewer_name) {
+function generateMarkdownFile(q, name, interviewer_name, level = "level1", outputName = name) {
   const markdownsDir = path.join(__dirname,"..","markdowns");
   if (!fs.existsSync(markdownsDir)) fs.mkdirSync(markdownsDir);
 
-  const filePath = path.join(markdownsDir, `${name}.md`);
+  const filePath = path.join(markdownsDir, `${outputName}.md`);
 
-  let content = `# Interview with ${name}\n**Interviewer:** ${interviewer_name}\n\n`;
+  let content = `# Interview with ${name}\n**Interviewer:** ${interviewer_name}\n**Level:** ${level === "level1" ? "Level 1 · Foundations" : "Level 2 · Development"}\n\n`;
 
+  let questionNumber = 1;
   for (const [level, questions] of Object.entries(q)) {
     content += `## ${level} Questions\n\n`;
 
     questions.forEach((question) => {
-      // used the original index of the question
-      content += `### ${question.index}. ${question.question}\n\n`;
+      content += `### ${questionNumber}. ${question.question}\n\n`;
+      if (question.category) content += `**Category:** ${question.category}\n\n`;
+      questionNumber += 1;
 
       // Always show code (if exists)
       if (question.code) {
@@ -178,11 +179,52 @@ function validateQuestions(beginnerStr, intermediateStr, advancedStr) {
   return isValidBeginner && isValidIntermediate && isValidAdvanced;
 }
 
-module.exports = {
-  stringToArr,
-  getQuestions,
-  checkFileName,
-  generateMarkdownFile,
-  generateRandomQuestions,
-  validateQuestions,
+const level1CategoryQuotas = {
+  Beginner: { "JavaScript Basics": 5, "Problem Solving": 1, "HTTP & Web Basics": 2 },
+  Intermediate: { "JS Intermediate": 3, "Database Concepts": 2, "Asynchronous Programming": 2, "Node.js & Backend Fundamentals": 2 },
+  Advanced: { "__all__": 4 },
 };
+const jsIntermediateCategories = ["JS Intermediate Level"];
+function quotasFor(data, level) {
+  return level === "level1" ? level1CategoryQuotas : { Beginner: { "__all__": 7 }, Intermediate: { "__all__": 8 }, Advanced: { "__all__": 5 } };
+}
+function categoryMatches(question, difficulty, category) {
+  if (category === "__all__") return true;
+  if (difficulty === "Intermediate" && category === "JS Intermediate") return jsIntermediateCategories.includes(question.category);
+  return question.category === category;
+}
+function manualQuotas(data, level) {
+  const quotas = quotasFor(data, level);
+  return Object.fromEntries(difficulties.map((d) => [d, Object.values(quotas[d]).reduce((a, b) => a + b, 0)]));
+}
+
+function selectQuestions(data, selected) {
+  return Object.fromEntries(difficulties.map((difficulty) => {
+    const available = data[difficulty] || [];
+    return [difficulty, (selected[difficulty] || []).map((id) => available.find((q) => q.id === id)).filter(Boolean)];
+  }));
+}
+
+function randomQuestions(data, count = 20, level = "level2") {
+  if (level === "level1") {
+    const quotas = quotasFor(data, level);
+    return Object.fromEntries(difficulties.map((difficulty) => {
+      const chosen = [];
+      for (const [category, required] of Object.entries(quotas[difficulty])) {
+        const pool = (data[difficulty] || []).filter((q) => categoryMatches(q, difficulty, category));
+        for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+        if (pool.length < required) throw new Error(`Not enough ${difficulty} questions in ${category}.`);
+        chosen.push(...pool.slice(0, required));
+      }
+      return [difficulty, chosen];
+    }));
+  }
+  const pool = difficulties.flatMap((difficulty) => data[difficulty] || []);
+  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+  const chosen = new Set(pool.slice(0, count));
+  return Object.fromEntries(difficulties.map((difficulty) => [difficulty, (data[difficulty] || []).filter((q) => chosen.has(q))]));
+}
+
+function sanitizeName(name) { return String(name).trim().replace(/\s+/g, "_").replace(/[^\p{L}\p{N}_-]/gu, ""); }
+
+module.exports = { stringToArr, getQuestions, checkFileName, generateMarkdownFile, generateRandomQuestions, validateQuestions, manualQuotas, quotasFor, categoryMatches, selectQuestions, randomQuestions, sanitizeName };
