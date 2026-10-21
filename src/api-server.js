@@ -42,13 +42,11 @@ app.post("/api/generate", (req, res) => {
   try {
     const data = getQuestions(level);
     let questions;
-    if (level === "level1") {
-      const requirements = quotasFor(data, level);
-      for (const difficulty of difficulties) {
-        for (const [category, required] of Object.entries(requirements[difficulty])) {
-          const available = (data[difficulty] || []).filter((q) => categoryMatches(q, difficulty, category)).length;
-          if (available < required) return res.status(422).json({ message: "The question bank is missing questions for the requested topic mix.", fieldErrors: { questions: `${difficulty} · ${category}: ${required} required, ${available} available.` } });
-        }
+    const requirements = quotasFor(data, level);
+    for (const difficulty of difficulties) {
+      for (const [category, required] of Object.entries(requirements[difficulty])) {
+        const available = (data[difficulty] || []).filter((q) => categoryMatches(q, difficulty, category)).length;
+        if (available < required) return res.status(422).json({ message: "The question bank is missing questions for the requested topic mix.", fieldErrors: { questions: `${difficulty} · ${category}: ${required} required, ${available} available.` } });
       }
     }
     if (mode === "random") {
@@ -70,12 +68,10 @@ app.post("/api/generate", (req, res) => {
         if (ids.length !== quotas[difficulty]) {
           return res.status(400).json({ message: "Select the required number from each difficulty.", fieldErrors: { questions: `Choose exactly ${quotas[difficulty]} ${difficulty.toLowerCase()} questions.` } });
         }
-        if (level === "level1") {
-          const requiredByCategory = quotasFor(data, level)[difficulty];
-          for (const [category, required] of Object.entries(requiredByCategory)) {
-            const categoryCount = ids.filter((id) => categoryMatches(available.find((q) => q.id === id), difficulty, category)).length;
-            if (categoryCount !== required) return res.status(400).json({ message: "Select the required number from each topic.", fieldErrors: { questions: `Choose exactly ${required} question(s) from ${category} in ${difficulty}.` } });
-          }
+        const requiredByCategory = quotasFor(data, level)[difficulty];
+        for (const [category, required] of Object.entries(requiredByCategory)) {
+          const categoryCount = ids.filter((id) => categoryMatches(available.find((q) => q.id === id), difficulty, category)).length;
+          if (categoryCount !== required) return res.status(400).json({ message: "Select the required number from each topic.", fieldErrors: { questions: `Choose exactly ${required} question(s) from ${category} in ${difficulty}.` } });
         }
       }
       questions = selectQuestions(data, selected);

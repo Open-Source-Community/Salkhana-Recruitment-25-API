@@ -278,7 +278,7 @@
       if (!data || !difficulties.every((difficulty) => Array.isArray(data[difficulty]))) throw new Error('The question API returned an invalid response. Restart the project server and refresh the page.');
       state.questions = data; renderQuestions();
       $('step-mode').classList.add('hidden'); $('step-questions').classList.remove('hidden'); $('result').innerHTML = '';
-      $('question-heading').textContent = state.level === 'level1' ? 'Level 1 · Foundations: choose 21 questions by topic' : 'Level 2 · Development: choose 20 questions';
+      $('question-heading').textContent = state.level === 'level1' ? 'Level 1 · Foundations: choose 21 questions by topic' : 'Level 2 · Development: choose 21 questions';
       window.scrollTo({top:0,behavior:'smooth'});
     } catch (error) {
       $('mode-error').textContent = window.location.protocol === 'file:' ? 'Open the app at http://localhost:3001 so it can reach the API.' : error instanceof TypeError ? `Could not reach the question API at ${window.location.origin}. Restart the server with npm run dev.` : error.message;
@@ -289,7 +289,11 @@
       Beginner: { 'JavaScript Basics': 5, 'Problem Solving': 1, 'HTTP & Web Basics': 2 },
       Intermediate: { 'JS Intermediate': 3, 'Database Concepts': 2, 'Asynchronous Programming': 2, 'Node.js & Backend Fundamentals': 2 },
       Advanced: { '__all__': 4 }
-    } : { Beginner: { '__all__': 7 }, Intermediate: { '__all__': 8 }, Advanced: { '__all__': 5 } };
+    } : {
+      Beginner: { 'JavaScript/TypeScript': 2, 'Network & HTTP Methods': 1, 'Databases': 2, 'Backend & APIs': 2, 'Authentication & Authorization': 1, 'Tools': 1 },
+      Intermediate: { 'JavaScript/TypeScript': 2, 'Network & HTTP Methods': 1, 'Databases': 2, 'Backend & APIs': 2, 'Authentication & Authorization': 1 },
+      Advanced: { '__all__': 4 }
+    };
     state.quotas = Object.fromEntries(difficulties.map((d) => [d, Object.values(state.topicQuotas[d]).reduce((a,b) => a+b, 0)]));
     state.totalQuota = Object.values(state.quotas).reduce((a,b) => a+b, 0);
     $('question-lists').innerHTML = difficulties.map((difficulty) => {

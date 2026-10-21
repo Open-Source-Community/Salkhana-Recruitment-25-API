@@ -20,7 +20,11 @@ Level 1 categories in the question bank:
 
 ### Level 2 · Development
 
-Level 2 keeps the existing 20-question mix: 7 Beginner, 8 Intermediate, and 5 Advanced questions. Its categories are:
+- **Beginner:** 2 JavaScript/TypeScript, 1 Network & HTTP Methods, 2 Databases, 2 Backend & APIs, 1 Authentication & Authorization, and 1 Tools question.
+- **Intermediate:** 2 JavaScript/TypeScript, 1 Network & HTTP Methods, 2 Databases, 2 Backend & APIs, and 1 Authentication & Authorization question.
+- **Advanced:** 4 random questions drawn from all Advanced categories as one combined pool.
+
+Manual selection enforces the same topic counts as random selection. The Level 2 pack has 21 questions total. Its categories are:
 
 - Beginner: `JavaScript/TypeScript`, `Network`, `SQL`, `NoSQL`, `Express JS`, `Params vs Query`, `CRUD`, `HTTP Methods`, `Authentication & Authorization`, `Postman`, `Deployment`, `Problem Solving`
 - Intermediate: `JavaScript/TypeScript`, `Network`, `SQL`, `NoSQL`, `Express JS`, `Params vs Query`, `CRUD`, `Authentication & Authorization`, `Postman`, `Deployment`, `Swagger`, `Problem Solving`

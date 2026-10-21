@@ -184,9 +184,14 @@ const level1CategoryQuotas = {
   Intermediate: { "JS Intermediate": 3, "Database Concepts": 2, "Asynchronous Programming": 2, "Node.js & Backend Fundamentals": 2 },
   Advanced: { "__all__": 4 },
 };
+const level2CategoryQuotas = {
+  Beginner: { "JavaScript/TypeScript": 2, "Network & HTTP Methods": 1, Databases: 2, "Backend & APIs": 2, "Authentication & Authorization": 1, Tools: 1 },
+  Intermediate: { "JavaScript/TypeScript": 2, "Network & HTTP Methods": 1, Databases: 2, "Backend & APIs": 2, "Authentication & Authorization": 1 },
+  Advanced: { "__all__": 4 },
+};
 const jsIntermediateCategories = ["JS Intermediate Level"];
 function quotasFor(data, level) {
-  return level === "level1" ? level1CategoryQuotas : { Beginner: { "__all__": 7 }, Intermediate: { "__all__": 8 }, Advanced: { "__all__": 5 } };
+  return level === "level1" ? level1CategoryQuotas : level2CategoryQuotas;
 }
 function categoryMatches(question, difficulty, category) {
   if (category === "__all__") return true;
@@ -206,23 +211,17 @@ function selectQuestions(data, selected) {
 }
 
 function randomQuestions(data, count = 20, level = "level2") {
-  if (level === "level1") {
-    const quotas = quotasFor(data, level);
-    return Object.fromEntries(difficulties.map((difficulty) => {
-      const chosen = [];
-      for (const [category, required] of Object.entries(quotas[difficulty])) {
-        const pool = (data[difficulty] || []).filter((q) => categoryMatches(q, difficulty, category));
-        for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
-        if (pool.length < required) throw new Error(`Not enough ${difficulty} questions in ${category}.`);
-        chosen.push(...pool.slice(0, required));
-      }
-      return [difficulty, chosen];
-    }));
-  }
-  const pool = difficulties.flatMap((difficulty) => data[difficulty] || []);
-  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
-  const chosen = new Set(pool.slice(0, count));
-  return Object.fromEntries(difficulties.map((difficulty) => [difficulty, (data[difficulty] || []).filter((q) => chosen.has(q))]));
+  const quotas = quotasFor(data, level);
+  return Object.fromEntries(difficulties.map((difficulty) => {
+    const chosen = [];
+    for (const [category, required] of Object.entries(quotas[difficulty])) {
+      const pool = (data[difficulty] || []).filter((q) => categoryMatches(q, difficulty, category));
+      for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+      if (pool.length < required) throw new Error(`Not enough ${difficulty} questions in ${category}.`);
+      chosen.push(...pool.slice(0, required));
+    }
+    return [difficulty, chosen];
+  }));
 }
 
 function sanitizeName(name) { return String(name).trim().replace(/\s+/g, "_").replace(/[^\p{L}\p{N}_-]/gu, ""); }
