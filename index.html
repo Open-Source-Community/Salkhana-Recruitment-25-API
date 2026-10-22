@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#14100b" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <title>OSC — Interview Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -357,7 +357,7 @@
       const response = await fetch(`${API_BASE}/api/generate`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('candidate').value,interviewer:$('interviewer').value,level:state.level,mode,selected})});
       const data = await response.json().catch(() => ({}));
       if (!response.ok) { if (data.fieldErrors?.name) renderErrors({candidate:data.fieldErrors.name}); if (data.fieldErrors?.interviewer) renderErrors({interviewer:data.fieldErrors.interviewer}); if (data.fieldErrors?.questions) $('questions-error').textContent = data.fieldErrors.questions; showResult('error', escapeHTML(data.message || 'Could not generate the interview pack.')); return; }
-      showResult('success', `${escapeHTML(data.message)}<br><a href="${API_BASE}${encodeURI(data.filePath)}" target="_blank" rel="noopener">Open the interview pack →</a>`);
+      showResult('success', `${escapeHTML(data.message)}<br><a${encodeURI(data.filePath)}" target="_blank" rel="noopener">Open the interview pack from the markdowns folder in VS Code.</a>`);
     } catch (error) { showResult('error', 'Could not reach the API server. Start it with npm run dev and open http://localhost:3001.'); }
     finally { button.disabled = false; if (mode === 'manual') button.textContent = 'Generate interview pack'; else if (pill) pill.textContent = 'Generate question pack'; }
   }
