@@ -54,7 +54,7 @@ function generateMarkdownFile(q, name, interviewer_name, level = "level1", outpu
     content += `## ${level} Questions\n\n`;
 
     questions.forEach((question) => {
-      content += `### ${questionNumber}. ${question.question}\n\n`;
+      content += `### ${question.id ?? questionNumber}. ${question.question}\n\n`;
       if (question.category) content += `**Category:** ${question.category}\n\n`;
       questionNumber += 1;
 
