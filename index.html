@@ -279,7 +279,7 @@
       if (!data || !difficulties.every((difficulty) => Array.isArray(data[difficulty]))) throw new Error('The question API returned an invalid response. Restart the project server and refresh the page.');
       state.questions = data; renderQuestions();
       $('step-mode').classList.add('hidden'); $('step-questions').classList.remove('hidden'); $('result').innerHTML = '';
-      $('question-heading').textContent = state.level === 'level1' ? 'Level 1 · Foundations: choose 21 questions by topic' : 'Level 2 · Development: choose 21 questions';
+      $('question-heading').textContent = state.level === 'level1' ? 'Level 1 · Foundations: choose 20 questions by topic' : 'Level 2 · Development: choose 20 questions';
       window.scrollTo({top:0,behavior:'smooth'});
     } catch (error) {
       $('mode-error').textContent = window.location.protocol === 'file:' ? 'Open the app at http://localhost:3001 so it can reach the API.' : error instanceof TypeError ? `Could not reach the question API at ${window.location.origin}. Restart the server with npm run dev.` : error.message;
