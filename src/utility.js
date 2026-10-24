@@ -99,27 +99,26 @@ function getRandomNumbers(range) {
 function generateRandomQuestions() {
   // Beginner
   const beginner = [
-    ...getRandomNumbers([1, 13]).slice(0, 2), // Choose 2 from [1-13]
-    ...getRandomNumbers([14, 15]).slice(0, 1), // Choose 1 from [14, 15]
+    ...getRandomNumbers([1, 13]).slice(0, 4), // Choose 4 from [1-13]
+    ...getRandomNumbers([14, 15]).slice(0, 2), // Choose 2 from [14, 15]
     ...getRandomNumbers([16, 18]).slice(0, 1), // Choose 1 from [16, 18]
   ];
 
   // Intermediate
   const intermediate = [
-    ...getRandomNumbers([1, 14]).slice(0, 2), // Choose 2 from [1-14]
-    ...getRandomNumbers([15, 17]).slice(0, 1), // Choose 1 from [15, 17]
-    ...getRandomNumbers([18, 19]).slice(0, 1), // Choose 1 from [18, 19]
-    ...getRandomNumbers([20, 21]).slice(0, 1), // Choose 1 from [20, 21]
+    ...getRandomNumbers([1, 14]).slice(0, 3), // Choose 3 from [1-14]
+    ...getRandomNumbers([15, 17]).slice(0, 2), // Choose 2 from [15, 17]
+    ...getRandomNumbers([18, 20]).slice(0, 2), // Choose 2 from [18, 20]
+    ...getRandomNumbers([21, 23]).slice(0, 1), // Choose 1 from [21, 23]
   ];
 
   // Advanced
   const advanced = [
-    ...getRandomNumbers([1, 12]).slice(0, 1), // Choose 1 from [1-12]
-    ...getRandomNumbers([13, 15]).slice(0, 1), // Choose 1 from [13, 15]
-    ...getRandomNumbers([16, 18]).slice(0, 1), // Choose 1 from [16, 18]
-    ...getRandomNumbers([19, 20]).slice(0, 1), // Choose 1 from [19, 20]
-    ...getRandomNumbers([21, 23]).slice(0, 1), // Choose 1 from [21, 23]
-    ...getRandomNumbers([24, 26]).slice(0, 1), // Choose 1 from [24, 26]
+    ...getRandomNumbers([1, 11]).slice(0, 1), // Choose 1 from [1-11]
+    ...getRandomNumbers([12, 13]).slice(0, 1), // Choose 1 from [12, 13]
+    ...getRandomNumbers([14, 16]).slice(0, 1), // Choose 1 from [14, 16]
+    ...getRandomNumbers([17, 21]).slice(0, 1), // Choose 1 from [17, 21]
+    ...getRandomNumbers([22, 25]).slice(0, 1), // Choose 1 from [22, 25]
   ];
 
   // Join the numbers into strings separated by spaces
@@ -141,24 +140,22 @@ function validateQuestions(beginnerStr, intermediateStr, advancedStr) {
     numbers.filter((num) => num >= min && num <= max).length;
 
   const validateBeginner = (numbers) =>
-    countInRange(numbers, 1, 13) >= 2 &&
-    countInRange(numbers, 14, 15) >= 1 &&
+    countInRange(numbers, 1, 13) >= 4 &&
+    countInRange(numbers, 14, 15) >= 2 &&
     countInRange(numbers, 16, 18) >= 1;
 
   const validateIntermediate = (numbers) =>
-    countInRange(numbers, 1, 14) >= 2 &&
-    countInRange(numbers, 15, 17) >= 1 &&
-    countInRange(numbers, 18, 19) >= 1 &&
-    countInRange(numbers, 20, 21) >= 1;
+    countInRange(numbers, 1, 14) >= 3 &&
+    countInRange(numbers, 15, 17) >= 2 &&
+    countInRange(numbers, 18, 20) >= 2 &&
+    countInRange(numbers, 21, 23) >= 1;
 
   const validateAdvanced = (numbers) =>
-    countInRange(numbers, 1, 12) >= 1 &&
-    countInRange(numbers, 13, 15) >= 1 &&
-    countInRange(numbers, 16, 18) >= 1 &&
-    countInRange(numbers, 19, 20) >= 1 &&
-    countInRange(numbers, 21, 23) >= 1 &&
-    countInRange(numbers, 24, 26) >= 1;
-
+    countInRange(numbers, 1, 11) >= 1 &&
+    countInRange(numbers, 12, 13) >= 1 &&
+    countInRange(numbers, 14, 16) >= 1 &&
+    countInRange(numbers, 17, 21) >= 1 &&
+    countInRange(numbers, 22, 25) >= 1 
   const beginner = parseNumbers(beginnerStr);
   const intermediate = parseNumbers(intermediateStr);
   const advanced = parseNumbers(advancedStr);
@@ -180,13 +177,13 @@ function validateQuestions(beginnerStr, intermediateStr, advancedStr) {
 }
 
 const level1CategoryQuotas = {
-  Beginner: { "JavaScript Basics": 5, "Problem Solving": 1, "HTTP & Web Basics": 2 },
-  Intermediate: { "JS Intermediate": 3, "Database Concepts": 2, "Asynchronous Programming": 2, "Node.js & Backend Fundamentals": 2 },
-  Advanced: { "__all__": 4 },
+  Beginner: { "JavaScript Basics": 4, "Problem Solving": 1, "HTTP & Web Basics": 2 },
+  Intermediate: { "JS Intermediate": 3, "Database Concepts": 2, "Various Questions": 2, "Node.js & Backend Fundamentals": 1 },
+  Advanced: { "__all__": 5 },
 };
 const level2CategoryQuotas = {
-  Beginner: { "JavaScript/TypeScript": 2, "Network & HTTP Methods": 1, Databases: 2, "Backend & APIs": 2, "Authentication & Authorization": 1, Tools: 1 },
-  Intermediate: { "JavaScript/TypeScript": 2, "Network & HTTP Methods": 1, Databases: 2, "Backend & APIs": 2, "Authentication & Authorization": 1 },
+  Beginner: { "JavaScript/TypeScript": 1, "Network & HTTP Methods": 2, Databases: 1, "Backend & APIs": 2, Tools: 1 },
+  Intermediate: { "JavaScript/TypeScript": 2, "Network & HTTP Methods": 2, Databases: 2, "Backend & APIs": 2, "Authentication & Authorization": 1 },
   Advanced: { "__all__": 4 },
 };
 const jsIntermediateCategories = ["JS Intermediate Level"];

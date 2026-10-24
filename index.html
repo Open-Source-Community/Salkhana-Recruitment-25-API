@@ -221,7 +221,7 @@
       <div class="actions"><span class="hint">You can switch levels any time.</span><button type="button" class="primary" id="continue">Continue <span aria-hidden="true">→</span></button></div>
     </div></section>
 
-    <section class="card hidden" id="step-mode"><div class="card-head"><p class="kicker">Step 02 · Question mode</p><h2>How would you like to build the pack?</h2><p>Level 1 packs contain 21 questions with fixed counts for each topic.</p></div><div class="card-body"><div id="mode-error" class="field-error" role="alert"></div><div class="levels"><button class="level-card mode-card" id="choose-random" type="button"><span class="level-name">Random questions</span><p>Pick the required count from each Level 1 topic, with four random Advanced questions.</p><span class="pill">Generate question pack</span></button><button class="level-card mode-card" id="choose-manual" type="button"><span class="level-name">Manual questions</span><p>Choose the required number of questions from each topic.</p><span class="pill">You choose the questions</span></button></div><div class="actions"><button class="text-btn" id="back-level">← Back</button></div></div></section>
+    <section class="card hidden" id="step-mode"><div class="card-head"><p class="kicker">Step 02 · Question mode</p><h2>How would you like to build the pack?</h2><p>Level 1 packs contain 20 questions with fixed counts for each topic.</p></div><div class="card-body"><div id="mode-error" class="field-error" role="alert"></div><div class="levels"><button class="level-card mode-card" id="choose-random" type="button"><span class="level-name">Random questions</span><p>Pick the required count from each Level 1 topic, with four random Advanced questions.</p><span class="pill">Generate question pack</span></button><button class="level-card mode-card" id="choose-manual" type="button"><span class="level-name">Manual questions</span><p>Choose the required number of questions from each topic.</p><span class="pill">You choose the questions</span></button></div><div class="actions"><button class="text-btn" id="back-level">← Back</button></div></div></section>
 
     <section class="card hidden" id="step-questions"><div class="card-head"><p class="kicker">Step 03 · Manual question set</p><h2 id="question-heading">Choose questions by topic</h2><p>Select the required number from every topic to complete your pack.</p></div><div class="card-body"><div class="notice" id="selection-count" aria-live="polite">0 questions selected</div><div id="questions-error" class="field-error" role="alert"></div><div id="question-lists"></div><div class="actions"><button type="button" class="text-btn" id="back-mode">← Back</button><button type="button" class="primary" id="generate">Generate interview pack</button></div><button class="hidden" id="back" type="button"></button><button class="hidden" id="switch-level" type="button"></button></div></section>
 
@@ -287,12 +287,12 @@
   }
   function renderQuestions() {
     state.topicQuotas = state.level === 'level1' ? {
-      Beginner: { 'JavaScript Basics': 5, 'Problem Solving': 1, 'HTTP & Web Basics': 2 },
-      Intermediate: { 'JS Intermediate': 3, 'Database Concepts': 2, 'Asynchronous Programming': 2, 'Node.js & Backend Fundamentals': 2 },
-      Advanced: { '__all__': 4 }
+      Beginner: { 'JavaScript Basics': 4, 'Problem Solving': 1, 'HTTP & Web Basics': 2 },
+      Intermediate: { 'JS Intermediate': 3, 'Database Concepts': 2, 'Various Questions': 2, 'Node.js & Backend Fundamentals': 1 },
+      Advanced: { '__all__': 5 }
     } : {
-      Beginner: { 'JavaScript/TypeScript': 2, 'Network & HTTP Methods': 1, 'Databases': 2, 'Backend & APIs': 2, 'Authentication & Authorization': 1, 'Tools': 1 },
-      Intermediate: { 'JavaScript/TypeScript': 2, 'Network & HTTP Methods': 1, 'Databases': 2, 'Backend & APIs': 2, 'Authentication & Authorization': 1 },
+      Beginner: { 'JavaScript/TypeScript': 1, 'Network & HTTP Methods': 2, 'Databases': 1, 'Backend & APIs': 2, 'Tools': 1 },
+      Intermediate: { 'JavaScript/TypeScript': 2, 'Network & HTTP Methods': 2, 'Databases': 2, 'Backend & APIs': 2, 'Authentication & Authorization': 1 },
       Advanced: { '__all__': 4 }
     };
     state.quotas = Object.fromEntries(difficulties.map((d) => [d, Object.values(state.topicQuotas[d]).reduce((a,b) => a+b, 0)]));

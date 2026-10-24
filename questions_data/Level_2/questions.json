@@ -84,13 +84,13 @@
       "explanation": "The middleware must be registered before routes that need it. Request-body data should still be validated.",
       "category": "Backend & APIs"
     },
-    {
-      "question": "What is middleware in Express, and what are the three common things middleware can do?",
-      "code": "",
-      "answer": "Middleware is a function that receives `req`, `res`, and `next`. It can run logic or modify request/response state, end the response, or call `next()` to pass control onward.",
-      "explanation": "If middleware neither sends a response nor calls `next()`, the request may hang.",
-      "category": "Backend & APIs"
-    },
+{
+  "question": "What is the role of middleware in Express?",
+  "code": "",
+  "answer": "Middleware processes requests before they reach the final route handler. It can perform tasks such as logging, authentication, validating input, and modifying the request or response.",
+  "explanation": "Middleware helps organize and reuse common logic across multiple routes.",
+  "category": "Backend & APIs"
+},
     {
       "question": "What is the difference between a path parameter and a query parameter?",
       "code": "",
@@ -148,10 +148,10 @@
       "category": "Tools"
     },
     {
-      "question": "What does deployment mean for a backend API?",
+      "question": "What does deployment mean for a backend application?",
       "code": "",
       "answer": "Deployment makes the application available in a target environment where clients can reach it, with its runtime, configuration, network settings, and dependencies properly set up.",
-      "explanation": "A deployed API also needs monitoring, error logging, security controls, and appropriate data persistence.",
+      "explanation": "A deployed application also needs monitoring, error logging, security controls, and appropriate data persistence.",
       "category": "Tools"
     },
     {
@@ -161,20 +161,20 @@
       "explanation": "Never include real database passwords or token-signing secrets in the example file.",
       "category": "Tools"
     },
-    {
-      "question": "Problem solving: Write a function that returns the largest number in an array without using `Math.max()`.",
-      "code": "findLargest([3, 9, 2, 7]);",
-      "answer": "function findLargest(numbers) {\n  if (numbers.length === 0) return undefined;\n  let largest = numbers[0];\n  for (const number of numbers) {\n    if (number > largest) largest = number;\n  }\n  return largest;\n}",
-      "explanation": "Start with the first element and compare each number with the current largest value. This takes O(n) time.",
-      "category": "Problem Solving"
-    },
-    {
-      "question": "Problem solving: Write a function that counts how many times a given character appears in a string.",
-      "code": "countCharacter(\"banana\", \"a\");",
-      "answer": "function countCharacter(text, character) {\n  let count = 0;\n  for (const current of text) {\n    if (current === character) count++;\n  }\n  return count;\n}",
-      "explanation": "Loop through the string and increase the counter whenever a character matches. The example returns 3.",
-      "category": "Problem Solving"
-    }
+  {
+    "question": "Write a function that removes duplicate values from an array.",
+    "code": "removeDuplicates([1, 2, 2, 3, 1]);",
+    "answer": "function removeDuplicates(numbers) {\n  const result = [];\n  for (const number of numbers) {\n    if (!result.includes(number)) {\n      result.push(number);\n    }\n  }\n  return result;\n}",
+    "explanation": "Loop through the array and add each number only if it does not already exist in the result. The example returns [1, 2, 3].",
+    "category": "Problem Solving"
+  },
+   {
+  "question": "Write a function that finds the first non-repeating character in a string.",
+  "code": "firstUniqueCharacter(\"swiss\");",
+  "answer": "function firstUniqueCharacter(text) {\n  const frequency = {};\n\n  for (const character of text) {\n    frequency[character] = (frequency[character] || 0) + 1;\n  }\n\n  for (const character of text) {\n    if (frequency[character] === 1) {\n      return character;\n    }\n  }\n\n  return null;\n}",
+  "explanation": "Count how many times each character appears, then loop through the string again to find the first character whose frequency is 1. The example returns \"w\". If every character repeats, return null. Time complexity: O(n).",
+  "category": "Problem Solving"
+}
   ],
   "Intermediate": [
     {
@@ -182,13 +182,6 @@
       "code": "function demo() {\n  console.log(value);\n  var value = 2;\n  console.log(value);\n}\ndemo();",
       "answer": "The output is `undefined` then `2`.",
       "explanation": "`var` declarations are hoisted to the top of their function scope, but their assignments are not. The first log occurs before the assignment.",
-      "category": "JavaScript/TypeScript"
-    },
-    {
-      "question": "What is the difference between synchronous and asynchronous code, and what is the purpose of async and await?",
-      "code": "",
-      "answer": "Synchronous code executes operations one after another, waiting for each operation to finish. Asynchronous code allows operations to complete later while other work can continue. In JavaScript, async makes a function return a Promise, while await allows you to wait for a Promise to settle and get its result or handle its error.",
-      "explanation": "Asynchronous operations are important in backend development because network requests and database operations can take time. Using async and await makes asynchronous code easier to read and write without blocking the entire JavaScript thread while waiting for typical asynchronous operations.",
       "category": "JavaScript/TypeScript"
     },
     {
@@ -269,10 +262,10 @@
       "category": "Databases"
     },
     {
-      "question": "What is an index, and what trade-off does it introduce?",
+      "question": "What are database indexes and when would you use them?",
       "code": "",
-      "answer": "An index is a data structure that helps the database find rows more efficiently for certain queries.",
-      "explanation": "Indexes consume storage and add work to inserts, updates, and deletes, so index columns based on query patterns rather than indexing everything.",
+      "answer": "Indexes are special lookup tables that speed up data retrieval. Use them on columns frequently searched or used in joins.",
+      "explanation": "Indexes improve query performance but slow down writes. They're ideal for columns in WHERE clauses, JOIN conditions, or as primary/foreign keys.",
       "category": "Databases"
     },
     {
@@ -303,13 +296,13 @@
       "explanation": "Every middleware should intentionally end the request-response cycle or pass control to the next middleware.",
       "category": "Backend & APIs"
     },
-    {
-      "question": "What is the difference between a route handler and a controller?",
-      "code": "",
-      "answer": "A route handler is the function registered to respond to a matching request; a controller is a code-organization pattern for grouping request-handling/business logic separately from route declarations.",
-      "explanation": "In a small app they may be the same function. Separating them can make routes easier to read and logic easier to test.",
-      "category": "Backend & APIs"
-    },
+{
+  "question": "What is the difference between a route handler and a controller in Express?",
+  "code": "",
+  "answer": "A route handler handles a request for a specific route. A controller is a function usually placed in a separate file to keep the request-handling code organized.",
+  "explanation": "A route handler can be written directly inside a route or moved into a controller function. Using controllers helps keep route files clean and organized.",
+  "category": "Backend & APIs"
+},
     {
       "question": "An endpoint supports filtering and pagination for a product list. Which information belongs in path parameters and which belongs in query parameters?",
       "code": "",
@@ -346,13 +339,6 @@
       "category": "Authentication & Authorization"
     },
     {
-      "question": "Why use Postman environments and variables when testing an API?",
-      "code": "",
-      "answer": "They let you reuse values such as the base URL or access token across requests and switch configuration between environments without editing every request.",
-      "explanation": "For example, a baseUrl variable can point to a local server in development and a deployed API in staging. Sensitive values should be handled carefully and not shared publicly.",
-      "category": "Tools"
-    },
-    {
       "question": "What is CORS, and does it replace authentication?",
       "code": "",
       "answer": "CORS is a browser-enforced policy controlling whether frontend JavaScript from one origin may read responses from another origin.",
@@ -368,13 +354,6 @@
     }
   ],
   "Advanced": [
-    {
-      "question": "What does it mean that JavaScript functions are first-class values?",
-      "code": "",
-      "answer": "Functions can be stored in variables, passed as arguments, returned from other functions, and stored in objects or arrays.",
-      "explanation": "This enables callbacks, higher-order functions, composition, and many common asynchronous patterns.",
-      "category": "JavaScript/TypeScript"
-    },
     {
       "question": "What is the difference between `type` and `interface`?",
       "code": "",

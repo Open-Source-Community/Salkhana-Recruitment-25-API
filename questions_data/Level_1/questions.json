@@ -233,13 +233,13 @@
       "explanation": "Foreign keys enforce referential integrity by ensuring the value exists in the referenced table. They create relationships between tables in a relational database.",
       "category": "Database Concepts"
     },
-    {
-      "question": "What are database indexes and when would you use them?",
-      "code": "",
-      "answer": "Indexes are special lookup tables that speed up data retrieval. Use them on columns frequently searched or used in joins.",
-      "explanation": "Indexes improve query performance but slow down writes. They're ideal for columns in WHERE clauses, JOIN conditions, or as primary/foreign keys.",
-      "category": "Database Concepts"
-    },
+{
+  "question": "What are the main types of databases?",
+  "code": "",
+  "answer": "The main database categories include relational databases (SQL), non-relational databases (NoSQL), graph databases, and time-series databases. NoSQL includes document, key-value, and wide-column databases.",
+  "explanation": "Different database types are designed for different data structures and use cases. For example, MySQL is relational, MongoDB is document-based, Redis is key-value, and Neo4j is graph-based.",
+  "category": "Database Concepts"
+},
     {
       "question": "What is the difference between SQL and NoSQL databases?",
       "code": "",
@@ -252,22 +252,29 @@
       "code": "",
       "answer": "Synchronous executes code sequentially, blocking until completion. Asynchronous allows operations to complete in the background and uses callbacks/promises for results.",
       "explanation": "Synchronous is simpler but can be inefficient for I/O operations. Asynchronous improves performance by not blocking the main thread during long operations.",
-      "category": "Asynchronous Programming"
+      "category": "Various Questions"
     },
     {
-      "question": "What is the difference between synchronous and asynchronous operations?",
+      "question": "What is the difference between authentication and authorization?",
       "code": "",
-      "answer": "Synchronous operations execute one after another, while asynchronous operations allow other code to run while waiting for a task to complete.",
-      "explanation": "Asynchronous programming helps prevent the program from waiting unnecessarily for slow operations, such as fetching data from a server.",
-      "category": "Asynchronous Programming"
+      "answer": "Authentication verifies who a user is, while authorization determines what the authenticated user is allowed to access.",
+      "explanation": "Authentication usually involves checking credentials such as a password or token. Authorization checks permissions and roles before allowing access to a resource.",
+      "category": "Various Questions"
     },
     {
-      "question": "What is the purpose of `package.json` in Node.js?",
+      "question": "What is the purpose of caching in backend development?",
       "code": "",
-      "answer": "It defines project metadata, dependencies, scripts, and configuration for Node.js projects.",
-      "explanation": "package.json is the manifest file for Node.js projects. It lists required packages, version info, author details, and scripts for building/running the project.",
-      "category": "Node.js & Backend Fundamentals"
+      "answer": "To improve performance by storing frequently accessed data in faster storage, reducing database/API calls.",
+      "explanation": "Caching reduces latency, decreases server load, and improves scalability. Common cache targets include database queries, API responses, and rendered pages.",
+      "category": "Various Questions"
     },
+    {
+  "question": "What are HTTP requests and responses?",
+  "code": "",
+  "answer": "An HTTP request is a message sent by a client to a server to ask for data or perform an action. An HTTP response is the message sent back by the server, containing a status code and usually data or an error message.",
+  "explanation": "For example, when a client requests a list of users from an API, the request contains the HTTP method and URL. The server processes the request and sends a response with a status code, such as 200 OK for success or 404 Not Found if the resource does not exist.",
+  "category": "Node.js & Backend Fundamentals"
+},
     {
       "question": "What does CRUD stand for in backend development?",
       "code": "",
@@ -281,13 +288,6 @@
       "answer": "Application Programming Interface - a set of rules/protocols for building and interacting with software applications.",
       "explanation": "APIs define how different software components should interact. Web APIs allow communication between different systems over the internet using standardized protocols.",
       "category": "Node.js & Backend Fundamentals"
-    },
-    {
-      "question": "What is the difference between authentication and authorization?",
-      "code": "",
-      "answer": "Authentication verifies who a user is, while authorization determines what the authenticated user is allowed to access.",
-      "explanation": "Authentication usually involves checking credentials such as a password or token. Authorization checks permissions and roles before allowing access to a resource.",
-      "category": "Authentication & Security"
     }
   ],
   "Advanced": [
@@ -296,51 +296,79 @@
       "code": "console.log(0.1 + 0.2 === 0.3);",
       "answer": "false",
       "explanation": "Due to floating-point precision issues in JavaScript (and most programming languages), 0.1 + 0.2 actually equals approximately 0.30000000000000004, not exactly 0.3.",
-      "category": "JavaScript Core Concepts"
+      "category": "JavaScript Advanced Level"
     },
     {
       "question": "What will the following code return?",
       "code": "function multiplyBy(factor) {\n  return function (x) {\n    return x * factor;\n  };\n}\nconst double = multiplyBy(2);\nconsole.log(double(5));",
       "answer": "10",
       "explanation": "This demonstrates closure and currying. multiplyBy returns a function that remembers the factor value. When we call double(5), it multiplies 5 by the remembered factor (2).",
-      "category": "Functions, Closures & Scope"
+      "category": "JavaScript Advanced Level"
     },
     {
       "question": "What does the following code produce?",
       "code": "const numbers = [1, 2, 3, 4, 5];\nconst doubled = numbers.map((n) => n * 2).filter((n) => n > 5);\nconsole.log(doubled);",
       "answer": "[6, 8, 10]",
       "explanation": "The map() creates a new array with each number doubled ([2,4,6,8,10]). filter() then returns only elements greater than 5, resulting in [6,8,10].",
-      "category": "Arrays & Functional Methods"
+      "category": "JavaScript Advanced Level"
     },
     {
       "question": "What will the following code output?",
       "code": "console.log(1 + \"2\" - 1);",
       "answer": "11",
       "explanation": "First, 1 + \"2\" performs string concatenation resulting in \"12\". Then \"12\" - 1 forces string-to-number conversion, resulting in 12 - 1 = 11.",
-      "category": "JavaScript Core Concepts"
+      "category": "JavaScript Advanced Level"
     },
     {
       "question": "What will this code log?",
       "code": "function foo() {\n  console.log(this);\n}\nfoo();",
       "answer": "window (browser) or global (Node.js)",
       "explanation": "In non-strict mode, this in a regular function call refers to the global object. In strict mode, it would be undefined.",
-      "category": "JavaScript Core Concepts"
+      "category": "JavaScript Advanced Level"
     },
     {
       "question": "What does the following code produce?",
       "code": "console.log(2 ** 3);",
       "answer": "8",
       "explanation": "The ** operator is the exponentiation operator. 2 ** 3 means 2 raised to the power of 3, which equals 8.",
-      "category": "JavaScript Core Concepts"
+      "category": "JavaScript Advanced Level"
     },
     {
       "question": "What will the following code output?",
       "code": "const obj = { a: 1, b: 2, c: 3 };\nconst { a, ...rest } = obj;\nconsole.log(rest);",
       "answer": "{ b: 2, c: 3 }",
       "explanation": "This uses object destructuring with rest properties. It extracts a, then collects the remaining properties into rest, resulting in { b: 2, c: 3 }.",
-      "category": "Objects & Destructuring"
+      "category": "JavaScript Advanced Level"
     },
     {
+      "question": "What does the following code return?",
+      "code": "const arr = [1, 2, 3, 4, 5];\nconst newArr = arr.filter((num) => num > 3);\nconsole.log(newArr);",
+      "answer": "[4, 5]",
+      "explanation": "The filter() method creates a new array with all elements that pass the test (num > 3). Only 4 and 5 satisfy this condition.",
+      "category": "JavaScript Advanced Level"
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "code": "(function () {\n  console.log(a);\n  var a = 1;\n})();",
+      "answer": "undefined",
+      "explanation": "Due to hoisting, var declarations are moved to the top of their scope. The variable a exists when logged, but hasn't been assigned yet, so it's undefined.",
+      "category": "JavaScript Advanced Level"
+    },
+    {
+      "question": "What will this code produce?",
+      "code": "const arr = [1, 2, 3];\nconst doubled = arr.map((x) => x * 2);\nconsole.log(doubled);",
+      "answer": "[2, 4, 6]",
+      "explanation": "The map() method creates a new array by applying the callback function to each element. Here, it doubles each number in the original array.",
+      "category": "JavaScript Advanced Level"
+    },
+    {
+      "question": "What will this code produce?",
+      "code": "const arr = [1, 2, 3, 4];\nconst result = arr.find((num) => num > 2);\nconsole.log(result);",
+      "answer": "3",
+      "explanation": "The find() method returns the first element in the array that satisfies the provided testing function. 3 is the first number greater than 2.",
+      "category": "JavaScript Advanced Level"
+    },
+        {
       "question": "What will this code log?",
       "code": "const promise = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"Done!\"), 1000);\n});\npromise.then((result) => console.log(result));",
       "answer": "\"Done!\" (after 1 second)",
@@ -348,53 +376,11 @@
       "category": "Asynchronous Programming & Event Loop"
     },
     {
-      "question": "What does the following code return?",
-      "code": "const arr = [1, 2, 3, 4, 5];\nconst newArr = arr.filter((num) => num > 3);\nconsole.log(newArr);",
-      "answer": "[4, 5]",
-      "explanation": "The filter() method creates a new array with all elements that pass the test (num > 3). Only 4 and 5 satisfy this condition.",
-      "category": "Arrays & Functional Methods"
-    },
-    {
-      "question": "What will be the output of the following code?",
-      "code": "(function () {\n  console.log(a);\n  var a = 1;\n})();",
-      "answer": "undefined",
-      "explanation": "Due to hoisting, var declarations are moved to the top of their scope. The variable a exists when logged, but hasn't been assigned yet, so it's undefined.",
-      "category": "Functions, Closures & Scope"
-    },
-    {
-      "question": "What will this code produce?",
-      "code": "const arr = [1, 2, 3];\nconst doubled = arr.map((x) => x * 2);\nconsole.log(doubled);",
-      "answer": "[2, 4, 6]",
-      "explanation": "The map() method creates a new array by applying the callback function to each element. Here, it doubles each number in the original array.",
-      "category": "Arrays & Functional Methods"
-    },
-    {
-      "question": "What will this code produce?",
-      "code": "const arr = [1, 2, 3, 4];\nconst result = arr.find((num) => num > 2);\nconsole.log(result);",
-      "answer": "3",
-      "explanation": "The find() method returns the first element in the array that satisfies the provided testing function. 3 is the first number greater than 2.",
-      "category": "Arrays & Functional Methods"
-    },
-    {
-      "question": "How does the Node.js event loop handle different phases (timers, I/O, etc.)?",
-      "code": "",
-      "answer": "The event loop has multiple phases: timers (setTimeout/setInterval), pending callbacks, idle/prepare, poll (I/O), check (setImmediate), and close callbacks.",
-      "explanation": "Each phase has a FIFO queue of callbacks. The loop processes one phase completely before moving to the next. Understanding this helps optimize performance and avoid bottlenecks.",
-      "category": "Node.js Runtime & Architecture"
-    },
-    {
       "question": "How do you handle asynchronous errors in Node.js?",
       "code": "",
       "answer": "Using try/catch with async/await or .catch() with promises.",
       "explanation": "For async/await: \nasync function fetchData() {\n  try {\n    const data = await someAsyncOp();\n  } catch (err) {\n    // Handle error\n  }\n}\nFor promises: someAsyncOp().then().catch(err => {});",
       "category": "Asynchronous Programming & Event Loop"
-    },
-    {
-      "question": "What is the recommended folder structure for a Node.js project?",
-      "code": "",
-      "answer": "Common structure: /src (source), /config (configs), /routes (API routes), /models (data models), /controllers (business logic), /middleware, /tests",
-      "explanation": "This separation of concerns makes the project more maintainable. Larger projects might use domain-driven structure with features/modules containing their own routes, models, etc.",
-      "category": "Node.js Runtime & Architecture"
     },
     {
       "question": "What is JWT?",
@@ -416,13 +402,6 @@
       "answer": "Vulnerable to XSS attacks since JavaScript can access localStorage. No automatic expiration like cookies.",
       "explanation": "If an XSS vulnerability exists, attackers can steal localStorage tokens. HttpOnly cookies are more secure for tokens, but have different tradeoffs regarding CSRF protection.",
       "category": "Authentication & Security"
-    },
-    {
-      "question": "What is the purpose of caching in backend development?",
-      "code": "",
-      "answer": "To improve performance by storing frequently accessed data in faster storage, reducing database/API calls.",
-      "explanation": "Caching reduces latency, decreases server load, and improves scalability. Common cache targets include database queries, API responses, and rendered pages.",
-      "category": "Caching & Performance"
     },
     {
       "question": "What is a collection in MongoDB?",
@@ -458,6 +437,13 @@
       "answer": "The save() method is called on a document instance to save it to the database, while create() creates and saves a new document directly using the model.",
       "explanation": "With save(), you typically create a document instance first and then call save(). With create(), you pass the document data directly to the model, which creates and saves the document. Both methods can run Mongoose validation and middleware.",
       "category": "MongoDB"
+    },
+        {
+      "question": "What is the recommended folder structure for a Node.js project?",
+      "code": "",
+      "answer": "Common structure: /src (source), /config (configs), /routes (API routes), /models (data models), /controllers (business logic), /middleware, /tests",
+      "explanation": "This separation of concerns makes the project more maintainable. Larger projects might use domain-driven structure with features/modules containing their own routes, models, etc.",
+      "category": "Node.js Runtime & Architecture"
     },
     {
       "question": "What is a middleware in backend development?",
